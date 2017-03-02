@@ -1,0 +1,162 @@
+body {
+	display: flex;
+	flex-direction: column;
+	background-color: #5f3919b3;
+	background-image: url("img/wood1.jpg");
+	background-attachment: fixed;
+	position:relative;
+	height:auto;
+}
+html{
+	height:100%;
+}
+body, html{
+	width: 100%;
+	margin:0;
+	padding: 0;
+}
+
+/*_______________________________JUMBOTRON_____________________________*/
+.jumbotron h1 {
+    font-size: 11em;
+	text-shadow: 0 5px 15px #453927;
+}
+.jumbotron h2 {
+	font-size: 5em;
+}
+.jumbotron h1, .jumbotron h2 {
+	    color: #faf8f5;
+}
+.jumbotron>a {
+	color: #faf8f5;
+	text-decoration: none;
+}
+.jumbotron>a:hover{
+	color: #453927cc;
+	text-decoration: none;
+	text-shadow: 0px 0px 1px #897575;
+	cursor:pointer
+}
+.jumbotron {
+	background-color:  #4e474066;
+    padding-top: 90px;
+	margin-bottom: 0px;
+}
+h1, h2 {
+	font-family: 'Italianno', cursive;
+}
+.btn-primary,  .btn-primary:focus, .btn-primary:hover{
+	width: 200px;
+    background-image: -webkit-linear-gradient(top,#513C2D,#5E412D 90%);
+	border-color: #513C2D;
+	background-repeat: inherit;
+}
+#blockBtn {
+    margin : 30px 0px 30px 0px;
+}
+
+/*_______________________________PAGE_____________________________*/
+
+.navbar > .container-fluid .navbar-brand {
+  margin: 0px;
+  padding: 0px;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color: none;
+}
+.navbar-header {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.navbar-form {
+  padding: 0px 15px;
+  border: none ;
+}
+.navbar-default .navbar-toggle {
+  border: none;
+}
+#regles {
+	padding: 0% 25% 0% 25%;
+}
+#DefierJoueur {
+	padding: 7% 25% 7% 25%;
+}
+#regles p {
+	 line-height: 2em;
+	 text-shadow: 0px 1px 1px #7e71714d;
+ }
+#test, footer {
+	background : #faf8f5;
+}
+#test{
+	box-shadow: 0px 0px 50px 0px #513C2D;
+}
+.divider {
+	display: block;
+	width: auto;
+	height: 15px;
+	background: url("img/divider5.png") center center no-repeat;
+	margin: 9% 0%;
+}
+table, th {
+	text-align : center;
+}
+
+/*________________________ ELEVATOR __________________________*/
+#elevator_item {
+  width: 60px;
+  height: 100px;
+  position: fixed;
+  right: 5px;
+  bottom: 10px;
+  -webkit-transition: opacity .4s ease-in-out;
+  -moz-transition: opacity .4s ease-in-out;
+  -o-transition: opacity .4s ease-in-out;
+  opacity: 1;
+  filter:alpha(opacity=100);
+  z-index: 1000;
+  display: none;
+}
+#elevator_item.off {
+  opacity: 0;
+  filter:alpha(opacity=0);
+  visibility: hidden
+}
+#elevator {
+	display: block;
+	width: 55px;
+	height: 40px;
+	background: url(http://www.jqueryscript.net/demo/jQuery-Scroll-To-Top-Barcode-Plugin/img/icon_top.png) center center no-repeat;
+	background-color: #444;
+	background-color: #513C2D;
+	border-radius: 2px;
+	box-shadow: 0 1px 3px rgba(0,0,0,.2);
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+#elevator:hover {
+  background-color: #513C2DCC ;
+}
+#elevator:active {
+  background-color: #513C2D ;
+}
+
+  
+/*_______________________________FOOTER_____________________________*/
+footer p{
+	font-size: 10px;
+}
+.footer-info {
+  border-top: 8px solid #513C2D;
+  color: #6C6C6C;
+  text-align: center;
+  height: auto;
+}
+.footer-logo  {
+  padding: 10px;
+}
+.footer-brand {
+  padding : 50px 0px 50px 0px;
+}
