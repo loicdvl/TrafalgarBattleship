@@ -8,17 +8,23 @@ namespace TrafalgarBattleAPI.Models
     public class Case
     {
         public Coordinates Coordinates { get; set; }
+        public State State { get; set; }
 
         public Case(int row, int column)
         {
             Coordinates = new Coordinates(row, column);
+            State = State.Empty;
         }
 
         public bool IsOccupied
         {
             get
             {
-                return true;
+                return State == State.Battleship
+                    || State == State.Carrier
+                    || State == State.Cruiser
+                    || State == State.Destroyer
+                    || State == State.Submarine;
             }
         }
     }

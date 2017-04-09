@@ -7,6 +7,13 @@ namespace TrafalgarBattleAPI.Models
 {
     public enum State
     {
-        Water, Ship, TouchedShip, Sunk 
+        Battleship,
+        Cruiser,
+        Destroyer,
+        Submarine,
+        Carrier,
+        Hit,
+        Miss,
+        Empty
     }
 }
