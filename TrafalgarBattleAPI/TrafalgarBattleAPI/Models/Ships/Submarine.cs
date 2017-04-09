@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TrafalgarBattleAPI.Models
+namespace TrafalgarBattleAPI.Models.Ships
 {
-    public class Submarine
+    public class Submarine : Ship
     {
         public Submarine()
         {
-
+            Name = "Submarine";
+            Width = 3;
         }
     }
 }
