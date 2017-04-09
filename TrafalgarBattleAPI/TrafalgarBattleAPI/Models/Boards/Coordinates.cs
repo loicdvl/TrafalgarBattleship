@@ -7,13 +7,13 @@ namespace TrafalgarBattleAPI.Models
 {
     public class Coordinates
     {
-        private int numLine { get; set; }
-        private int numRow { get; set; }
+        private int Row { get; set; }
+        private int Column { get; set; }
         
-        public Coordinates(int x, int y)
+        public Coordinates(int row, int column)
         {
-            numLine = y;
-            numRow = x;
+            this.Row = row;
+            this.Column = column;
         }
     }
 }
