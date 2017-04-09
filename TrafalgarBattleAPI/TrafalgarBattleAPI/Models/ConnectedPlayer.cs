@@ -7,20 +7,19 @@ namespace TrafalgarBattleAPI.Models
 {
     public class ConnectedPlayer : Player
     {
-        private string password { get; set; }
-        private string email { get; set; }
-        private string avatar { get; set; }
-        private int nbVictory { get; set; }
-        private int nbDefeat { get; set; }
+        private string Password { get; set; }
+        private string Email { get; set; }
+        private string Avatar { get; set; }
+        private int NbVictory { get; set; }
+        private int NbDefeat { get; set; }
 
-        public ConnectedPlayer()
+        public ConnectedPlayer(string name, string password, string email, string avatar, int nbVictory, int nbDefeat) : base(name)
         {
-
-        }
-
-        public bool deleteAccount()
-        {
-            return true;
+            this.Password = password;
+            this.Email = email;
+            this.Avatar = avatar;
+            this.NbVictory = nbVictory;
+            this.NbDefeat = nbDefeat;
         }
     }
 }

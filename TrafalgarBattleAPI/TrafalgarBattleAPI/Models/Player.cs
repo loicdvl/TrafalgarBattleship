@@ -2,51 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TrafalgarBattleAPI.Models.Ships;
 
 namespace TrafalgarBattleAPI.Models
 {
     public class Player
     {
-        private static int idPlayer { get; set; }
-        private string pseudo { get; set; }
-        private int shipNb { get; set; }
-        private int score { get; set; }
-        private bool isDisponible { get; set; }
-
-        public Player()
+        public string Name { get; set; }
+        public PlayerGrid PlayerGrid { get; set; }
+        public List<Ship> Ships { get; set; }
+        public bool HasLost
         {
-            pseudo = "Anonyme";
-        }
-        
-        public bool createAccount(string pseudo, string mdp)
-        {
-
-            return true;
+            get
+            {
+                return Ships.All(x => x.IsSunk);
+            }
         }
 
-        public bool login(string pseudo, string mdp)
+        public Player(string name)
         {
-            return true;
-        }
-
-        public void challengePlayer(Player p)
-        {
-
-        }
-
-        public void acceptChallenge(Player j)
-        {
-
-        }
-
-        public void exitGame()
-        {
-
-        }
-
-        public void replay()
-        {
-
+            this.Name = name;
+            Ships = new List<Ship>()
+            {
+                new Destroyer(),
+                new Submarine(),
+                new Cruiser(),
+                new Carrier(),
+                new Battleship()
+            };
+            PlayerGrid = new PlayerGrid();
         }
     }
 }
