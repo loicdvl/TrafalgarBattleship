@@ -1,0 +1,153 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.ico"></link>
+	<link href="https://fonts.googleapis.com/css?family=Italianno" rel="stylesheet"> 
+		<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> 
+		<!-- CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <title>Trafalgar Battleship</title>
+</head>
+
+
+<body>
+
+    <!-- En-tête avec le logo -->
+    <header>
+		<nav class="navbar navbar-default navbar-static-top">
+		  <div class="container-fluid">
+			<div class="navbar-header">
+			  <a class="navbar-brand" href="#">
+				<img alt="Brand" src="img/oldship.png" id="brand">
+			  </a>
+			</div>
+		  </div>
+		</nav>
+    </header>
+
+    <!-- Accueil du jeu -->
+	<div class="jumbotron text-center" >
+		<div id="header">
+			<h1>Trafalgar Battleship</h1>
+			<h2>Bienvenue</h2>
+		</div>
+	  <div id="blockBtn">
+		  <p><a class="btn btn-primary" href="defierJoueur.html" role="button">Commencer une partie</a></p>
+		  <p><a class="btn btn-primary" href="leaderboard.html" role="button">Leaderboard</a></p>
+		  <br/>
+		  <p><a type="button" class="btn btn-primary" data-toggle="modal" data-target="#contactModal">Se connecter</a></p>
+	  </div>
+	  <a class="glyphicon glyphicon-menu-down" href="#regles"></a>
+	</div>
+	
+	<div class="test">
+		<!-- Bouton back to top -->
+		<div id="elevator_item"><a id="elevator" onclick="return false;" title="Back To Top"></a></div>
+		<div class="divider"></div>
+		<!-- Règle de jeu -->
+		<div id="regles">
+			<p>
+			Dans le cadre de la formation Master 1 Miage apprentissage, nous avons pour projet de réaliser une
+			application. Le sujet choisi est une application web proposé par M. Julien Hairapian. Il s’agit d’une
+			application permettant à deux personnes connectées de jouer au jeu de la bataille navale en temps réel.
+			Le jeu de bataille navale, ou touché-coulé, est au départ un jeu de société. Le but est de placer des
+			navires sur une grille qui n’est pas connue du joueur adverse, il doit réussir à lui couler les siens. Le
+			premier des joueurs qui parvient à toucher (“couler”) la totalité des navires adverses, remporte la partie.
+			</P>
+			</br>
+			<p>
+			La bataille navale oppose deux joueurs qui s'affrontent. Chacun a une flotte composée de 5 bateaux, qui sont, en général, les suivants : 
+			1 porte-avion (5 cases), 1 croiseur (4 cases), 1 contre torpilleur (3 cases), 1 sous-marin (3 cases), 1 torpilleur (2 cases). 
+			Au début du jeu, chaque joueur place ses bateaux sur sa grille. Celle-ci est toujours numérotée de A à J verticalement et de 1 à 10 horizontalement. 
+			Un à un, les joueurs vont "tirer" sur une case de l'adversaire. Par exemple B.3 ou encore H.8. Le but est donc de couler les bateaux adverses. 
+			En général, les jeux de société prévoient des pions blancs pour les tirs dans l'eau (donc qui ne touchent aucun bateau adverse) et des pions rouges pour les "touché". 
+			Au fur et à mesure, il faut mettre les pions sur sa propre grille afin de se souvenir de nos tirs passés.
+			</p>
+		</div>
+	</div>
+	
+	
+    <!-- modal contact form -->
+            <div id="contactModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3 id="contactModalLabel">Connexion</h3>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" action=" " method="post"  id="contact_form">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="last_name">Pseudo</label> 
+                                    <div class="col-md-10 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input id="last_name" name="last_name" class="form-control"  type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="email">E-Mail</label>  
+                                    <div class="col-md-10 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                            <input id="email" name="email" class="form-control"  type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="confirm_email">Confirmation</label>  
+                                    <div class="col-md-10 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                            <input id="confirm_email" name="confirm_email" class="form-control"  type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Success message -->
+                                <div class="alert alert-success" role="alert" id="success_message">Connexion réussie</div>
+                                <!-- Button -->
+                                <div class="form-group">
+                                    <button id="send" type="submit" class="btn btn-warning"> Se connecter </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+	
+    <!-- pied de page -->
+    <footer>
+        <div class="footer-info">
+            <div class="footer-brand">
+                <p> Loïc DEVOILLE & Lucie SEURIN</p>
+				<p>2016-2017 M1 Miage Apprentissage</p>
+            </div>
+        </div>
+    </footer>
+	
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="bootstrap-scrolling-nav/js/jquery.easing.min.js"></script>
+	<script type="text/javascript" src="backToTop.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.glyphicon-menu-down').click(function() {
+				var div = $(this).attr("href");
+				var pos = $(div).offset().top;
+				$('html, body').animate({scrollTop:pos},2000) ; 
+			});
+		});
+	</script>
+
+</body>
+</html>
