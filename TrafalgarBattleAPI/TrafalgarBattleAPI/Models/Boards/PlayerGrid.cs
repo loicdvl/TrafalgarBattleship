@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TrafalgarBattleAPI.Models
+namespace TrafalgarBattleAPI.Models.Boards
 {
     public class PlayerGrid
     {
@@ -19,6 +19,11 @@ namespace TrafalgarBattleAPI.Models
                     Cases.Add(new Case(i,j));
                 }
             }
+        }
+
+        public Case Search(int row, int column)
+        {
+            return Cases.Where(x => x.Coordinates.Row == row && x.Coordinates.Column == column).First();
         }
     }
 }

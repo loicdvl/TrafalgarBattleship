@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using TrafalgarBattleAPI.Models.Ships;
+using TrafalgarBattleAPI.Models.Boards;
 
 namespace TrafalgarBattleAPI.Models
 {
@@ -31,6 +31,21 @@ namespace TrafalgarBattleAPI.Models
                 new Battleship()
             };
             PlayerGrid = new PlayerGrid();
+        }
+
+        public ShotResult ProcessShot(Coordinates coordinates)
+        {
+            if (!PlayerGrid.Search(coordinates.Row, coordinates.Column).IsOccupied)
+            {
+                return ShotResult.Miss;
+            }
+            Ship ship = Ships.First(x => x.State == PlayerGrid.Search(coordinates.Row, coordinates.Column).State);
+            ship.Hits++;
+            if (ship.IsSunk)
+            {
+                return ShotResult.Sunk;
+            }
+            return ShotResult.Hit;
         }
     }
 }

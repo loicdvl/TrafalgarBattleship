@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TrafalgarBattleAPI.Models.Boards;
 
 namespace TrafalgarBattleAPI.Models.Ships
 {
@@ -10,6 +11,7 @@ namespace TrafalgarBattleAPI.Models.Ships
         public string Name { get; set; }
         public int Width { get; set; }
         public int Hits { get; set; }
+        public State State { get; set; }
         public bool IsSunk
         {
             get
