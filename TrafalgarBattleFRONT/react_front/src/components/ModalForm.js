@@ -1,15 +1,43 @@
 import React from 'react';
 
+import {Modal,Form,FormGroup,FormControl,ControlLabel} from 'react-bootstrap';
+
 class ModalForm extends React.Component {
+
+    state = {
+      showModalSignUp: false
+    };
+
+    openModalSignUp = () => {
+        this.setState({ showModalSignUp : true });
+    };
+
+    closeModalSignUp = () => {
+        this.setState({ showModalSignUp : false });
+    };
+
     render() {
         return (
-            <div id="contactModal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+            <Modal show={this.state.showModalSignUp} onHide={this.close}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Inscription</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form vertical>
+                        <FormGroup>
+                            <ControlLabel>Pseudo</ControlLabel>
+                            <FormControl />
+                        </FormGroup>
+                        <Button type="submit" className="btn btn-warning">S'inscrire</Button>
+                    </Form>
+                </Modal.Body>
+            </Modal>
+
+
+
+            <Modal>
                 <div className="modal-dialog">
                     <div className="modal-content">
-                        <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="contactModalLabel">Connexion</h3>
-                        </div>
                         <div className="modal-body">
                             <form className="form-horizontal" action=" " method="post"  id="contact_form">
                                 <div className="form-group">
@@ -49,7 +77,7 @@ class ModalForm extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Modal>
         )
     }
 }
