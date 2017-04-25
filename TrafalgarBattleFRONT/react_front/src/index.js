@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 
 import Index from './components/Index';
 import Leaderboard from './components/Leaderboard';
@@ -30,6 +29,6 @@ const Root = () => {
 };
 
 ReactDOM.render(
-    <Provider />,
+    <Root />,
     document.getElementById('root')
 );
