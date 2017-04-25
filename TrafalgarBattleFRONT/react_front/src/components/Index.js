@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Header from './Header';
 import Footer from './Footer';
 import Rules from './Rules';
 import {Jumbotron,Button,ButtonGroup,Modal,Form,FormGroup,FormControl,ControlLabel,InputGroup,Glyphicon,Alert} from 'react-bootstrap';
@@ -31,19 +30,28 @@ class Index extends React.Component {
         this.setState({ showModalSignIn : false });
     };
 
+    goToChallengePlayer = event => {
+        event.preventDefault();
+        this.context.router.transitionTo('/challenge-player');
+    };
+
+    goToLeaderboard = event => {
+        event.preventDefault();
+        this.context.router.transitionTo('/leaderboard');
+    };
+
     render () {
         return (
             <div>
-                <Header />
                 <Jumbotron className="jumbotron text-center">
                     <div id="header">
                         <h1>Trafalgar Battleship</h1>
                         <h2>Bienvenue</h2>
                     </div>
                     <ButtonGroup vertical>
-                        <Button bsStyle="primary" bsSize="large" block>Commencer une partie</Button>
+                        <Button bsStyle="primary" bsSize="large" onClick={e => this.goToChallengePlayer(e)} block>Commencer une partie</Button>
                         <br/>
-                        <Button bsStyle="primary" bsSize="large" block>Leaderboard</Button>
+                        <Button bsStyle="primary" bsSize="large" onClick={e => this.goToLeaderboard(e)} block>Leaderboard</Button>
                         <br/>
                         <Button bsStyle="primary" bsSize="large" onClick={this.openModalSignIn} block>Se connecter</Button>
                         <br/>
@@ -55,9 +63,9 @@ class Index extends React.Component {
                 </Jumbotron>
 
                 <div className="test">
-                    <div id="elevator_item"><a id="elevator" title="Back To Top"></a></div>
+                    <div id="elevator_item"><a id="elevator" title="Back To Top" /></div>
 
-                    <div className="divider"></div>
+                    <div className="divider" />
 
                     <Rules />
                     <Modal show={this.state.showModalSignUp} onHide={this.closeModalSignUp}>
@@ -123,13 +131,22 @@ class Index extends React.Component {
                             </Form>
                             <Alert bsStyle="success">Connexion réussie</Alert>
                             <Button type="submit" bsStyle="warning">Se connecter</Button>
+                            <br/><br/><br/>
+                            <ButtonGroup vertical>
+                                <Button type="submit" bsStyle="primary" block>Facebook</Button><br/>
+                                <Button type="submit" bsStyle="primary" block>Twitter</Button>
+                            </ButtonGroup>
                         </Modal.Body>
                     </Modal>
                 </div>
                 <Footer />
             </div>
-        )
+        );
     }
+
+    static contextTypes = {
+        router: React.PropTypes.object
+    };
 }
 
 export default Index;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Jumbotron,Nav} from 'react-bootstrap';
+import { Nav, Image } from 'react-bootstrap';
 
 class Header extends React.Component {
     render () {
@@ -10,7 +10,7 @@ class Header extends React.Component {
                     <div className="container-fluid">
                         <div className="navbar-header">
                             <a className="navbar-brand" href="#">
-                                <img alt="Brand" src="../img/oldship.png" id="brand" />
+                                <Image src="../img/oldship.png" id="brand" />
                             </a>
                         </div>
                     </div>
