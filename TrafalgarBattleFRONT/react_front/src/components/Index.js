@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Footer from './Footer';
+import { Link } from 'react-router';
+
 import Rules from './Rules';
 import {Jumbotron,Button,ButtonGroup,Modal,Form,FormGroup,FormControl,ControlLabel,InputGroup,Glyphicon,Alert} from 'react-bootstrap';
 
@@ -30,16 +31,6 @@ class Index extends React.Component {
         this.setState({ showModalSignIn : false });
     };
 
-    goToChallengePlayer = event => {
-        event.preventDefault();
-        this.context.router.transitionTo('/challenge-player');
-    };
-
-    goToLeaderboard = event => {
-        event.preventDefault();
-        this.context.router.transitionTo('/leaderboard');
-    };
-
     render () {
         return (
             <div>
@@ -49,9 +40,9 @@ class Index extends React.Component {
                         <h2>Bienvenue</h2>
                     </div>
                     <ButtonGroup vertical>
-                        <Button bsStyle="primary" bsSize="large" onClick={e => this.goToChallengePlayer(e)} block>Commencer une partie</Button>
+                        <Link to="/challenge-player"><Button bsStyle="primary" bsSize="large" block>Commencer une partie</Button></Link>
                         <br/>
-                        <Button bsStyle="primary" bsSize="large" onClick={e => this.goToLeaderboard(e)} block>Leaderboard</Button>
+                        <Link to="/leaderboard"><Button bsStyle="primary" bsSize="large" block>Leaderboard</Button></Link>
                         <br/>
                         <Button bsStyle="primary" bsSize="large" onClick={this.openModalSignIn} block>Se connecter</Button>
                         <br/>
@@ -139,7 +130,6 @@ class Index extends React.Component {
                         </Modal.Body>
                     </Modal>
                 </div>
-                <Footer />
             </div>
         );
     }
