@@ -1,7 +1,13 @@
-import { connect } from 'react-redux';
+import React from 'react';
 import OnlinePlayersList from '../views/OnlinePlayersList';
 
 
-const OnlinePlayersListContainer = connect()(OnlinePlayersList);
+class OnlinePlayersListContainer extends React.Component {
+    render() {
+        return (
+            <OnlinePlayersList/>
+        )
+    }
+}
 
 export default OnlinePlayersListContainer;

@@ -1,7 +1,13 @@
-import { connect } from 'react-redux';
+import React from 'react';
 import SearchForm from '../views/SearchForm';
 
 
-const SearchFormContainer = connect()(SearchForm);
+class SearchFormContainer extends React.Component {
+    render() {
+        return (
+            <SearchForm />
+        )
+    }
+}
 
 export default SearchFormContainer;

@@ -13,7 +13,6 @@ import { Router, Route, browserHistory } from 'react-router';
 
 import './css/bootstrap/css/bootstrap.min.css';
 
-
 const Root = () => {
     return (
         <Router history={browserHistory}>
@@ -21,8 +20,8 @@ const Root = () => {
                 <Route path="/" component={Index} />
                 <Route path="/leaderboard" component={Leaderboard} />
                 <Route path="/challenge-player" component={ChallengePlayer} />
-                <Route path="/game/placing-ships/:playerid" component={PlacingShips} />
-                <Route path="/game/battle/:playerid" component={Game} />
+                <Route path="/game/placing-ships" component={PlacingShips} />
+                <Route path="/game/battle" component={Game} />
             </Route>
         </Router>
     )

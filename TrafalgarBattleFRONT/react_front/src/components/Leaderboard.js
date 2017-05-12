@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Image, Form, FormControl, Table, Button, Input } from 'react-bootstrap';
+import { Image, Form, FormControl, Table, Button } from 'react-bootstrap';
 
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
@@ -17,54 +17,53 @@ class Leaderboard extends React.Component {
 						<Button bsStyle="primary">Rechercher</Button>
 						<Button bsStyle="primary">Mon classement</Button>
 					</Form>
-					<div className="bs-example">
-						<Table striped condensed hover>
-							<thead>
-								<tr>
-									<th/>
-									<th>Position</th>
-									<th>Joueur</th>
-									<th>Victoire</th>
-									<th>Défaite</th>
-									<th>Total</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><Image alt="Brand" src="img/oldship.png" id="brand"/></td>
-									<td>1</td>
-									<td>John</td>
-									<td>10</td>
-									<td>1</td>
-									<td>11</td>
-								</tr>
-								<tr>
-									<td><Image alt="Brand" src="img/oldship.png" id="brand"/></td>
-									<td>1</td>
-									<td>John</td>
-									<td>10</td>
-									<td>1</td>
-									<td>11</td>
-								</tr>
-								<tr>
-									<td><Image alt="Brand" src="img/oldship.png" id="brand"/></td>
-									<td>1</td>
-									<td>John</td>
-									<td>10</td>
-									<td>1</td>
-									<td>11</td>
-								</tr>
-								<tr>
-									<td><Image alt="Brand" src="img/oldship.png" id="brand"/></td>
-									<td>1</td>
-									<td>John</td>
-									<td>10</td>
-									<td>1</td>
-									<td>11</td>
-								</tr>
-							</tbody>
-						</Table>
-					</div>
+					<br/>
+					<Table striped condensed hover>
+						<thead>
+							<tr>
+								<th/>
+								<th>Position</th>
+								<th>Joueur</th>
+								<th>Victoire</th>
+								<th>Défaite</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><Image src="../img/oldship.png"/></td>
+								<td>1</td>
+								<td>John</td>
+								<td>10</td>
+								<td>1</td>
+								<td>11</td>
+							</tr>
+							<tr>
+								<td><Image src="../img/oldship.png"/></td>
+								<td>1</td>
+								<td>John</td>
+								<td>10</td>
+								<td>1</td>
+								<td>11</td>
+							</tr>
+							<tr>
+								<td><Image src="../img/oldship.png"/></td>
+								<td>1</td>
+								<td>John</td>
+								<td>10</td>
+								<td>1</td>
+								<td>11</td>
+							</tr>
+							<tr>
+								<td><Image src="../img/oldship.png"/></td>
+								<td>1</td>
+								<td>John</td>
+								<td>10</td>
+								<td>1</td>
+								<td>11</td>
+							</tr>
+						</tbody>
+					</Table>
 				</div>
 			</div>
         )

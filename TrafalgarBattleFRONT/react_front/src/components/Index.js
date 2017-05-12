@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router';
 
-import Rules from './Rules';
+import Rules from './views/Rules';
 import {Jumbotron,Button,ButtonGroup,Modal,Form,FormGroup,FormControl,ControlLabel,InputGroup,Glyphicon,Alert} from 'react-bootstrap';
 
 import '../css/bootstrap/css/bootstrap.min.css';
