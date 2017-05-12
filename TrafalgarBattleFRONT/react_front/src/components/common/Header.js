@@ -4,25 +4,30 @@ import { Link } from 'react-router';
 import { Nav, Image, Jumbotron } from 'react-bootstrap';
 
 class Header extends React.Component {
-    render () {
-        return (
-            <div>
-                <Nav className="navbar navbar-default navbar-static-top">
-                    <div className="container-fluid">
-                        <div className="navbar-header">
-                            <Link to="#" className="navbar-brand">
-                                <Image src="../../img/oldship.png" id="brand" />
-                            </Link>
+
+    render (){
+        if(this.props.show) {
+            return (
+                <div>
+                    <Nav className="navbar navbar-default navbar-static-top">
+                        <div className="container-fluid">
+                            <div className="navbar-header">
+                                <Link to="#" className="navbar-brand">
+                                    <Image src="../../img/oldship.png" id="brand"/>
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                </Nav>
-                <Jumbotron className="jumbotron text-center">
-                    <div id="header">
-                        <h1>Trafalgar Battleship</h1>
-                    </div>
-                </Jumbotron>
-            </div>
-        )
+                    </Nav>
+                    <Jumbotron className="jumbotron text-center">
+                        <div id="header">
+                            <h1>Trafalgar Battleship</h1>
+                        </div>
+                    </Jumbotron>
+                </div>
+            )
+        }
+        else
+            return null;
     }
 }
 
