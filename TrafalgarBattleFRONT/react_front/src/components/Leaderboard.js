@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { Image, Form, FormControl, Table, Button } from 'react-bootstrap';
+import { Form, FormControl, Table, Button } from 'react-bootstrap';
+
+import LeaderboardPlayersListContainer from './containers/LeaderboardPlayersListContainer';
+import SearchFormContainer from './containers/SearchFormContainer';
 
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
@@ -12,11 +15,8 @@ class Leaderboard extends React.Component {
 			<div className="test">
 				<div id="DefierJoueur">
 					<h1>Leaderboard : Classement des meilleurs joueurs !</h1>
-					<Form inline>
-						<FormControl type="text" placeholder="PseudoJoueur" />
-						<Button bsStyle="primary">Rechercher</Button>
-						<Button bsStyle="primary">Mon classement</Button>
-					</Form>
+
+					<SearchFormContainer/>
 					<br/>
 					<Table striped condensed hover>
 						<thead>
@@ -30,38 +30,11 @@ class Leaderboard extends React.Component {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><Image src="../img/oldship.png"/></td>
-								<td>1</td>
-								<td>John</td>
-								<td>10</td>
-								<td>1</td>
-								<td>11</td>
-							</tr>
-							<tr>
-								<td><Image src="../img/oldship.png"/></td>
-								<td>1</td>
-								<td>John</td>
-								<td>10</td>
-								<td>1</td>
-								<td>11</td>
-							</tr>
-							<tr>
-								<td><Image src="../img/oldship.png"/></td>
-								<td>1</td>
-								<td>John</td>
-								<td>10</td>
-								<td>1</td>
-								<td>11</td>
-							</tr>
-							<tr>
-								<td><Image src="../img/oldship.png"/></td>
-								<td>1</td>
-								<td>John</td>
-								<td>10</td>
-								<td>1</td>
-								<td>11</td>
-							</tr>
+							<LeaderboardPlayersListContainer/>
+							<LeaderboardPlayersListContainer/>
+							<LeaderboardPlayersListContainer/>
+							<LeaderboardPlayersListContainer/>
+							<LeaderboardPlayersListContainer/>
 						</tbody>
 					</Table>
 				</div>

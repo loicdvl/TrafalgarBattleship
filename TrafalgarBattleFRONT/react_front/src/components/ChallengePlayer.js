@@ -3,7 +3,7 @@ import React from 'react';
 import OnlinePlayersListContainer from './containers/OnlinePlayersListContainer';
 import SearchFormContainer from './containers/SearchFormContainer';
 
-import { Button, Table, Image } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
