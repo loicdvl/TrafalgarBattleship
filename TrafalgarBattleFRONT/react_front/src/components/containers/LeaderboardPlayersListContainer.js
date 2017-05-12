@@ -3,7 +3,6 @@ import LeaderboardPlayersList from '../views/LeaderboardPlayersList';
 
 import { Table } from 'react-bootstrap';
 
-
 class LeaderboardPlayersListContainer extends React.Component {
     render() {
         const players = {

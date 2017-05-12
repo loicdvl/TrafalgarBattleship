@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import LeaderboardPlayersListContainer from './containers/LeaderboardPlayersListContainer';
 import SearchFormContainer from './containers/SearchFormContainer';
 
@@ -18,7 +17,6 @@ class Leaderboard extends React.Component {
 					<SearchFormContainer/>
 					<br/>
 					<LeaderboardPlayersListContainer/>
-
 				</div>
 			</div>
         )

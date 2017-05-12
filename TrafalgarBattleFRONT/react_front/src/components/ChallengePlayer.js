@@ -3,8 +3,6 @@ import React from 'react';
 import OnlinePlayersListContainer from './containers/OnlinePlayersListContainer';
 import SearchFormContainer from './containers/SearchFormContainer';
 
-import { Table } from 'react-bootstrap';
-
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
 
@@ -19,25 +17,7 @@ class ChallengePlayer extends React.Component {
 
                     <br/>
                     <div className="bs-example">
-                        <Table striped condensed hover>
-                            <thead>
-                                <tr>
-                                    <th/>
-                                    <th>Joueur</th>
-                                    <th>Score</th>
-                                    <th/>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <OnlinePlayersListContainer/>
-                                <OnlinePlayersListContainer/>
-                                <OnlinePlayersListContainer/>
-                                <OnlinePlayersListContainer/>
-                                <OnlinePlayersListContainer/>
-                                <OnlinePlayersListContainer/>
-                                <OnlinePlayersListContainer/>
-                            </tbody>
-                        </Table>
+                        <OnlinePlayersListContainer/>
                     </div>
                 </div>
             </div>

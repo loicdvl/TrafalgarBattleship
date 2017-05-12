@@ -131,12 +131,8 @@ class Index extends React.Component {
                     </Modal>
                 </div>
             </div>
-        );
+        )
     }
-
-    static contextTypes = {
-        router: React.PropTypes.object
-    };
 }
 
 export default Index;
