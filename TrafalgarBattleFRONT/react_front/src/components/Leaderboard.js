@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Form, FormControl, Table, Button } from 'react-bootstrap';
 
 import LeaderboardPlayersListContainer from './containers/LeaderboardPlayersListContainer';
 import SearchFormContainer from './containers/SearchFormContainer';
@@ -18,25 +17,8 @@ class Leaderboard extends React.Component {
 
 					<SearchFormContainer/>
 					<br/>
-					<Table striped condensed hover>
-						<thead>
-							<tr>
-								<th/>
-								<th>Position</th>
-								<th>Joueur</th>
-								<th>Victoire</th>
-								<th>Défaite</th>
-								<th>Total</th>
-							</tr>
-						</thead>
-						<tbody>
-							<LeaderboardPlayersListContainer/>
-							<LeaderboardPlayersListContainer/>
-							<LeaderboardPlayersListContainer/>
-							<LeaderboardPlayersListContainer/>
-							<LeaderboardPlayersListContainer/>
-						</tbody>
-					</Table>
+					<LeaderboardPlayersListContainer/>
+
 				</div>
 			</div>
         )

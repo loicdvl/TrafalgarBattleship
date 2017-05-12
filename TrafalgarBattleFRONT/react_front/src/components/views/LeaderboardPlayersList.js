@@ -6,15 +6,19 @@ class LeaderboardPlayersList extends React.Component {
     render () {
         return (
             <tr>
-                <td><Image src="../img/oldship.png"/></td>
-                <td>1</td>
-                <td>John</td>
-                <td>10</td>
-                <td>1</td>
-                <td>11</td>
+                <td><Image src="../../img/oldship.png"/></td>
+                <td>{this.props.player.position}</td>
+                <td>{this.props.player.pseudo}</td>
+                <td>{this.props.player.victory}</td>
+                <td>{this.props.player.defeat}</td>
+                <td>{this.props.player.total}</td>
             </tr>
         )
     }
+
+    static propTypes = {
+        player: React.PropTypes.object.isRequired
+    };
 }
 
 export default LeaderboardPlayersList;
