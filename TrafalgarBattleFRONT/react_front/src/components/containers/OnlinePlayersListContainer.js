@@ -18,6 +18,8 @@ class OnlinePlayersListContainer extends React.Component {
             }
         };
 
+
+
         const onlineplayers = Object
             .keys(onlineplayersjson)
             .map(key => <OnlinePlayer key={key} player={onlineplayersjson[key]} />);

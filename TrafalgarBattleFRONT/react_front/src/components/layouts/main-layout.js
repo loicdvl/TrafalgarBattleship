@@ -5,10 +5,9 @@ import Footer from '../common/Footer';
 
 class MainLayout extends React.Component {
     render () {
-        var isHome = (window.location.pathname != "/") ? true : false ;
         return (
             <div>
-                <Header show={isHome}/>
+                <Header show={(window.location.pathname !== "/")}/>
                 <main>
                     {this.props.children}
                 </main>
