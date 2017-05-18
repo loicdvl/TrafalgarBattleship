@@ -9,6 +9,7 @@ namespace TrafalgarBattleAPI.Models
     public class Player
     {
         public string Name { get; set; }
+        public string Avatar { get; set; }
         public PlayerGrid PlayerGrid { get; set; }
         public List<Ship> Ships { get; set; }
         public bool HasLost
@@ -19,9 +20,10 @@ namespace TrafalgarBattleAPI.Models
             }
         }
 
-        public Player(string name)
+        public Player(string Name)
         {
-            this.Name = name;
+            this.Name = Name;
+            Avatar = "oldship.png";
             Ships = new List<Ship>()
             {
                 new Destroyer(),
