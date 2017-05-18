@@ -3,10 +3,10 @@ import { Grid, Row, Col } from 'react-bootstrap';
 
 class GridContainer extends React.Component {
     render() {
-
         return (
             <Grid bsClass="placingGrid">
-                <Row >
+                <Row bsClass="row">
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
@@ -27,30 +27,10 @@ class GridContainer extends React.Component {
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
-                </Row>
-                <Row bsClass="row">
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
                 </Row>
                 <Row bsClass="row">
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                    <Col bsClass="col" sm={1} md={1} lg={1}/>
-                </Row>
-                <Row bsClass="row">
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
@@ -71,8 +51,70 @@ class GridContainer extends React.Component {
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
                 </Row>
                 <Row bsClass="row">
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                </Row>
+                <Row bsClass="row">
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                </Row>
+                <Row bsClass="row">
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                </Row>
+                <Row bsClass="row">
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                </Row>
+                <Row bsClass="row">
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
+                </Row>
+                <Row bsClass="row">
+                    <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>
                     <Col bsClass="col" sm={1} md={1} lg={1}/>

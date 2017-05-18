@@ -1,33 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import MainLayout from './components/layouts/main-layout';
-
-import Index from './components/Index';
-import Leaderboard from './components/Leaderboard';
-import ChallengePlayer from './components/ChallengePlayer';
-import Game from './components/Game';
-import PlacingShips from './components/PlacingShips';
-
-import { Router, Route, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import store from './store';
+import router from './router';
 
 import './css/bootstrap/css/bootstrap.min.css';
 
-const Root = () => {
-    return (
-        <Router history={browserHistory}>
-            <Route component={MainLayout}>
-                <Route path="/" component={Index} />
-                <Route path="/leaderboard" component={Leaderboard} />
-                <Route path="/challenge-player" component={ChallengePlayer} />
-                <Route path="/game/placing-ships" component={PlacingShips} />
-                <Route path="/game/battle" component={Game} />
-            </Route>
-        </Router>
-    )
-};
-
 ReactDOM.render(
-    <Root/>,
+    <Provider store={store}>{router}</Provider>,
     document.getElementById('root')
 );
