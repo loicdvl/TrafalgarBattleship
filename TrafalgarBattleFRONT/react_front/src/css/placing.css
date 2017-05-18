@@ -4,10 +4,12 @@
 .container {
 	padding-bottom: 10%;
 }
-section>#placingGrid>.row>.col {
+section>.placingGrid>.row>.col-lg-1,
+section>.placingGrid>.row>.col-md-1,
+section>.placingGrid>.row>.col-sm-1 {
 	border: 1px solid black;
 	width: 10%;
-	height: 12%;
+	height: 50px;
 }
 .row{
     margin-right: 0px;
