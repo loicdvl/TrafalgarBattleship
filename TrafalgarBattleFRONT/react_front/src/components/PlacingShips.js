@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Button, Glyphicon } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
@@ -161,7 +162,7 @@ class PlacingShips extends React.Component {
                             </div>
                         </section>
                         <section className="col col-2 col-sm-2 col-md-2 col-lg-2">
-                            <Button bsStyle="primary">Commencer la bataille</Button>
+                            <Link to="/game/battle"><Button bsStyle="primary">Commencer la bataille</Button></Link>
                         </section>
                     </div>
                 </div>
