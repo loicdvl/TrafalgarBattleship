@@ -5,12 +5,12 @@ using System.Web;
 
 namespace TrafalgarBattleAPI.Models.Boards
 {
-    public class Coordinates
+    public class Coordinate
     {
         public int Row { get; set; }
         public int Column { get; set; }
         
-        public Coordinates(int row, int column)
+        public Coordinate(int row, int column)
         {
             this.Row = row;
             this.Column = column;

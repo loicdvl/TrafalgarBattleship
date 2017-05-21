@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchForm from '../views/SearchForm';
-import * as userApi from '../../api/userApi';
+import * as playerApi from '../../api/player-api';
 
 
 class SearchFormContainer extends React.Component {
@@ -11,7 +11,7 @@ class SearchFormContainer extends React.Component {
 
             let query = this.refs.child.getQuery();
 
-            userApi.searchUsers(query);
+            playerApi.searchPlayer(query);
         };
 
         return (

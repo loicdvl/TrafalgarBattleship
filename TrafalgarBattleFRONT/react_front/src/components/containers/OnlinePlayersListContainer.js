@@ -1,28 +1,19 @@
 import React from 'react';
-import OnlinePlayer from '../views/OnlinePlayer';
+import { connect } from 'react-redux';
+
+import OnlinePlayerList from '../views/OnlinePlayerList';
+import * as playerApi from '../../api/player-api';
 
 import { Table } from 'react-bootstrap';
 
 
 class OnlinePlayersListContainer extends React.Component {
+
+    componentDidMount() {
+        playerApi.getAllPlayers();
+    };
+
     render() {
-
-        const onlineplayersjson = {
-            player1: {
-                pseudo: "toto",
-                score:51
-            },
-            player2: {
-                pseudo: "toto",
-                score:15
-            }
-        };
-
-
-
-        const onlineplayers = Object
-            .keys(onlineplayersjson)
-            .map(key => <OnlinePlayer key={key} player={onlineplayersjson[key]} />);
 
 
         return (
@@ -35,12 +26,16 @@ class OnlinePlayersListContainer extends React.Component {
                     <th/>
                 </tr>
                 </thead>
-                <tbody>
-                    {onlineplayers}
-                </tbody>
+                <OnlinePlayerList players={this.props.players} />
             </Table>
         )
     }
 }
 
-export default OnlinePlayersListContainer;
+const mapStateToProps = function(store) {
+    return {
+        players: store.playerState.players
+    };
+};
+
+export default connect(mapStateToProps)(OnlinePlayersListContainer);

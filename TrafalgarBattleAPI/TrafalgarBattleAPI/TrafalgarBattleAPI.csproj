@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -120,7 +121,7 @@
     <Compile Include="Models\Ships\Carrier.cs" />
     <Compile Include="Models\Boards\Case.cs" />
     <Compile Include="Models\ConnectedPlayer.cs" />
-    <Compile Include="Models\Boards\Coordinates.cs" />
+    <Compile Include="Models\Boards\Coordinate.cs" />
     <Compile Include="Models\Ships\Cruiser.cs" />
     <Compile Include="Models\Ships\Destroyer.cs" />
     <Compile Include="Models\Player.cs" />

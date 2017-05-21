@@ -12,12 +12,6 @@ namespace TrafalgarBattleAPI.Models.Ships
         public int Width { get; set; }
         public int Hits { get; set; }
         public State State { get; set; }
-        public bool IsSunk
-        {
-            get
-            {
-                return Hits >= Width;
-            }
-        }
+        public bool IsSunk => Hits >= Width;
     }
 }

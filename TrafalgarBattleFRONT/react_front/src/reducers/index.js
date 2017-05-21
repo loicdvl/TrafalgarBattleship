@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import userReducer from './user-reducer';
+import playerReducer from './player-reducer';
 
 let reducers = combineReducers({
-    userState: userReducer
+    playerState: playerReducer
 });
 
 export default reducers;

@@ -12,7 +12,7 @@ namespace TrafalgarBattleAPI.Models
         public int NbVictory { get; set; }
         public int NbDefeat { get; set; }
 
-        public ConnectedPlayer(string name, string password, string email, string avatar, int nbVictory, int nbDefeat) : base(name)
+        public ConnectedPlayer(string name, string password, string email, string avatar, int nbVictory, int nbDefeat)
         {
             Password = password;
             Email = email;

@@ -4,33 +4,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TrafalgarBattleAPI.Models;
-using TrafalgarBattleAPI.Models.Boards;
-using TrafalgarBattleAPI.Models.Ships;
 
 namespace TrafalgarBattleAPI.Controllers
 {
-    public class PlayerController : ApiController
+    public class GridController : ApiController
     {
-        private readonly Player []_players =
-        {
-            new Player{Name = "Loic", Avatar="oldship.png"},
-            new Player{Name="Lucie", Avatar="oldship.png"}
-        };
-
-        private readonly Player _loic = new Player{Name = "Loic", Avatar = "oldship.png"};
-
-
         // GET api/<controller>
-        public IEnumerable<Player> Get()
+        public IEnumerable<string> Get()
         {
-            return _players;
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/<controller>/5
-        public Player Get(string id)
+        public string Get(int id)
         {
-            return _loic;
+            return "value";
         }
 
         // POST api/<controller>

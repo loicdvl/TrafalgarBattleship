@@ -10,7 +10,7 @@ namespace TrafalgarBattleAPI.Models
     {
         public string Name { get; set; }
         public string Avatar { get; set; }
-        public PlayerGrid PlayerGrid { get; set; }
+        /*public PlayerGrid PlayerGrid { get; set; }
         public List<Ship> Ships { get; set; }
         public bool HasLost
         {
@@ -20,34 +20,15 @@ namespace TrafalgarBattleAPI.Models
             }
         }
 
-        public Player(string Name)
-        {
-            this.Name = Name;
-            Avatar = "oldship.png";
-            Ships = new List<Ship>()
-            {
-                new Destroyer(),
-                new Submarine(),
-                new Cruiser(),
-                new Carrier(),
-                new Battleship()
-            };
-            PlayerGrid = new PlayerGrid();
-        }
-
         public ShotResult ProcessShot(Coordinates coordinates)
         {
             if (!PlayerGrid.Search(coordinates.Row, coordinates.Column).IsOccupied)
             {
                 return ShotResult.Miss;
             }
-            Ship ship = Ships.First(x => x.State == PlayerGrid.Search(coordinates.Row, coordinates.Column).State);
+            var ship = Ships.First(x => x.State == PlayerGrid.Search(coordinates.Row, coordinates.Column).State);
             ship.Hits++;
-            if (ship.IsSunk)
-            {
-                return ShotResult.Sunk;
-            }
-            return ShotResult.Hit;
-        }
+            return ship.IsSunk ? ShotResult.Sunk : ShotResult.Hit;
+        }*/
     }
 }

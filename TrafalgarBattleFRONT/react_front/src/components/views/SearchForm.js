@@ -3,6 +3,7 @@ import React from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
 
 class SearchForm extends React.Component {
+
     getQuery = () => {
         return this.refs.search.value;
     };

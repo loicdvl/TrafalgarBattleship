@@ -12,9 +12,9 @@ namespace TrafalgarBattleAPI.Models.Boards
         public PlayerGrid()
         {
             Cases = new List<Case>();
-            for(int i=0;i<10;i++)
+            for(var i=0;i<10;i++)
             {
-                for(int j=0;j<10;j++)
+                for(var j=0;j<10;j++)
                 {
                     Cases.Add(new Case(i,j));
                 }
@@ -23,7 +23,7 @@ namespace TrafalgarBattleAPI.Models.Boards
 
         public Case Search(int row, int column)
         {
-            return Cases.Where(x => x.Coordinates.Row == row && x.Coordinates.Column == column).First();
+            return Cases.First(x => x.Coordinates.Row == row && x.Coordinates.Column == column);
         }
     }
 }

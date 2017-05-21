@@ -1,9 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import LeaderboardPlayersList from '../views/LeaderboardPlayersList';
+import * as playerApi from '../../api/player-api';
 
 import { Table } from 'react-bootstrap';
 
 class LeaderboardPlayersListContainer extends React.Component {
+
+    static componentDidMount () {
+        playerApi.getLeaderboard();
+    };
+
     render() {
         const players = {
             player1: {
@@ -48,4 +55,10 @@ class LeaderboardPlayersListContainer extends React.Component {
     }
 }
 
-export default LeaderboardPlayersListContainer;
+const mapStateToProps = function(store) {
+    return {
+        players: store.playerState.players
+    };
+};
+
+export default connect(mapStateToProps)(LeaderboardPlayersListContainer);

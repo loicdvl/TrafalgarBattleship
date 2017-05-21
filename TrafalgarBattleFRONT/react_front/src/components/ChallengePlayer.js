@@ -17,7 +17,7 @@ class ChallengePlayer extends React.Component {
 
                     <br/>
                     <div className="bs-example">
-                        <OnlinePlayersListContainer/>
+                        {this.props.children}
                     </div>
                 </div>
             </div>
