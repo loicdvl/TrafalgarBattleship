@@ -4,12 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using TrafalgarBattleAPI.Models;
 using TrafalgarBattleAPI.Models.Boards;
 using TrafalgarBattleAPI.Models.Ships;
 
 namespace TrafalgarBattleAPI.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PlayerController : ApiController
     {
         private readonly Player []_players =
