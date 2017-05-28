@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace TrafalgarBattleAPI.Models.Boards
+﻿namespace TrafalgarBattleAPI.Models.Boards
 {
     public enum State
     {

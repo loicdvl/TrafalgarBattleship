@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using TrafalgarBattleAPI.Models.Boards;
+﻿using TrafalgarBattleAPI.Models.Boards;
 
 namespace TrafalgarBattleAPI.Models.Ships
 {

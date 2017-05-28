@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TrafalgarBattleAPI.Models
+﻿namespace TrafalgarBattleAPI.Models
 {
     public class User
     {
