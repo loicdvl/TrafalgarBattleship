@@ -10,23 +10,22 @@ using TrafalgarBattleAPI.Models;
 namespace TrafalgarBattleAPI.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class PlayerController : ApiController
+    public class LeaderboardController : ApiController
     {
-        private readonly User[]_users =
+        private readonly User[] _leaderboard =
         {
-            new User{ Rank=1, Name = "Loic", Avatar="oldship.png", Victory=50, Defeat=10 },
-            new User{ Rank=2, Name="Lucie", Avatar="oldship.png",  Victory=50, Defeat=30 },
-            new User{ Rank=3, Name="Benben", Avatar="oldship.png",  Victory=30, Defeat=70 },
-            new User{ Rank=4, Name="Didi", Avatar="oldship.png",  Victory=10, Defeat=90 }
+            new User{ Rank=1, Name = "Loic", Avatar="oldship.png", Victory=50, Defeat=10},
+            new User{ Rank=2, Name="Lucie", Avatar="oldship.png",  Victory=50, Defeat=30},
+            new User{ Rank=3, Name="Benben", Avatar="oldship.png",  Victory=30, Defeat=70},
+            new User{ Rank=4, Name="Didi", Avatar="oldship.png",  Victory=10, Defeat=90}
         };
 
-        private readonly User _loic = new User { Rank = 1, Name = "Loic", Avatar = "oldship.png", Victory = 50, Defeat = 10 };
-
+        private readonly User _loic = new User { Rank = 1, Name = "Loic", Avatar = "oldship.png", Victory = 50, Defeat=10 };
 
         // GET api/<controller>
         public IEnumerable<User> Get()
         {
-            return _users;
+            return _leaderboard;
         }
 
         // GET api/<controller>/5

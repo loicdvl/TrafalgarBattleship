@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 
-class GridContainer extends React.Component {
+class Grid extends React.Component {
     render() {
         return (
             <Grid bsClass="placingGrid">
@@ -130,4 +130,4 @@ class GridContainer extends React.Component {
     }
 }
 
-export default GridContainer;
+export default Grid;

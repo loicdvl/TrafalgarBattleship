@@ -14,7 +14,7 @@ class Leaderboard extends React.Component {
 				<div id="DefierJoueur">
 					<h1>Leaderboard : Classement des meilleurs joueurs !</h1>
 
-					<SearchFormContainer/>
+					<SearchFormContainer typeSearch="LEADERBOARD"/>
 					<br/>
 					<LeaderboardPlayersListContainer/>
 				</div>

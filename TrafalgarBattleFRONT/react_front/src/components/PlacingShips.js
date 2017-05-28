@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
 import '../css/placing.css';
-import GridContainer from "./containers/GridContainer";
+import GridContainer from "./containers/PlayerGridContainer";
 
 class PlacingShips extends React.Component {
 

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import OnlinePlayersListContainer from './containers/OnlinePlayersListContainer';
 import SearchFormContainer from './containers/SearchFormContainer';
 
 import '../css/bootstrap/css/bootstrap.min.css';
@@ -13,7 +12,7 @@ class ChallengePlayer extends React.Component {
                 <div id="DefierJoueur">
                     <h1>C'est parti, défie un adversaire !</h1>
 
-                    <SearchFormContainer/>
+                    <SearchFormContainer typeSearch="PLAYER"/>
 
                     <br/>
                     <div className="bs-example">

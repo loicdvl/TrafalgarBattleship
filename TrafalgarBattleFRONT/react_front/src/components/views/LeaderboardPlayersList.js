@@ -3,22 +3,45 @@ import React from 'react';
 import { Image } from 'react-bootstrap';
 
 class LeaderboardPlayersList extends React.Component {
-    render () {
-        return (
-            <tr>
-                <td><Image src="../../img/oldship.png"/></td>
-                <td>{this.props.player.position}</td>
-                <td>{this.props.player.pseudo}</td>
-                <td>{this.props.player.victory}</td>
-                <td>{this.props.player.defeat}</td>
-                <td>{this.props.player.total}</td>
-            </tr>
-        )
+
+    renderLeaderboardList () {
+        if (this.props.leaderboard.length > 1)
+        {
+            return this.props.leaderboard.map(player => {
+                return (
+                    <tr key={this.props.Name}>
+                        <td><Image src="../../img/oldship.png"/></td>
+                        <td>{player.Rank}</td>
+                        <td>{player.Name}</td>
+                        <td>{player.Victory}</td>
+                        <td>{player.Defeat}</td>
+                        <td>{player.Victory - player.Defeat}</td>
+                    </tr>
+                );
+            })
+        }
+        else
+        {
+            return (
+                <tr>
+                    <td><Image src="../../img/oldship.png"/></td>
+                    <td>{this.props.leaderboard.Rank}</td>
+                    <td>{this.props.leaderboard.Name}</td>
+                    <td>{this.props.leaderboard.Victory}</td>
+                    <td>{this.props.leaderboard.Defeat}</td>
+                    <td>{this.props.leaderboard.Victory - this.props.leaderboard.Defeat}</td>
+                </tr>
+            )
+        }
     }
 
-    static propTypes = {
-        player: React.PropTypes.object.isRequired
-    };
+    render () {
+        return (
+            <tbody>
+                {this.renderLeaderboardList()}
+            </tbody>
+        )
+    }
 }
 
 export default LeaderboardPlayersList;
