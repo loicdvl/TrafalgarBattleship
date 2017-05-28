@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using TrafalgarBattleAPI.Extensions;
@@ -35,7 +33,7 @@ namespace TrafalgarBattleAPI.Controllers
         }
 
         // GET api/<controller>/5
-        public PlayerGrid Get(int id)
+        public PlayerGrid Get(string id)
         {
             return PlayerGrid;
         }
@@ -68,7 +66,6 @@ namespace TrafalgarBattleAPI.Controllers
                     int endrow = startrow, endcolumn = startcolumn;
                     var orientation = rand.Next(1, 101) % 2; //0 for Horizontal
 
-                    var panelNumbers = new List<int>();
                     if (orientation == 0)
                     {
                         for (var i = 1; i < ship.Width; i++)
@@ -87,7 +84,6 @@ namespace TrafalgarBattleAPI.Controllers
                     //We cannot place ships beyond the boundaries of the board
                     if (endrow > 10 || endcolumn > 10)
                     {
-                        isOpen = true;
                         continue;
                     }
 
@@ -95,7 +91,6 @@ namespace TrafalgarBattleAPI.Controllers
                     var affectedPanels = PlayerGrid.Cases.Range(startrow, startcolumn, endrow, endcolumn);
                     if (affectedPanels.Any(x => x.IsOccupied))
                     {
-                        isOpen = true;
                         continue;
                     }
 
