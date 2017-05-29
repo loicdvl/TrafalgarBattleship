@@ -14,8 +14,6 @@ class OnlinePlayersListContainer extends React.Component {
     };
 
     render() {
-
-
         return (
             <Table striped condensed hover>
                 <thead>

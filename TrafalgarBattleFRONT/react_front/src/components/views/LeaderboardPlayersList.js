@@ -9,7 +9,7 @@ class LeaderboardPlayersList extends React.Component {
         {
             return this.props.leaderboard.map(player => {
                 return (
-                    <tr key={this.props.Name}>
+                    <tr key={player.Rank}>
                         <td><Image src="../../img/oldship.png"/></td>
                         <td>{player.Rank}</td>
                         <td>{player.Name}</td>
@@ -23,7 +23,7 @@ class LeaderboardPlayersList extends React.Component {
         else
         {
             return (
-                <tr>
+                <tr key={this.props.leaderboard.Rank}>
                     <td><Image src="../../img/oldship.png"/></td>
                     <td>{this.props.leaderboard.Rank}</td>
                     <td>{this.props.leaderboard.Name}</td>

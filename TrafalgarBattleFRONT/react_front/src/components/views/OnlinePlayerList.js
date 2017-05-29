@@ -7,12 +7,12 @@ class OnlinePlayerList extends React.Component {
 
     renderOnlinePlayersList() {
         if (this.props.players.length > 1 ){
-            return this.props.players.map((players) => {
+            return this.props.players.map((player) => {
                 return (
-                    <tr>
-                        <td><Image src={players.Avatar} id="brand" /></td>
-                        <td>{players.Name}</td>
-                        <td>{players.Victory}</td>
+                    <tr key={player.Name}>
+                        <td><Image src={player.Avatar} id="brand" /></td>
+                        <td>{player.Name}</td>
+                        <td>{player.Victory}</td>
                         <td><Link to="/game/placing-ships"><Button bsStyle="primary">Défier</Button></Link></td>
                     </tr>
                 );
@@ -21,7 +21,7 @@ class OnlinePlayerList extends React.Component {
         else
         {
             return (
-                <tr>
+                <tr key={this.props.players.Name}>
                     <td><Image src={this.props.players.Avatar} id="brand" /></td>
                     <td>{this.props.players.Name}</td>
                     <td>{this.props.players.Victory}</td>

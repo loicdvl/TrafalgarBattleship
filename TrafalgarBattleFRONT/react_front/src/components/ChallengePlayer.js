@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SearchFormContainer from './containers/SearchFormContainer';
+import OnlinePlayerListContainer from './containers/OnlinePlayersListContainer';
 
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
@@ -16,7 +17,7 @@ class ChallengePlayer extends React.Component {
 
                     <br/>
                     <div className="bs-example">
-                        {this.props.children}
+                        <OnlinePlayerListContainer />
                     </div>
                 </div>
             </div>
