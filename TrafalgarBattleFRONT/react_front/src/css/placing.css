@@ -15,6 +15,15 @@ section>.placingGrid>.row>.col-sm-1 {
     margin-right: 0px;
     margin-left: 0px;
 }
+
+.occupied {
+	background-color: red
+}
+
+.water {
+	background-color: blue;
+}
+
 section:first-of-type {
 	padding: 19px;
 	background-color: #513C2D;

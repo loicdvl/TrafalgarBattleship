@@ -21,7 +21,7 @@ namespace TrafalgarBattleAPI.Models.Boards
 
         public Case Search(int row, int column)
         {
-            return Cases.First(x => x.Coordinates.Row == row && x.Coordinates.Column == column);
+            return Cases.First(x => x.Coordinate.Row == row && x.Coordinate.Column == column);
         }
     }
 }

@@ -2,12 +2,12 @@
 {
     public class Case
     {
-        public Coordinate Coordinates { get; set; }
+        public Coordinate Coordinate { get; set; }
         public State State { get; set; }
 
         public Case(int row, int column)
         {
-            Coordinates = new Coordinate(row, column);
+            Coordinate = new Coordinate(row, column);
             State = State.Empty;
         }
 

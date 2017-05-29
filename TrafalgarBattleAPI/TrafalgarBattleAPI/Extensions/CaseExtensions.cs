@@ -10,15 +10,15 @@ namespace TrafalgarBattleAPI.Extensions
     {
         public static Case At(this List<Case> cases, int row, int column)
         {
-            return cases.First(x => x.Coordinates.Row == row && x.Coordinates.Column == column);
+            return cases.First(x => x.Coordinate.Row == row && x.Coordinate.Column == column);
         }
 
         public static List<Case> Range(this List<Case> cases, int startRow, int startColumn, int endRow, int endColumn)
         {
-            return cases.Where(x => x.Coordinates.Row >= startRow
-                                     && x.Coordinates.Column >= startColumn
-                                     && x.Coordinates.Row <= endRow
-                                     && x.Coordinates.Column <= endColumn).ToList();
+            return cases.Where(x => x.Coordinate.Row >= startRow
+                                     && x.Coordinate.Column >= startColumn
+                                     && x.Coordinate.Row <= endRow
+                                     && x.Coordinate.Column <= endColumn).ToList();
         }
     }
 }

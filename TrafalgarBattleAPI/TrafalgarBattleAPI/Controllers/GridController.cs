@@ -25,11 +25,11 @@ namespace TrafalgarBattleAPI.Controllers
 
 
 
-    // GET api/<controller>
-        public IEnumerable<PlayerGrid> Get()
+        // GET api/<controller>
+        public List<Case> Get()
         {
             PlaceShips();
-            yield return PlayerGrid;
+            return PlayerGrid.Cases;
         }
 
         // GET api/<controller>/5

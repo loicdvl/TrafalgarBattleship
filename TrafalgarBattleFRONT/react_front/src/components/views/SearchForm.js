@@ -12,7 +12,7 @@ class SearchForm extends React.Component {
         return (
             <Form onSubmit={this.props.search} inline>
                 <FormControl type="text" ref="search" placeholder="PseudoJoueur" />
-                <Button bsStyle="primary">Rechercher</Button>
+                <Button type="submit" bsStyle="primary">Rechercher</Button>
                 <Button bsStyle="primary">Aléatoire</Button>
             </Form>
         )
