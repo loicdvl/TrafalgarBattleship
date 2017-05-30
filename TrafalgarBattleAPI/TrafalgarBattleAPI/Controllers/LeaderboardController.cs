@@ -19,9 +19,7 @@ namespace TrafalgarBattleAPI.Controllers
             new User{ Rank=3, Name="Benben", Avatar="oldship.png",  Victory=30, Defeat=70},
             new User{ Rank=4, Name="Didi", Avatar="oldship.png",  Victory=10, Defeat=90}
         };
-
-        private readonly User _loic = new User { Rank = 1, Name = "Loic", Avatar = "oldship.png", Victory = 50, Defeat=10 };
-
+       
         // GET api/<controller>
         public IEnumerable<User> Get()
         {
@@ -31,7 +29,8 @@ namespace TrafalgarBattleAPI.Controllers
         // GET api/<controller>/5
         public User Get(string id)
         {
-            return _loic;
+            var user = _leaderboard.FirstOrDefault((u) => u.Name == id);
+            return user;
         }
 
         // POST api/<controller>

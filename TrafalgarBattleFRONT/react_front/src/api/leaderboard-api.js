@@ -14,7 +14,7 @@ export function getLeaderboard() {
         });
 }
 
-export function searchLeaderboard(query = 'Loic') {
+export function searchLeaderboard(query) {
     return axios.get('http://localhost:54409/api/Leaderboard/'+query)
         .then(response => {
             if (response.status === 200 ) {

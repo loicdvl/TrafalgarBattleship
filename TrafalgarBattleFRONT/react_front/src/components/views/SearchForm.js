@@ -5,15 +5,13 @@ import { Form, FormControl, Button } from 'react-bootstrap';
 class SearchForm extends React.Component {
 
     getQuery = () => {
-        return this.refs.search.value;
+        return this.input.value;
     };
 
     render () {
         return (
             <Form onSubmit={this.props.search} inline>
-                <FormControl type="text" ref="search" placeholder="PseudoJoueur" />
                 <Button type="submit" bsStyle="primary">Rechercher</Button>
-                <Button bsStyle="primary">Aléatoire</Button>
             </Form>
         )
     }

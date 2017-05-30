@@ -14,7 +14,7 @@ export function getAllPlayers() {
         });
 }
 
-export function searchPlayer(query = 'Loic') {
+export function searchPlayer(query) {
     return axios.get('http://localhost:54409/api/Player/'+query)
         .then(response => {
             if (response.status === 200 ) {
