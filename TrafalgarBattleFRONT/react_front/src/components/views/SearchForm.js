@@ -11,6 +11,7 @@ class SearchForm extends React.Component {
     render () {
         return (
             <Form onSubmit={this.props.search} inline>
+                <FormControl type="text" inputRef={(ref) => { this.input = ref; }} placeholder="PseudoJoueur" />
                 <Button type="submit" bsStyle="primary">Rechercher</Button>
             </Form>
         )
