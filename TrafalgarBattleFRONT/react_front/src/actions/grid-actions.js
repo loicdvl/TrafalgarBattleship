@@ -9,3 +9,12 @@ export function getGridSuccess(parameters) {
     };
 }
 
+export function getOpponentEmptyGridSuccess(parameters) {
+    let opponentGrid = parameters.opponentGrid;
+
+    return {
+        type: types.GET_OPPONENT_EMPTY_GRID_SUCCESS,
+        opponentGrid
+    };
+}
+

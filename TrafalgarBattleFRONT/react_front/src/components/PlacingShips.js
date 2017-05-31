@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
 import '../css/placing.css';
-import GridContainer from "./containers/PlayerGridContainer";
+import PlayerGridContainer from "./containers/PlayerGridContainer";
 
 class PlacingShips extends React.Component {
 
@@ -39,7 +39,7 @@ class PlacingShips extends React.Component {
                             <div id="placing">
                                 <h1>Place tes navires</h1>
                             </div>
-                            <GridContainer/>
+                            <PlayerGridContainer/>
                         </section>
                         <section className="col col-2 col-sm-2 col-md-2 col-lg-2">
                             <Link to="/game/battle"><Button bsStyle="primary">Commencer la bataille</Button></Link>

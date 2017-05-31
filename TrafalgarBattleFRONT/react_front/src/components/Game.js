@@ -1,4 +1,6 @@
 import React from 'react';
+import PlayerGridContainer from './containers/PlayerGridContainer';
+import OpponentGridContainer from './containers/OpponentGridContainer';
 
 class Game extends React.Component {
 
@@ -12,169 +14,12 @@ class Game extends React.Component {
                 <div className="container">
                     <div className="row">
                         <section className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
+                            <PlayerGridContainer />
                         </section>
-
+                    </div>
+                    <div className="row">
                         <section className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
-                            <div className="row">
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                                <div className="col col-2 col-sm-2 col-md-2 col-lg-2"/>
-                            </div>
+                            <OpponentGridContainer />
                         </section>
                     </div>
                 </div>

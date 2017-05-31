@@ -5,9 +5,9 @@ import * as gridApi from '../../api/grid-api';
 
 import { Grid, Row, Col } from 'react-bootstrap';
 
-class PlayerGridContainer extends React.Component {
+class OpponentGridContainer extends React.Component {
     componentDidMount() {
-        gridApi.getRandomGrid();
+        gridApi.getEmptyGrid();
     };
 
     renderCols = (cols, row) => {
@@ -20,7 +20,7 @@ class PlayerGridContainer extends React.Component {
 
     renderRow = (row) => {
         let cols=[];
-        this.props.playerGrid.map((cases,index) => {
+        this.props.opponentGrid.map((cases,index) => {
             if( index >= row && index < row+10 )
                 return (
                     cols[index] = cases
@@ -36,7 +36,7 @@ class PlayerGridContainer extends React.Component {
     render() {
         return (
             <Grid bsClass="placingGrid">
-                {this.props.playerGrid.map((cases, index) => {
+                {this.props.opponentGrid.map((cases, index) => {
                     if( index%10 === 0 && index < 100 )
                     {
                         return (
@@ -51,8 +51,8 @@ class PlayerGridContainer extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        playerGrid: store.playerGridState.playerGrid
+        opponentGrid: store.opponentGridState.opponentGrid
     };
 };
 
-export default connect(mapStateToProps)(PlayerGridContainer);
+export default connect(mapStateToProps)(OpponentGridContainer);
