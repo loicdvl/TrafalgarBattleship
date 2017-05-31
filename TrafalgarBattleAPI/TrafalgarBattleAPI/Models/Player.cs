@@ -55,8 +55,8 @@ namespace TrafalgarBattleAPI.Models
                 var isOpen = true;
                 while (isOpen)
                 {
-                    var startcolumn = rand.Next(1, 11);
-                    var startrow = rand.Next(1, 11);
+                    var startcolumn = rand.Next(0, 10);
+                    var startrow = rand.Next(0, 10);
                     int endrow = startrow, endcolumn = startcolumn;
                     var orientation = rand.Next(1, 101) % 2; //0 for Horizontal
 
@@ -76,7 +76,7 @@ namespace TrafalgarBattleAPI.Models
                     }
 
                     //We cannot place ships beyond the boundaries of the board
-                    if (endrow > 10 || endcolumn > 10)
+                    if (endrow > 9 || endcolumn > 9)
                     {
                         continue;
                     }
