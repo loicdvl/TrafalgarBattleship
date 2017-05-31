@@ -1,5 +1,8 @@
 import React from 'react';
 
+import io from 'socket.io-client';
+let socket = io(`http://localhost:54409`);
+
 import SearchFormContainer from './containers/SearchFormContainer';
 import OnlinePlayerListContainer from './containers/OnlinePlayersListContainer';
 
