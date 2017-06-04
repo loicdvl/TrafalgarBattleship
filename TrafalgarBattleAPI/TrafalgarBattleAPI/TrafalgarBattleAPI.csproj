@@ -160,12 +160,10 @@
     <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Extensions\CaseExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Models\Games\Game.cs" />
     <Compile Include="Models\Ships\Carrier.cs" />
     <Compile Include="Models\Boards\Case.cs" />
