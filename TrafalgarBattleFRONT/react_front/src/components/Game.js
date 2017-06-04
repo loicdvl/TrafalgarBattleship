@@ -13,14 +13,16 @@ class Game extends React.Component {
 
                 <div className="container">
                     <div className="row">
+                    <div className="col col-6 col-sm-6 col-md-6 col-lg-6">
                         <section className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <PlayerGridContainer />
                         </section>
                     </div>
-                    <div className="row">
+                    <div className="col col-6 col-sm-6 col-md-6 col-lg-6">
                         <section className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <OpponentGridContainer />
                         </section>
+                    </div>
                     </div>
                 </div>
             </div>
