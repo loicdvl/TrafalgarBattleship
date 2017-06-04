@@ -1,6 +1,7 @@
 import React from 'react';
 import PlayerGridContainer from './containers/PlayerGridContainer';
 import OpponentGridContainer from './containers/OpponentGridContainer';
+import '../css/game.css';
 
 class Game extends React.Component {
 
@@ -13,16 +14,12 @@ class Game extends React.Component {
 
                 <div className="container">
                     <div className="row">
-                    <div className="col col-6 col-sm-6 col-md-6 col-lg-6">
-                        <section className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
+                        <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <PlayerGridContainer />
-                        </section>
-                    </div>
-                    <div className="col col-6 col-sm-6 col-md-6 col-lg-6">
-                        <section className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
+                        </div>
+                        <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <OpponentGridContainer />
-                        </section>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>

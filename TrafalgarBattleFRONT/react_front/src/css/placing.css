@@ -23,9 +23,6 @@ section>.placingGrid>.row>.col-sm-1 {
 .water {
 	background-color: blue;
 }
-.gameSection{
-	width: 100%;
-}
 section:first-of-type {
 	padding: 19px;
 	background-color: #513C2D;
