@@ -9,11 +9,11 @@ class Header extends React.Component {
         if(this.props.show) {
             return (
                 <div>
-                    <Nav className="navbar navbar-default navbar-static-top">
+                    <Nav className="navbar navbar-default navbar-static-top" role="banner">
                         <div className="container-fluid">
                             <div className="navbar-header">
                                 <Link to="#" className="navbar-brand">
-                                    <Image src="../../img/oldship.png" id="brand"/>
+                                    <Image src="oldship.png" id="brand"/>
                                 </Link>
                             </div>
                         </div>

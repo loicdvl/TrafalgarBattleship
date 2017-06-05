@@ -29,9 +29,16 @@ body, html{
 .navbar {
     padding: 10px 0px 6px 0px;
     margin: 0px;
-    box-shadow: 0px 0px 15px 0px #FFF;
+    /*box-shadow: 0px 0px 15px 0px #FFF;*/
     border: none;
-    display: none;
+    display: block;
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+.navbar-default {
+    background-color: transparent;
 }
 img {
     border: 0;
