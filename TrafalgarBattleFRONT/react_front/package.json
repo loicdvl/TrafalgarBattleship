@@ -9,7 +9,7 @@
     "react-redux": "^4.4.5",
     "react-router": "2.0.0",
     "redux": "^3.5.2",
-    "signalr-client": "^0.0.17"
+    "signalr-no-jquery": "^0.1.8"
   },
   "devDependencies": {
     "axios": "^0.9.1",
