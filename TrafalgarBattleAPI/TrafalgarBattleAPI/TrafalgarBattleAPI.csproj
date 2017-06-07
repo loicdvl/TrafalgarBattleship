@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="ConnectionMapping.cs" />
     <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
@@ -164,10 +165,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\GameStore.cs" />
+    <Compile Include="Hubs\HitHub.cs" />
+    <Compile Include="Hubs\OnlineUserStore.cs" />
     <Compile Include="Models\Games\Game.cs" />
     <Compile Include="Models\Ships\Carrier.cs" />
     <Compile Include="Models\Boards\Case.cs" />
-    <Compile Include="Models\ConnectedPlayer.cs" />
     <Compile Include="Models\Boards\Coordinate.cs" />
     <Compile Include="Models\Ships\Cruiser.cs" />
     <Compile Include="Models\Ships\Destroyer.cs" />
@@ -183,7 +186,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

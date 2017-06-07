@@ -36,6 +36,26 @@ namespace TrafalgarBattleAPI.Models
             HasLost = false;
         }
 
+        public Player(User user)
+        {
+            ConnectionId = user.ConnectionId;
+            Rank = user.Rank;
+            Avatar = user.Avatar;
+            Name = user.Name;
+            Victory = user.Victory;
+            Defeat = user.Defeat;
+            Ships = new List<Ship>
+            {
+                new Destroyer(),
+                new Submarine(),
+                new Cruiser(),
+                new Carrier(),
+                new Battleship()
+            };
+            PlayerGrid = new PlayerGrid();
+            HasLost = false;
+        }
+
         public ShotResult ProcessShot(Coordinate coordinate)
         {
             if (!PlayerGrid.Search(coordinate.Row, coordinate.Column).IsOccupied)
@@ -58,7 +78,7 @@ namespace TrafalgarBattleAPI.Models
                     var startcolumn = rand.Next(0, 10);
                     var startrow = rand.Next(0, 10);
                     int endrow = startrow, endcolumn = startcolumn;
-                    var orientation = rand.Next(1, 101) % 2; //0 for Horizontal
+                    var orientation = rand.Next(1, 101) % 2;
 
                     if (orientation == 0)
                     {
@@ -75,13 +95,11 @@ namespace TrafalgarBattleAPI.Models
                         }
                     }
 
-                    //We cannot place ships beyond the boundaries of the board
                     if (endrow > 9 || endcolumn > 9)
                     {
                         continue;
                     }
 
-                    //Check if specified panels are occupied
                     var affectedPanels = PlayerGrid.Cases.Range(startrow, startcolumn, endrow, endcolumn);
                     if (affectedPanels.Any(x => x.IsOccupied))
                     {
