@@ -10,6 +10,10 @@ namespace TrafalgarBattleAPI.Hubs
 {
     public class HitHub : Hub
     {
+        private readonly static GameMapping<int> _games = new GameMapping<int>();
+
+        private static int idGame = 0;
+
         public void FireShot(Player player, Coordinate coordinate)
         {
             var result = player.ProcessShot(coordinate);
