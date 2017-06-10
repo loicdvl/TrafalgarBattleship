@@ -14,10 +14,10 @@ namespace TrafalgarBattleAPI.Controllers
     {
         private readonly User[] _leaderboard =
         {
-            new User{ ConnectionId = "1", Rank=1, Name = "Loic", Avatar="oldship.png", Victory=50, Defeat=10 },
-            new User{ ConnectionId = "2", Rank=2, Name="Lucie", Avatar="oldship.png",  Victory=50, Defeat=30 },
-            new User{ ConnectionId = "3", Rank=3, Name="Benben", Avatar="oldship.png",  Victory=30, Defeat=70 },
-            new User{ ConnectionId = "4", Rank=4, Name="Didi", Avatar="oldship.png",  Victory=10, Defeat=90 }
+            new User("1","Loic"),
+            new User("2","Lucie"),
+            new User("3","Choustof"),
+            new User("4","Glodie")
         };
        
         // GET api/<controller>

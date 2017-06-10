@@ -20,29 +20,11 @@ namespace TrafalgarBattleAPI.Models
             set => throw new NotImplementedException();
         }
 
-        public Player(string connectionId, string name)
+        public Player(User user) : base(user.ConnectionId, user.Name)
         {
-            ConnectionId = connectionId;
-            Name = name;
-            Avatar = "oldship.png";
-            Ships = new List<Ship>
-            {
-                new Destroyer(),
-                new Submarine(),
-                new Cruiser(),
-                new Carrier(),
-                new Battleship()
-            };
-            PlayerGrid = new PlayerGrid();
-            HasLost = false;
-        }
-
-        public Player(User user)
-        {
-            ConnectionId = user.ConnectionId;
+            IdUser = user.IdUser;
             Rank = user.Rank;
             Avatar = user.Avatar;
-            Name = user.Name;
             Victory = user.Victory;
             Defeat = user.Defeat;
             Ships = new List<Ship>
