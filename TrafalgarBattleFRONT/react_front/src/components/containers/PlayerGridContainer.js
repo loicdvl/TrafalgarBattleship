@@ -20,11 +20,11 @@ class PlayerGridContainer extends React.Component {
 
     renderRow = (row) => {
         let cols=[];
-        this.props.playerGrid.map((cases,index) => {
+        this.props.playerGrid.forEach((cases,index) => {
             if( index >= row && index < row+10 )
-                return (
-                    cols[index] = cases
-                );
+            {
+                cols[index] = cases;
+            }
         });
         return (
             <Row bsClass="row" key={row}>
@@ -43,6 +43,8 @@ class PlayerGridContainer extends React.Component {
                             this.renderRow(index)
                         )
                     }
+                    else
+                        return null;
                 })}
             </Grid>
         )

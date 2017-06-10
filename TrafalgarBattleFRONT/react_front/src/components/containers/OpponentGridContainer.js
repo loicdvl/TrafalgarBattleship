@@ -25,11 +25,11 @@ class OpponentGridContainer extends React.Component {
 
     renderRow = (row) => {
         let cols=[];
-        this.props.opponentGrid.map((cases,index) => {
+        this.props.opponentGrid.forEach((cases,index) => {
             if( index >= row && index < row+10 )
-                return (
-                    cols[index] = cases
-                );
+            {
+                cols[index] = cases;
+            }
         });
         return (
             <Row bsClass="row" key={row}>
@@ -47,6 +47,10 @@ class OpponentGridContainer extends React.Component {
                         return (
                             this.renderRow(index)
                         )
+                    }
+                    else
+                    {
+                        return null;
                     }
                 })}
             </Grid>
