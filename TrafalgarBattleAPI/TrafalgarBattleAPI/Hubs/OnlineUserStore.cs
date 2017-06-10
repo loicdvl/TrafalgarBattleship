@@ -22,6 +22,15 @@ namespace TrafalgarBattleAPI.Hubs
             Clients.All.updateOnlineUserList(userlist);
         }
 
+        public void CreateUserFromName(string name)
+        {
+            User user = new User(Context.ConnectionId,name);
+            _connections.Add(user.ConnectionId, user);
+            var userlist = _connections.GetAllUsers();
+            Clients.Caller.setUser(user);
+            Clients.All.updateOnlineUserList(userlist);
+        }
+
         public void ChallengeUser(User challenger, User defiedUser)
         {
             if( _connections.GetConnections(defiedUser.ConnectionId) != null )

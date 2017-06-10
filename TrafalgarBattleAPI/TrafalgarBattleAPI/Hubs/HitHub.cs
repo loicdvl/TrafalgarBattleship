@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using TrafalgarBattleAPI.Models;
 using TrafalgarBattleAPI.Models.Boards;
+using TrafalgarBattleAPI.Models.Games;
 
 namespace TrafalgarBattleAPI.Hubs
 {
@@ -32,6 +33,12 @@ namespace TrafalgarBattleAPI.Hubs
                 Clients.Caller.updateOpponentGridShipSunk(coordinate);
                 Clients.Client(player.ConnectionId).updatePlayerGridShipSunk(coordinate);
             }
+        }
+
+        public void CreateGame(Player player1, Player player2)
+        {
+            Game game = new Game(idGame++, player1, player2);
+
         }
     }
 }

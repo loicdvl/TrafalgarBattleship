@@ -20,8 +20,9 @@ namespace TrafalgarBattleAPI.Models
             set => throw new NotImplementedException();
         }
 
-        public Player(string name)
+        public Player(string connectionId, string name)
         {
+            ConnectionId = connectionId;
             Name = name;
             Avatar = "oldship.png";
             Ships = new List<Ship>
