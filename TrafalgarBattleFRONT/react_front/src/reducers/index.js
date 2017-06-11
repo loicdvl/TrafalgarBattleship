@@ -5,6 +5,7 @@ import playerGridReducer from './player-grid-reducer';
 import opponentGridReducer from './opponent-grid-reducer';
 import onlineUsersReducer from './online-users-reducers';
 import userReducer from './user-reducer';
+import opponentReducer from './opponent-reducer';
 
 let reducers = combineReducers({
     playerState: playerReducer,
@@ -12,7 +13,8 @@ let reducers = combineReducers({
     playerGridState: playerGridReducer,
     opponentGridState: opponentGridReducer,
     onlineUsersState: onlineUsersReducer,
-    userState: userReducer
+    userState: userReducer,
+    opponentState: opponentReducer
 });
 
 export default reducers;
