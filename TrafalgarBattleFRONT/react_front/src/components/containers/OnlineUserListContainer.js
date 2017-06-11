@@ -1,17 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import OnlinePlayerList from '../views/OnlinePlayerList';
-import * as playerApi from '../../api/player-api';
+import OnlineUserList from '../views/OnlineUserList';
 
 import { Table } from 'react-bootstrap';
 
 
-class OnlinePlayersListContainer extends React.Component {
-
-    componentDidMount() {
-        playerApi.getAllPlayers();
-    };
+class OnlineUserListContainer extends React.Component {
 
     render() {
         return (
@@ -20,11 +15,10 @@ class OnlinePlayersListContainer extends React.Component {
                 <tr>
                     <th/>
                     <th>Joueur</th>
-                    <th>Score</th>
                     <th/>
                 </tr>
                 </thead>
-                <OnlinePlayerList players={this.props.players} />
+                <OnlineUserList />
             </Table>
         )
     }
@@ -32,10 +26,9 @@ class OnlinePlayersListContainer extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        players: store.playerState.players,
         user: store.userState.user,
         onlineUsers: store.onlineUsersState.onlineUsers
     };
 };
 
-export default connect(mapStateToProps)(OnlinePlayersListContainer);
+export default connect(mapStateToProps)(OnlineUserListContainer);

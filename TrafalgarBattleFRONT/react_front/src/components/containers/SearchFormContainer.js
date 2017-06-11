@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchForm from '../views/SearchForm';
-import * as playerApi from '../../api/player-api';
+import { searchOnlineUser} from '../../api/online-users-api';
 import * as leaderboardApi from '../../api/leaderboard-api';
 
 
@@ -13,7 +13,7 @@ class SearchFormContainer extends React.Component {
             let query = this.refs.child.getQuery();
 
             if ( this.props.typeSearch === "PLAYER" )
-                playerApi.searchPlayer(query);
+                searchOnlineUser(query);
             else if (this.props.typeSearch === "LEADERBOARD" )
                 leaderboardApi.searchLeaderboard(query);
         };

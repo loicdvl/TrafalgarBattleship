@@ -1,45 +1,50 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { hubConnection } from 'signalr-no-jquery';
 
 import SearchFormContainer from './containers/SearchFormContainer';
-import OnlinePlayerListContainer from './containers/OnlinePlayersListContainer';
+import OnlineUserListContainer from './containers/OnlineUserListContainer';
+
+import { updateOnlineUserList } from "../api/online-users-api";
+import { setUser } from '../api/user-api';
+
 
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
-import {updateOnlineUserList} from "../api/online-users-api";
 
 class ChallengePlayer extends React.Component {
     componentDidMount() {
-        const connection = hubConnection('http://localhost:54409');
-        const OnlineUserStoreProxy = connection.createHubProxy('OnlineUserStore');
+        this.connection = hubConnection('http://localhost:54409');
+        this.OnlineUserStoreProxy = this.connection.createHubProxy('OnlineUserStore');
 
-        let user = {
-            ConnectionId: 1,
-            Rank: 1,
-            Avatar: '/img/oldship.png',
-            Name: 'Loic',
-            Victory: 100,
-            Defeat: 0
-        };
-
-        connection.start()
-            .done(function () { console.log(`Now connected, connection ID=${connection.id}`) })
+        this.connection.start()
             .done( () => {
-                OnlineUserStoreProxy.invoke('Connect',user);
+                console.log("step 1");
+                this.OnlineUserStoreProxy.invoke('CreateUserFromName',this.props.user.Name)
+                    .done( () => {
+                        console.log('step 3');
+                        this.OnlineUserStoreProxy.invoke('UpdateOnlineUserList');
+                    });
             });
 
-        OnlineUserStoreProxy.on('updateOnlineUserList', (_connections) => {
-            console.log('updateOnlineUserList() called with param',_connections);
+        this.OnlineUserStoreProxy.on('updateOnlineUserList', (_connections) => {
+            console.log('step 4');
             updateOnlineUserList(_connections);
+        });
+
+        this.OnlineUserStoreProxy.on('setUser',(_user) => {
+            console.log('step 2');
+            setUser(_user);
+            console.log('step 2');
         });
     }
 
     componentWillUnmount() {
         // disconnect user
-        // OnlineUserStoreProxy.invoke('Disconnect',user);
+        this.OnlineUserStoreProxy.invoke('Disconnect',this.props.user.ConnectionId);
     }
+
+
 
     render() {
         return (
@@ -51,7 +56,7 @@ class ChallengePlayer extends React.Component {
 
                     <br/>
                     <div className="bs-example">
-                        <OnlinePlayerListContainer />
+                        <OnlineUserListContainer />
                     </div>
                 </div>
             </div>
@@ -62,7 +67,6 @@ class ChallengePlayer extends React.Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState.user,
-        onlineUsers: store.onlineUsersState.onlineUsers
     };
 };
 

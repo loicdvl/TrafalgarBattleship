@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import playerReducer from './player-reducer';
 import leaderboardReducer from './leaderboard-reducer';
 import playerGridReducer from './player-grid-reducer';
 import opponentGridReducer from './opponent-grid-reducer';
@@ -8,7 +7,6 @@ import userReducer from './user-reducer';
 import opponentReducer from './opponent-reducer';
 
 let reducers = combineReducers({
-    playerState: playerReducer,
     leaderboardState: leaderboardReducer,
     playerGridState: playerGridReducer,
     opponentGridState: opponentGridReducer,

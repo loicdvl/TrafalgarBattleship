@@ -2,7 +2,6 @@ import * as types from '../actions/action-types';
 
 const initialState = {
     user: {
-        Avatar: '/img/oldship.png',
         Name: '#Anon'
     }
 };

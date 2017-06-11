@@ -1,6 +1,6 @@
 import * as types from '../actions/action-types';
 
-export function getOnlineUserList(parameters) {
+export function getOnlineUsersSuccess(parameters) {
     let onlineUsers = parameters.onlineUsers;
 
     return {
