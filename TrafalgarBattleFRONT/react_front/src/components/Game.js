@@ -18,11 +18,11 @@ class Game extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
-                            <h1>Pseudo 1</h1>
+                            <h1>{this.props.user.Name}</h1>
                             <PlayerGridContainer />
                         </div>
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
-                            <h1>Pseudo 2</h1>
+                            <h1>{this.props.opponent.Name}</h1>
                             <OpponentGridContainer />
                         </div>
                     </div>
