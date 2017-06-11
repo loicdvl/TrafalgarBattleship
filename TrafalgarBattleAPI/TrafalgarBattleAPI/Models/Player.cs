@@ -10,6 +10,7 @@ namespace TrafalgarBattleAPI.Models
     public class Player : User
     {
         public PlayerGrid PlayerGrid { get; set; }
+        public PlayerGrid ShotGrid { get; set; }
         public List<Ship> Ships { get; set; }
         public bool HasLost
         {

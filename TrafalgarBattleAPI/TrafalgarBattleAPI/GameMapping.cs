@@ -3,50 +3,44 @@ using TrafalgarBattleAPI.Models.Games;
 
 namespace TrafalgarBattleAPI.Hubs
 {
-    public class GameMapping<T>
+    public class GameList
     {
-        private readonly Dictionary<T, Game> _games =
-            new Dictionary<T, Game>();
+        private List<Game> _gamelist = 
+            new List<Game>();
 
-        public void Add(T key, Game game)
+
+        public void Add(Game game)
         {
-            lock (_games)
+            lock (_gamelist)
             {
-                if (!_games.TryGetValue(key, out Game g))
+                if(!_gamelist.Contains(game))
                 {
-                    _games.Add(key, game);
+                    _gamelist.Add(game);
                 }
             }
         }
 
-        public Game GetGame(T key)
+        public void Remove(Game game)
         {
-            if (_games.TryGetValue(key, out Game game))
+            lock (_gamelist)
             {
-                return game;
+                if (_gamelist.Contains(game))
+                {
+                    _gamelist.Remove(game);
+                }
+            }
+        }
+
+        public Game GetGame(int idGame)
+        {
+            foreach(var g in _gamelist)
+            {
+                if (g.IdGame == idGame)
+                {
+                    return g;
+                }
             }
             return null;
-        }
-
-        public void Remove(T key, Game game)
-        {
-            lock (_games)
-            {
-                if (_games.TryGetValue(key, out Game g))
-                {
-                    _games.Remove(key);
-                }
-            }
-        }
-
-        public List<Game> GetAllGames()
-        {
-            List<Game> games = new List<Game>();
-            foreach (var game in _games)
-            {
-                games.Add(game.Value);
-            }
-            return games;
         }
     }
 }

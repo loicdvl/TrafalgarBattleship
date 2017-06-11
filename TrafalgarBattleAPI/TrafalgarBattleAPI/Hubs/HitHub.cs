@@ -11,34 +11,49 @@ namespace TrafalgarBattleAPI.Hubs
 {
     public class HitHub : Hub
     {
-        private readonly static GameMapping<int> _games = new GameMapping<int>();
+        private readonly static GameList _gamelist = new GameList();
 
         private static int idGame = 0;
 
-        public void FireShot(Player player, Coordinate coordinate)
+        /*public void FireShot(int idGame, int idPlayer, Coordinate coordinate)
         {
+            Game game = _gamelist.GetGame(idGame);
             var result = player.ProcessShot(coordinate);
             if (result.Equals(ShotResult.Miss))
             {
-                Clients.Caller.updateOpponentGridShotMiss(player, coordinate);
-                Clients.Client(player.ConnectionId).updatePlayerGridShotMiss(coordinate);
+                player.ShotGrid.SetCaseState(false,coordinate);
+                Clients.Caller.updateOpponentGridOnShotMissed(player.ShotGrid.Cases);
+                Clients.Client(player.ConnectionId).updatePlayerGridOnShotMissed(player.ShotGrid.Cases);
             }
             else if (result.Equals(ShotResult.Hit))
             {
-                Clients.Caller.updateOpponentGridShotSuccess(coordinate);
-                Clients.Client(player.ConnectionId).updatePlayerGridShotSuccees(coordinate);
+                player.ShotGrid.SetCaseState(true, coordinate);
+                Clients.Caller.updateOpponentGridOnShotSuccess(player.ShotGrid.Cases);
+                Clients.Client(player.ConnectionId).updatePlayerGridOnShotSuccees(player.ShotGrid.Cases);
             }
             else
             {
-                Clients.Caller.updateOpponentGridShipSunk(coordinate);
-                Clients.Client(player.ConnectionId).updatePlayerGridShipSunk(coordinate);
+                player.ShotGrid.SetCaseState(true, coordinate);
+                if(!player.HasLost)
+                {
+                    Clients.Caller.updateOpponentGridOnShotSuccess(player.ShotGrid.Cases);
+                    Clients.Client(player.ConnectionId).updatePlayerGridOnShotSuccees(player.ShotGrid.Cases);
+                }
+                else
+                {
+                    Clients.Caller.notifyPlayerVictory(player.ShotGrid.Cases);
+                    Clients.Client(player.ConnectionId).notifyOpponentVictory(player.ShotGrid.Cases);
+                    _games.Remove(game.IdGame, game);
+                }
             }
         }
 
         public void CreateGame(Player player1, Player player2)
         {
             Game game = new Game(idGame++, player1, player2);
-
-        }
+            _games.Add(game.IdGame,game);
+            Clients.Client(player1.ConnectionId).startGame(game);
+            Clients.Client(player2.ConnectionId).startGame(game);
+        }*/
     }
 }
