@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { hubConnection } from 'signalr-no-jquery';
 
@@ -58,5 +59,12 @@ class ChallengePlayer extends React.Component {
     }
 }
 
-export default ChallengePlayer;
+const mapStateToProps = function(store) {
+    return {
+        user: store.userState.user,
+        onlineUsers: store.onlineUsersState.onlineUsers
+    };
+};
+
+export default connect (mapStateToProps)(ChallengePlayer);
 

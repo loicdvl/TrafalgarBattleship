@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import LeaderboardPlayersListContainer from './containers/LeaderboardPlayersListContainer';
 import SearchFormContainer from './containers/SearchFormContainer';
@@ -23,4 +24,10 @@ class Leaderboard extends React.Component {
     }
 }
 
-export default Leaderboard;
+const mapStateToProps = function(store) {
+    return {
+        user: store.userState.user
+    };
+};
+
+export default connect(mapStateToProps)(Leaderboard);

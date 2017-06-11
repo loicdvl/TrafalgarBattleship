@@ -34,7 +34,8 @@ class LeaderboardPlayersListContainer extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        leaderboard: store.leaderboardState.leaderboard
+        leaderboard: store.leaderboardState.leaderboard,
+        user: store.userState.user
     };
 };
 

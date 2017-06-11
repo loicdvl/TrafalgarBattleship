@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { Button, Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
@@ -51,5 +52,11 @@ class PlacingShips extends React.Component {
     }
 }
 
-export default PlacingShips;
+const mapStateToProps = function(store) {
+    return {
+        user: store.userState.user
+    };
+};
+
+export default connect(mapStateToProps)(PlacingShips);
 

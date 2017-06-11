@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import Rules from './views/Rules';
@@ -135,4 +135,10 @@ class Index extends React.Component {
     }
 }
 
-export default Index;
+const mapStateToProps = function(store) {
+    return {
+        user: store.userState.user
+    };
+};
+
+export default connect(mapStateToProps)(Index);

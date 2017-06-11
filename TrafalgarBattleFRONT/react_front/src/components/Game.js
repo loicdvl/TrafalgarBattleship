@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import PlayerGridContainer from './containers/PlayerGridContainer';
 import OpponentGridContainer from './containers/OpponentGridContainer';
+
 import '../css/game.css';
 
 class Game extends React.Component {
@@ -29,5 +32,11 @@ class Game extends React.Component {
     }
 }
 
-export default Game;
+const mapStateToProps = function(store) {
+    return {
+        user: store.userState.user
+    };
+};
+
+export default connect(mapStateToProps)(Game);
 

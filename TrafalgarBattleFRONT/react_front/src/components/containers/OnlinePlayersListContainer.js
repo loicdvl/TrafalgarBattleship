@@ -32,7 +32,9 @@ class OnlinePlayersListContainer extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        players: store.playerState.players
+        players: store.playerState.players,
+        user: store.userState.user,
+        onlineUsers: store.onlineUsersState.onlineUsers
     };
 };
 
