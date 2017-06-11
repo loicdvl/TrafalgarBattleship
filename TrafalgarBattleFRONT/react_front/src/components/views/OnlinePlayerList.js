@@ -18,7 +18,7 @@ class OnlinePlayerList extends React.Component {
                 );
             });
         }
-        else
+        else if (this.props.players.length === 1)
         {
             return (
                 <tr key={this.props.players.Name}>
@@ -29,7 +29,10 @@ class OnlinePlayerList extends React.Component {
                 </tr>
             )
         }
-
+        else
+        {
+            return null;
+        }
     }
 
     render () {

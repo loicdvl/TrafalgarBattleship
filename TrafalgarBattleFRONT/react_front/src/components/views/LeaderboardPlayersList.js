@@ -20,7 +20,7 @@ class LeaderboardPlayersList extends React.Component {
                 );
             })
         }
-        else
+        else if(this.props.leaderboard.length === 1)
         {
             return (
                 <tr key={this.props.leaderboard.Rank}>
@@ -32,6 +32,10 @@ class LeaderboardPlayersList extends React.Component {
                     <td>{this.props.leaderboard.Victory - this.props.leaderboard.Defeat}</td>
                 </tr>
             )
+        }
+        else
+        {
+            return null;
         }
     }
 
