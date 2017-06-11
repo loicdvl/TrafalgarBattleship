@@ -28,7 +28,7 @@ namespace TrafalgarBattleAPI
             return null;
         }
 
-        public void Remove(T key, User user)
+        public void Remove(T key)
         {
             lock (_connections)
             {

@@ -8,27 +8,26 @@ namespace TrafalgarBattleAPI.Hubs
         private readonly static ConnectionMapping<string> _connections =
             new ConnectionMapping<string>();
 
-        public void Connect(User user)
+        private static int _iduser = 0;
+
+        public void UpdateOnlineUserList()
         {
-            _connections.Add(user.ConnectionId, user);
             var userlist = _connections.GetAllUsers();
             Clients.All.updateOnlineUserList(userlist);
         }
 
-        public void Disconnect(User user)
+        public void Disconnect(string connectionId)
         {
-            _connections.Remove(user.ConnectionId, user);
+            _connections.Remove(connectionId);
             var userlist = _connections.GetAllUsers();
             Clients.All.updateOnlineUserList(userlist);
         }
 
         public void CreateUserFromName(string name)
         {
-            User user = new User(Context.ConnectionId,name);
-            _connections.Add(user.ConnectionId, user);
-            var userlist = _connections.GetAllUsers();
-            Clients.Caller.setUser(user);
-            Clients.All.updateOnlineUserList(userlist);
+            User _user = new User(Context.ConnectionId, _iduser++, name);
+            _connections.Add(_user.ConnectionId, _user);
+            Clients.Caller.setUser(_user);
         }
 
         public void ChallengeUser(User challenger, User defiedUser)
