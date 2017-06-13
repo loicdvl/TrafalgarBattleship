@@ -20,22 +20,15 @@ class ChallengePlayer extends React.Component {
         this.connection.start()
             .done( () => {
                 console.log("step 1");
-                this.OnlineUserStoreProxy.invoke('CreateUserFromName',this.props.user.Name)
-                    .done( () => {
-                        console.log('step 3');
-                        this.OnlineUserStoreProxy.invoke('UpdateOnlineUserList');
-                    });
+                this.OnlineUserStoreProxy.invoke('CreateUserFromName',this.props.user.Name);
             });
 
         this.OnlineUserStoreProxy.on('updateOnlineUserList', (_connections) => {
-            console.log('step 4');
             updateOnlineUserList(_connections);
         });
 
         this.OnlineUserStoreProxy.on('setUser',(_user) => {
-            console.log('step 2');
             setUser(_user);
-            console.log('step 2');
         });
     }
 

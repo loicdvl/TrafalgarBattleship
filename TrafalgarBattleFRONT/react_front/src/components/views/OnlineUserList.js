@@ -9,19 +9,13 @@ class OnlinePlayerList extends React.Component {
     renderOnlineUserList() {
         if (this.props.onlineUsers.length >= 1 ) {
             return this.props.onlineUsers.map((user) => {
-                if(user.ConnectionId !== this.props.user.ConnectionId) {
-                    return (
-                        <tr key={user.ConnectionId}>
-                            <td><Image src={user.Avatar} id="brand" /></td>
-                            <td>{user.Name}</td>
-                            <td><Link to="/game/placing-ships"><Button bsStyle="primary">Défier</Button></Link></td>
-                        </tr>
-                    );
-                }
-                else {
-                    return null;
-                }
-
+                return (
+                    <tr key={user.ConnectionId}>
+                        <td><Image src={user.Avatar} id="brand" /></td>
+                        <td>{user.Name}</td>
+                        <td>{(this.props.user.ConnectionId !== user.ConnectionId) ? <Link to="/game/placing-ships"><Button bsStyle="primary">Défier</Button></Link> : null }</td>
+                    </tr>
+                );
             });
         }
         else {
