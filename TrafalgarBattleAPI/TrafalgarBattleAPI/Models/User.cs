@@ -7,7 +7,6 @@
         public int Rank { get; set; }
         public string Avatar { get; set; }
         public string Name { get; set; }
-        public string Password { get; set; }
         public int Victory { get; set; }
         public int Defeat { get; set; }
 
@@ -19,7 +18,6 @@
             Rank = 1;
             Avatar = "oldship.png";
             Name = name;
-            Password = "password";
             Victory = 100;
             Defeat = 0;
         }
@@ -31,7 +29,17 @@
             Rank = 0;
             Avatar = "oldship.png";
             Name = name;
-            Password = "password";
+            Victory = 0;
+            Defeat = 0;
+        }
+
+        public User(int iduser, string name, string avatar, int victory, int defeat)
+        {
+            ConnectionId = "";
+            IdUser = iduser;
+            Rank = 0;
+            Avatar = avatar;
+            Name = name;
             Victory = 0;
             Defeat = 0;
         }

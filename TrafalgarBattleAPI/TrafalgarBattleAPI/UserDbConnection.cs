@@ -33,7 +33,7 @@ namespace TrafalgarBattleAPI
             MyCnx.Close();
         }
 
-        public void GetUser(string name, string password)
+        public User GetUser(string name, string password)
         {
             DataTable MyData = new DataTable();
             NpgsqlDataAdapter da;
@@ -46,15 +46,25 @@ namespace TrafalgarBattleAPI
             da = new NpgsqlDataAdapter(MyCmd);
             da.Fill(MyData);
 
+            List<string> MyUserParameter = new List<string>(); 
+
             foreach (DataRow row in MyData.Rows)
             {
                 for (int i = 0; i < MyData.Columns.Count; i++)
                 {
+                    MyUserParameter.Add(row[i].ToString());
                     Console.Write("{0} \t \n", row[i].ToString());
                 }
             }
-
             MyCnx.Close();
+
+            int.TryParse(MyUserParameter.ElementAt(0), out int iduser);
+            int.TryParse(MyUserParameter.ElementAt(3), out int victory);
+            int.TryParse(MyUserParameter.ElementAt(4), out int defeat);
+
+            User user = new User(iduser, MyUserParameter.ElementAt(1),MyUserParameter.ElementAt(2),victory,defeat);
+
+            return user;
         }
 
         public void UpdateUser(int iduser, string name, string password, string avatar, int victory, int defeat)

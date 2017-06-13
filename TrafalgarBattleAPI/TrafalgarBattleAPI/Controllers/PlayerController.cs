@@ -10,26 +10,23 @@ using TrafalgarBattleAPI.Models;
 namespace TrafalgarBattleAPI.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class PlayerController : ApiController
+    public class UserController : ApiController
     {
-        private readonly User[]_users =
-        {
-            new User("1","Loic"),
-            new User("2","Lucie"),
-            new User("3","Choustof"),
-            new User("4","Glodie")
-        };
+        UserDbConnection udc = null;
 
         // GET api/<controller>
         public IEnumerable<User> Get()
         {
-            return _users;
+            return new List<User>();
         }
 
         // GET api/<controller>/5
-        public User Get(string id)
+        public User Get(string name, string password)
         {
-            var user = _users.FirstOrDefault((u) => u.Name == id);
+            udc = new UserDbConnection();
+
+            
+            User user = udc.GetUser(name,password);
             return user;
         }
 
