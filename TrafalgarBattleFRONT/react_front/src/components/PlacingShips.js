@@ -14,6 +14,9 @@ class PlacingShips extends React.Component {
     render() {
         return (
             <div className="test">
+                <div id="placing">
+                    <h1>Place tes navires</h1>
+                </div>
                 <div className="container">
                     <div className="row">
                         <section className="col col-3 col-sm-3 col-md-3 col-lg-3">
@@ -37,9 +40,6 @@ class PlacingShips extends React.Component {
                         </section>
 
                         <section className="col col-7 col-sm-7 col-md-7 col-lg-7">
-                            <div id="placing">
-                                <h1>Place tes navires</h1>
-                            </div>
                             <PlayerGridContainer/>
                         </section>
                         <section className="col col-2 col-sm-2 col-md-2 col-lg-2">

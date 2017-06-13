@@ -12,7 +12,7 @@ class Game extends React.Component {
         return (
             <div className="test">
                 <div id="placing">
-                    <h1>Place tes navires</h1>
+                    <h1>A l'attaque !</h1>
                 </div>
 
                 <div className="container">
