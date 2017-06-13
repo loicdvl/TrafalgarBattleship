@@ -17,9 +17,8 @@ section>.placingGrid>.row>.col-sm-1 {
 .occupied {
 	background-color: red
 }
-
 .water {
-	background-color: blue;
+	background-color: #21219f;
 }
 section:first-of-type, .placingGrid {
 	padding: 15px;
