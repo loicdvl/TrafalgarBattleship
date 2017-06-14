@@ -7,6 +7,7 @@ import SearchFormContainer from './containers/SearchFormContainer';
 import OnlineUserListContainer from './containers/OnlineUserListContainer';
 
 import { updateOnlineUserList } from "../api/online-users-api";
+import { setOpponent } from '../api/opponent-api';
 import { setUser } from '../api/user-api';
 
 import '../css/bootstrap/css/bootstrap.min.css';
@@ -40,6 +41,11 @@ class ChallengePlayer extends React.Component {
             setUser(_user);
         });
 
+        this.OnlineUserStoreProxy.on('defied', (_user) => {
+            setOpponent(_user);
+            this.openModal();
+        });
+
         // Start connection with the signalr websocket server
         this.connection.start().done( () => {
 			// ask to create a new user from pseudo
@@ -51,8 +57,6 @@ class ChallengePlayer extends React.Component {
         // disconnect user from server user list
         this.OnlineUserStoreProxy.invoke('Disconnect',this.props.user.ConnectionId);
     }
-
-
 
     render() {
         return (
@@ -72,11 +76,11 @@ class ChallengePlayer extends React.Component {
                             <Modal.Title>Défi</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            Une flotte de navire dirigée par l'amiral Machin vous met au défi de la couler !
+                            Une flotte de navire dirigée par l'amiral {this.props.opponent.Name} vous met au défi de la couler !
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button bsStyle="danger">A l'attaque !</Button>
-                            <Button bsStyle="warning">S'enfuir !</Button>
+                            <Button bsStyle="danger" onClick={this.closeModal}>A l'attaque !</Button>
+                            <Button bsStyle="warning" onClick={this.closeModal}>S'enfuir !</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>
@@ -87,7 +91,8 @@ class ChallengePlayer extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        user: store.userState.user
+        user: store.userState.user,
+        opponent: store.opponentState.opponent
     };
 };
 
