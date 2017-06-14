@@ -32,16 +32,16 @@ namespace TrafalgarBattleAPI.Hubs
             Clients.All.updateOnlineUserList(userlist);
         }
 
-        public void ChallengeUser(User challenger, User defiedUser)
+        public void ChallengeUser(string targetConnectionId, string defiedUserName, string name)
         {
-            if( _connections.GetConnections(defiedUser.ConnectionId) != null )
+            if( _connections.GetConnections(targetConnectionId) != null )
             {
-                Clients.Client(defiedUser.ConnectionId).challengePlayer(challenger);
-                Clients.Caller.waitingForResponse(defiedUser);
+                Clients.Client(targetConnectionId).defied(name);
+                Clients.Caller.waitingForResponse(defiedUserName);
             }
             else
             {
-                Clients.Caller.userDefiedDisconnected(defiedUser);
+                Clients.Caller.userDefiedDisconnected(defiedUserName);
             }   
         }
 
