@@ -14,26 +14,29 @@ import '../css/style.css';
 
 class ChallengePlayer extends React.Component {
     componentDidMount() {
+        // define connection with the signalr websocket server and create hubProxy
         this.connection = hubConnection('http://localhost:54409');
         this.OnlineUserStoreProxy = this.connection.createHubProxy('OnlineUserStore');
 
-        this.connection.start()
-            .done( () => {
-                console.log("step 1");
-                this.OnlineUserStoreProxy.invoke('CreateUserFromName',this.props.user.Name);
-            });
-
+        // update list of online users
         this.OnlineUserStoreProxy.on('updateOnlineUserList', (_connections) => {
             updateOnlineUserList(_connections);
         });
 
+        // set user object received from server
         this.OnlineUserStoreProxy.on('setUser',(_user) => {
             setUser(_user);
         });
+
+        // Start connection with the signalr websocket server
+        this.connection.start();
+
+        // ask to create a new user from pseudo
+        this.OnlineUserStoreProxy.invoke('CreateUserFromName',this.props.user.Name);
     }
 
     componentWillUnmount() {
-        // disconnect user
+        // disconnect user from server user list
         this.OnlineUserStoreProxy.invoke('Disconnect',this.props.user.ConnectionId);
     }
 
@@ -60,6 +63,7 @@ class ChallengePlayer extends React.Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState.user,
+        websocketConnection: store.websocketConnectionState.websocketConnection
     };
 };
 

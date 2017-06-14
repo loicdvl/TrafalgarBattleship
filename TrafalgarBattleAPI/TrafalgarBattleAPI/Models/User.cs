@@ -18,7 +18,7 @@
             Rank = 1;
             Avatar = "oldship.png";
             Name = name;
-            Victory = 100;
+            Victory = 0;
             Defeat = 0;
         }
 
@@ -40,8 +40,8 @@
             Rank = 0;
             Avatar = avatar;
             Name = name;
-            Victory = 0;
-            Defeat = 0;
+            Victory = victory;
+            Defeat = defeat;
         }
     }
 }

@@ -42,8 +42,7 @@ namespace TrafalgarBattleAPI.Hubs
             else
             {
                 Clients.Caller.userDefiedDisconnected(defiedUser);
-            }
-            
+            }   
         }
 
         public void ChallengeAccepted(User challenger, User opponent)
