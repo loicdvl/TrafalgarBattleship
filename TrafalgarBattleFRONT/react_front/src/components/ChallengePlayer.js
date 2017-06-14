@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { hubConnection } from 'signalr-no-jquery';
+import { Modal, Button } from "react-bootstrap";
 
 import SearchFormContainer from './containers/SearchFormContainer';
 import OnlineUserListContainer from './containers/OnlineUserListContainer';
@@ -8,11 +9,22 @@ import OnlineUserListContainer from './containers/OnlineUserListContainer';
 import { updateOnlineUserList } from "../api/online-users-api";
 import { setUser } from '../api/user-api';
 
-
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
 
 class ChallengePlayer extends React.Component {
+    state = {
+        showModal: false
+    };
+
+    openModal = () => {
+        this.setState({ showModal : true });
+    };
+
+    closeModal = () => {
+        this.setState({ showModal : false });
+    };
+
     componentDidMount() {
         // define connection with the signalr websocket server and create hubProxy
         this.connection = hubConnection('http://localhost:54409');
@@ -54,6 +66,19 @@ class ChallengePlayer extends React.Component {
                     <div className="bs-example">
                         <OnlineUserListContainer />
                     </div>
+
+                    <Modal show={this.state.showModal} onHide={this.closeModal}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Défi</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            Une flotte de navire dirigée par l'amiral Machin vous met au défi de la couler !
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button bsStyle="danger">A l'attaque !</Button>
+                            <Button bsStyle="warning">S'enfuir !</Button>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             </div>
         )
