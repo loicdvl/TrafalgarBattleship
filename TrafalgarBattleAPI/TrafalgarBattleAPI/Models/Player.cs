@@ -52,6 +52,21 @@ namespace TrafalgarBattleAPI.Models
             return ship.IsSunk ? ShotResult.Sunk : ShotResult.Hit;
         }
 
+        public void ProcessShotResult(Coordinate coords, ShotResult result)
+        {
+            Case c = ShotGrid.Cases.At(coords.Row, coords.Column);
+            switch (result)
+            {
+                case ShotResult.Hit:
+                    c.State = State.Hit;
+                    break;
+
+                default:
+                    c.State = State.Miss;
+                    break;
+            }
+        }
+
         public void PlaceShips()
         {
             var rand = new Random(Guid.NewGuid().GetHashCode());
