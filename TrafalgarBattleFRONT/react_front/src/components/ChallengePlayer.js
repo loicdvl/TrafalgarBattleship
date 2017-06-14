@@ -29,10 +29,10 @@ class ChallengePlayer extends React.Component {
         });
 
         // Start connection with the signalr websocket server
-        this.connection.start();
-
-        // ask to create a new user from pseudo
+        this.connection.start().done( () => {
+			// ask to create a new user from pseudo
         this.OnlineUserStoreProxy.invoke('CreateUserFromName',this.props.user.Name);
+		});
     }
 
     componentWillUnmount() {
@@ -62,8 +62,7 @@ class ChallengePlayer extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        user: store.userState.user,
-        websocketConnection: store.websocketConnectionState.websocketConnection
+        user: store.userState.user
     };
 };
 
