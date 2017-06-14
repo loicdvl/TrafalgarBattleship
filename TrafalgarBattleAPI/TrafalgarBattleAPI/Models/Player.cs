@@ -37,6 +37,7 @@ namespace TrafalgarBattleAPI.Models
                 new Battleship()
             };
             PlayerGrid = new PlayerGrid();
+            ShotGrid = new PlayerGrid();
             HasLost = false;
         }
 
