@@ -35,7 +35,8 @@ class OnlinePlayerList extends React.Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState.user,
-        onlineUsers: store.onlineUsersState.onlineUsers
+        onlineUsers: store.onlineUsersState.onlineUsers,
+        socket: store.socketState.socket
     };
 };
 
