@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 class ButtonWithUser extends React.Component {
 
     sendNotificationToUser = () => {
-        this.props.socket.invoke('ChallengeUser',this.props.onlineUser.ConnectionId,this.props.onlineUser.Name,this.props.user.Name)
+        this.props.socket.invoke('ChallengeUser',this.props.onlineUser.ConnectionId,this.props.onlineUser.Name,this.props.user.ConnectionId,this.props.user.Name)
     };
 
     render() {

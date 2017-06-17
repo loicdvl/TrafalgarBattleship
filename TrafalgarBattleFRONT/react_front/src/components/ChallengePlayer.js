@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { hubConnection } from 'signalr-no-jquery';
 import { Modal, Button } from "react-bootstrap";
 
@@ -9,6 +10,9 @@ import OnlineUserListContainer from './containers/OnlineUserListContainer';
 import { updateOnlineUserList } from "../api/online-users-api";
 import { setUser } from '../api/user-api';
 import { setSocket } from '../api/socket-api';
+import { setGame } from '../api/game-api';
+import { setPlayer} from '../api/player-api';
+import { setOpponent } from '../api/opponent-api';
 
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
@@ -39,11 +43,13 @@ class ChallengePlayer extends React.Component {
     };
 
     challengeAccepted = () => {
-        this.props.socket.invoke('ChallengeAccepted');
+        this.closeModalOnBeingDefied();
+        this.props.socket.invoke('ChallengeAccepted', this.props.user.ConnectionId, this.state.opponent.ConnectionId);
     };
 
     challengeDeclined = () => {
-        this.props.socket.invoke('ChallengeDeclined');
+        this.closeModalOnBeingDefied();
+        this.props.socket.invoke('ChallengeDeclined', this.props.user.ConnectionId, this.state.opponent.ConnectionId);
     };
 
     escapeFromThisTrap = () => {
@@ -71,6 +77,17 @@ class ChallengePlayer extends React.Component {
             this.openModalOnWaitForDefiedResponse(opponent);
         });
 
+        this.OnlineUserStoreProxy.on('displayDeniedChallenge', () => {
+            this.closeModalModalOnWaitForDefiedResponse();
+        });
+
+        this.OnlineUserStoreProxy.on('startGame', (game,player,challenger) => {
+            setGame(game);
+            setPlayer(player);
+            setOpponent(challenger);
+            browserHistory.push('/game/placing-ships');
+        });
+
         this.connection.start().done( () => {
             setSocket(this.OnlineUserStoreProxy);
             this.OnlineUserStoreProxy.invoke('CreateUserFromName',this.props.user.Name);
@@ -94,7 +111,7 @@ class ChallengePlayer extends React.Component {
                         <OnlineUserListContainer />
                     </div>
 
-                    <Modal show={this.state.showModalOnBeingDefied} onHide={this.closeModalOnBeingDefied}>
+                    <Modal show={this.state.showModalOnBeingDefied} onHide={this.challengeDeclined}>
                         <Modal.Header closeButton>
                             <Modal.Title>Défi</Modal.Title>
                         </Modal.Header>
@@ -107,7 +124,7 @@ class ChallengePlayer extends React.Component {
                         </Modal.Footer>
                     </Modal>
 
-                    <Modal show={this.state.showModalOnWaitForDefiedResponse} onHide={this.closeModalModalOnWaitForDefiedResponse}>
+                    <Modal show={this.state.showModalOnWaitForDefiedResponse} onHide={this.escapeFromThisTrap}>
                         <Modal.Header closeButton>
                             <Modal.Title>Défi</Modal.Title>
                         </Modal.Header>
