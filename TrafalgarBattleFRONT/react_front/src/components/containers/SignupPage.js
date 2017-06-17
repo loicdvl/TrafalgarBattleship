@@ -3,23 +3,28 @@ import {Button,Form,FormGroup,FormControl,ControlLabel,InputGroup,Glyphicon} fro
 
 class SignupPage extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            username: '',
-            email: '',
-            password: ''
-        }
-
-        this.onChange = this.onChange.bind(this);
-        this.onChange = this.onSubmit.bind(this);
+    state = {
+        username: '',
+        email: '',
+        password: ''
     }
 
-    onChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
+    onChangeUsername = (e) =>{
+        e.preventDefault();
+        this.setState({ username: this.inputUsername.value });
     }
 
-    onSubmit(e) {
+    onChangeEmail = (e) =>{
+        e.preventDefault();
+        this.setState({ email: this.inputEmail.value });
+    }
+
+    onChangeUsername = (e) =>{
+        e.preventDefault();
+        this.setState({ password: this.inputUsername.value });
+    }
+
+    onSubmit = (e) => {
         e.preventDefault();
         console.log(this.state);
     }
@@ -31,21 +36,21 @@ class SignupPage extends React.Component {
                     <ControlLabel className="col-md-2 control-label">Pseudo</ControlLabel>
                     <InputGroup className="col-md-10 inputGroupContainer">
                         <InputGroup.Addon><Glyphicon glyph="user"/></InputGroup.Addon>
-                        <FormControl type="text" name="username" value={this.state.username} onChange={this.onChange}/>
+                        <FormControl type="text" inputRef={(ref) => {this.inputUsername = ref;}} onChange={this.onChangeUsername}/>
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel className="col-md-2 control-label">E-mail</ControlLabel>
                     <InputGroup className="col-md-10 inputGroupContainer">
                         <InputGroup.Addon><Glyphicon glyph="envelope"/></InputGroup.Addon>
-                        <FormControl type="text" name="email" value={this.state.email} onChange={this.onChange}/>
+                        <FormControl type="text" inputRef={(ref) => {this.inputEmail = ref;}} onChange={this.onChangeEmail}/>
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel className="col-md-2 control-label">Mot de passe</ControlLabel>
                     <InputGroup className="col-md-10 inputGroupContainer">
                         <InputGroup.Addon><Glyphicon glyph="eye-close"/></InputGroup.Addon>
-                        <FormControl type="password" name="password" value={this.state.password} onChange={this.onChange}/>
+                        <FormControl type="password" inputRef={(ref) => {this.inputPassword = ref;}} onChange={this.onChangePassword}/>
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
