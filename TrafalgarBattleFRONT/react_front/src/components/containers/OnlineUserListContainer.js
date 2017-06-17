@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Image, Button } from 'react-bootstrap';
-import { Link } from 'react-router'
+import { Image } from 'react-bootstrap';
+import ButtonWithUser from './ButtonWithUser';
 
 import { Table } from 'react-bootstrap';
 
@@ -11,12 +11,15 @@ class OnlineUserListContainer extends React.Component {
 
     renderOnlineUserList() {
         if (this.props.onlineUsers.length >= 1 ) {
-            return this.props.onlineUsers.map((user) => {
+            return this.props.onlineUsers.map((onlineUser) => {
                 return (
-                    <tr key={user.ConnectionId}>
-                        <td><Image src={user.Avatar} id="brand" /></td>
-                        <td>{user.Name}</td>
-                        <td>{(this.props.user.ConnectionId !== user.ConnectionId) ? <Link to="/game/placing-ships"><Button bsStyle="primary">Défier</Button></Link> : null }</td>
+                    <tr key={onlineUser.ConnectionId}>
+                        <td><Image src={onlineUser.Avatar} id="brand" /></td>
+                        <td>{onlineUser.Name}</td>
+                        <td>{(this.props.user.ConnectionId !== onlineUser.ConnectionId) ?
+                            <ButtonWithUser onlineUser={onlineUser}>Défier</ButtonWithUser>
+                            : null }
+                        </td>
                     </tr>
                 );
             });

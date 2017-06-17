@@ -7,54 +7,77 @@ import SearchFormContainer from './containers/SearchFormContainer';
 import OnlineUserListContainer from './containers/OnlineUserListContainer';
 
 import { updateOnlineUserList } from "../api/online-users-api";
-import { setOpponent } from '../api/opponent-api';
 import { setUser } from '../api/user-api';
+import { setSocket } from '../api/socket-api';
 
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
 
 class ChallengePlayer extends React.Component {
     state = {
-        showModal: false
+        showModalOnWaitForDefiedResponse: false,
+        showModalOnBeingDefied: false,
+        opponent: this.props.opponent
     };
 
-    openModal = () => {
-        this.setState({ showModal : true });
+    openModalOnBeingDefied = (opponent) => {
+        this.setState({opponent});
+        this.setState({ showModalOnBeingDefied : true });
     };
 
-    closeModal = () => {
-        this.setState({ showModal : false });
+    openModalOnWaitForDefiedResponse = (opponent) => {
+        this.setState({opponent});
+        this.setState({ showModalOnWaitForDefiedResponse : true });
+    };
+
+    closeModalModalOnWaitForDefiedResponse = () => {
+        this.setState({ showModalOnWaitForDefiedResponse : false });
+    };
+
+    closeModalOnBeingDefied = () => {
+        this.setState({ showModalOnBeingDefied : false });
+    };
+
+    challengeAccepted = () => {
+        this.props.socket.invoke('ChallengeAccepted');
+    };
+
+    challengeDeclined = () => {
+        this.props.socket.invoke('ChallengeDeclined');
+    };
+
+    escapeFromThisTrap = () => {
+        this.closeModalModalOnWaitForDefiedResponse();
+        this.props.invoke('ChallengeUserAbort',this.props.opponent.ConnectionId);
     };
 
     componentDidMount() {
-        // define connection with the signalr websocket server and create hubProxy
         this.connection = hubConnection('http://localhost:54409');
         this.OnlineUserStoreProxy = this.connection.createHubProxy('OnlineUserStore');
 
-        // update list of online users
         this.OnlineUserStoreProxy.on('updateOnlineUserList', (_connections) => {
             updateOnlineUserList(_connections);
         });
 
-        // set user object received from server
         this.OnlineUserStoreProxy.on('setUser',(_user) => {
             setUser(_user);
         });
 
         this.OnlineUserStoreProxy.on('defied', (_user) => {
-            setOpponent(_user);
-            this.openModal();
+            this.openModalOnBeingDefied(_user);
         });
 
-        // Start connection with the signalr websocket server
+        this.OnlineUserStoreProxy.on('waitingForResponse', (opponent) => {
+            this.openModalOnWaitForDefiedResponse(opponent);
+        });
+
         this.connection.start().done( () => {
-			// ask to create a new user from pseudo
-        this.OnlineUserStoreProxy.invoke('CreateUserFromName',this.props.user.Name);
+            setSocket(this.OnlineUserStoreProxy);
+            this.OnlineUserStoreProxy.invoke('CreateUserFromName',this.props.user.Name);
 		});
     }
 
     componentWillUnmount() {
-        // disconnect user from server user list
         this.OnlineUserStoreProxy.invoke('Disconnect',this.props.user.ConnectionId);
     }
 
@@ -71,16 +94,28 @@ class ChallengePlayer extends React.Component {
                         <OnlineUserListContainer />
                     </div>
 
-                    <Modal show={this.state.showModal} onHide={this.closeModal}>
+                    <Modal show={this.state.showModalOnBeingDefied} onHide={this.closeModalOnBeingDefied}>
                         <Modal.Header closeButton>
                             <Modal.Title>Défi</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            Une flotte de navire dirigée par l'amiral {this.props.opponent.Name} vous met au défi de la couler !
+                            Une flotte de navire dirigée par l'amiral {this.state.opponent.Name} vous met au défi de la couler !
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button bsStyle="danger" onClick={this.closeModal}>A l'attaque !</Button>
-                            <Button bsStyle="warning" onClick={this.closeModal}>S'enfuir !</Button>
+                            <Button bsStyle="danger" onClick={this.challengeAccepted}>A l'attaque !</Button>
+                            <Button bsStyle="warning" onClick={this.challengeDeclined}>S'enfuir !</Button>
+                        </Modal.Footer>
+                    </Modal>
+
+                    <Modal show={this.state.showModalOnWaitForDefiedResponse} onHide={this.closeModalModalOnWaitForDefiedResponse}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Défi</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            En attente de réponse de l'adversaire !
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button bsStyle="danger" onClick={this.escapeFromThisTrap}>Abandonner</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>
@@ -92,7 +127,8 @@ class ChallengePlayer extends React.Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState.user,
-        opponent: store.opponentState.opponent
+        opponent: store.opponentState.opponent,
+        socket: store.socketState.socket
     };
 };
 
