@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using TrafalgarBattleAPI.Models;
+using TrafalgarBattleAPI.Models.Boards;
 using TrafalgarBattleAPI.Models.Games;
 
 namespace TrafalgarBattleAPI.Hubs
@@ -79,6 +80,44 @@ namespace TrafalgarBattleAPI.Hubs
         public void ChallengeUserAbort(User challenger, User opponent)
         {
             Clients.Client(challenger.ConnectionId).abortChallenge(challenger, opponent);
+        }
+
+        public void FireShot(int idGame, string shooterPlayerConnectionId, string targerPlayerConnectionId, Coordinate coordinate)
+        {
+            Game game = _gamelist.GetGame(idGame);
+            Player targetPlayer = game.getPlayer(targerPlayerConnectionId);
+            Player shooterPlayer = game.getPlayer(shooterPlayerConnectionId);
+
+            if ( game == null || targetPlayer == null || shooterPlayer == null )
+            {
+                Clients.Caller.errorGame();
+                Clients.Client(targerPlayerConnectionId).errorGame();
+            }
+
+            var result = targetPlayer.ProcessShot(coordinate);
+            if (result.Equals(ShotResult.Miss))
+            {
+                shooterPlayer.ProcessShotResult(coordinate,ShotResult.Miss);
+                Clients.Caller.updateOpponentGridOnShotMissed(shooterPlayer.ShotGrid.Cases);
+            }
+            else if (result.Equals(ShotResult.Hit))
+            {
+                shooterPlayer.ProcessShotResult(coordinate, ShotResult.Hit);
+                Clients.Caller.updateOpponentGridOnShotSuccess(shooterPlayer.ShotGrid.Cases);
+            }
+            else
+            {
+                shooterPlayer.ProcessShotResult(coordinate, ShotResult.Sunk);
+                if (!shooterPlayer.HasLost)
+                {
+                    Clients.Caller.updateOpponentGridOnShotSuccess(shooterPlayer.ShotGrid.Cases);
+                }
+                else
+                {
+                    Clients.Caller.notifyPlayerVictory(shooterPlayer.ShotGrid.Cases);
+                    _gamelist.Remove(game);
+                }
+            }
         }
     }
 }

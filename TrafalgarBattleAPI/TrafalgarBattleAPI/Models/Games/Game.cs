@@ -17,5 +17,21 @@ namespace TrafalgarBattleAPI.Models.Games
             Player1 = player1;
             Player2 = player2;
         }
+
+        public Player getPlayer(string connectionId)
+        {
+            if (Player1.ConnectionId == connectionId)
+            {
+                return Player1;
+            }
+            else if (Player2.ConnectionId == connectionId)
+            {
+                return Player2;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
