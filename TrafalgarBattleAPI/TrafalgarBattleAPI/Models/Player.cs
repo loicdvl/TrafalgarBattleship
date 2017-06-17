@@ -59,6 +59,10 @@ namespace TrafalgarBattleAPI.Models
                     c.State = State.Hit;
                     break;
 
+                case ShotResult.Sunk:
+                    c.State = State.Sunk;
+                    break;
+
                 default:
                     c.State = State.Miss;
                     break;

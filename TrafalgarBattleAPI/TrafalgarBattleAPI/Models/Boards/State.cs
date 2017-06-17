@@ -9,6 +9,7 @@
         Carrier,
         Hit,
         Miss,
+        Sunk,
         Occupied,
         Empty
     }
