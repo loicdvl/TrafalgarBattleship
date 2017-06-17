@@ -6,6 +6,8 @@ import onlineUsersReducer from './online-users-reducers';
 import userReducer from './user-reducer';
 import opponentReducer from './opponent-reducer';
 import socketReducer from './socket-reducer';
+import gameReducer from './game-reducer';
+import playerReducer from './player-reducer';
 
 let reducers = combineReducers({
     leaderboardState: leaderboardReducer,
@@ -14,7 +16,9 @@ let reducers = combineReducers({
     onlineUsersState: onlineUsersReducer,
     userState: userReducer,
     opponentState: opponentReducer,
-    socketState: socketReducer
+    socketState: socketReducer,
+    gameState: gameReducer,
+    playerState: playerReducer
 });
 
 export default reducers;
