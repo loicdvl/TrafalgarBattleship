@@ -18,7 +18,6 @@ namespace TrafalgarBattleAPI.Models
             {
                 return Ships.All(x => x.IsSunk);
             }
-            set => throw new NotImplementedException();
         }
 
         public Player(User user) : base(user.ConnectionId, user.Name)
@@ -38,7 +37,6 @@ namespace TrafalgarBattleAPI.Models
             };
             PlayerGrid = new PlayerGrid();
             ShotGrid = new PlayerGrid();
-            HasLost = false;
         }
 
         public ShotResult ProcessShot(Coordinate coordinate)

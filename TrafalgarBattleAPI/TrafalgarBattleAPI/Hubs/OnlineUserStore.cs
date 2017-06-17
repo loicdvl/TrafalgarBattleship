@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using TrafalgarBattleAPI.Models;
+using TrafalgarBattleAPI.Models.Games;
 
 namespace TrafalgarBattleAPI.Hubs
 {
@@ -8,7 +9,10 @@ namespace TrafalgarBattleAPI.Hubs
         private readonly static ConnectionMapping<string> _connections =
             new ConnectionMapping<string>();
 
+        private readonly static GameList _gamelist = new GameList();
+
         private static int _iduser = 0;
+        private static int _idGame = 0;
 
         public void UpdateOnlineUserList()
         {
@@ -32,12 +36,15 @@ namespace TrafalgarBattleAPI.Hubs
             Clients.All.updateOnlineUserList(userlist);
         }
 
-        public void ChallengeUser(string targetConnectionId, string defiedUserName, string name)
+        public void ChallengeUser(string targetConnectionId, string defiedUserName, string challengerConnectionId, string challengerName)
         {
-            if( _connections.GetConnections(targetConnectionId) != null )
+            User targetUser = _connections.GetConnections(targetConnectionId);
+            User challengerUser = _connections.GetConnections(challengerConnectionId);
+
+            if ( targetUser != null && challengerUser != null )
             {
-                Clients.Client(targetConnectionId).defied(name);
-                Clients.Caller.waitingForResponse(defiedUserName);
+                Clients.Client(targetUser.ConnectionId).defied(challengerUser);
+                Clients.Caller.waitingForResponse(targetUser);
             }
             else
             {
@@ -45,15 +52,28 @@ namespace TrafalgarBattleAPI.Hubs
             }   
         }
 
-        public void ChallengeAccepted(User challenger, User opponent)
+        public void ChallengeAccepted(string callerConnectionId, string opponentConnectionId)
         {
-            Clients.Caller.startGame(challenger);
-            Clients.Client(challenger.ConnectionId).startGame(opponent);
+            User user1 = _connections.GetConnections(callerConnectionId);
+            User user2 = _connections.GetConnections(opponentConnectionId);
+
+            Player player1 = new Player(user1);
+            player1.PlaceShips();
+            Player player2 = new Player(user2);
+            player2.PlaceShips();
+
+            Game game = new Game(_idGame++, player1, player2);
+            _gamelist.Add(game);
+
+            Clients.Caller.startGame(game.IdGame, game.Player1, game.Player2);
+            Clients.Client(opponentConnectionId).startGame(game.IdGame, game.Player2, game.Player1);
         }
 
-        public void ChallengeDeclined(User challenger, User coward)
+        public void ChallengeDeclined(string callerConnectionId, string challengerConnectionId)
         {
-            Clients.Client(challenger.ConnectionId).displayDeniedChallenge(coward);
+            User user = _connections.GetConnections(callerConnectionId);
+
+            Clients.Client(challengerConnectionId).displayDeniedChallenge(user);
         }
 
         public void ChallengeUserAbort(User challenger, User opponent)
