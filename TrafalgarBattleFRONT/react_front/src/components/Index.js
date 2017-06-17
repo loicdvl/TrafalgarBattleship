@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
@@ -67,7 +68,6 @@ class Index extends React.Component {
                         <Modal.Body>
                             <SignupPage/>
                             <Alert bsStyle="success">Inscription réussie</Alert>
-                            <Button type="submit" bsStyle="warning">S'inscrire</Button>
                         </Modal.Body>
                     </Modal>
 
