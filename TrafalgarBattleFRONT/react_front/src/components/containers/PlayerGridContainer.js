@@ -1,14 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import * as gridApi from '../../api/grid-api';
-
 import { Grid, Row, Col } from 'react-bootstrap';
 
 class PlayerGridContainer extends React.Component {
-    componentDidMount() {
-        gridApi.getRandomGrid();
-    };
 
     renderCols = (cols, row) => {
         let line = [];
@@ -20,7 +14,7 @@ class PlayerGridContainer extends React.Component {
 
     renderRow = (row) => {
         let cols=[];
-        this.props.playerGrid.forEach((cases,index) => {
+        this.props.player.PlayerGrid.Cases.forEach((cases,index) => {
             if( index >= row && index < row+10 )
             {
                 cols[index] = cases;
@@ -36,7 +30,7 @@ class PlayerGridContainer extends React.Component {
     render() {
         return (
             <Grid bsClass="placingGrid">
-                {this.props.playerGrid.map((cases, index) => {
+                {this.props.player.PlayerGrid.Cases.map((cases, index) => {
                     if( index%10 === 0 && index < 100 )
                     {
                         return (
@@ -53,7 +47,7 @@ class PlayerGridContainer extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        playerGrid: store.playerGridState.playerGrid
+        player: store.playerState.player
     };
 };
 

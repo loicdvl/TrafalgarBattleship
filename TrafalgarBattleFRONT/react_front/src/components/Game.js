@@ -18,7 +18,7 @@ class Game extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
-                            <h1>{this.props.user.Name}</h1>
+                            <h1>{this.props.player.Name}</h1>
                             <PlayerGridContainer />
                         </div>
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
@@ -35,7 +35,9 @@ class Game extends React.Component {
 const mapStateToProps = function(store) {
     return {
         user: store.userState.user,
-        opponent: store.opponentState.opponent
+        opponent: store.opponentState.opponent,
+        game: store.gameState.game,
+        player: store.playerState.player
     };
 };
 
