@@ -82,40 +82,58 @@ namespace TrafalgarBattleAPI.Hubs
             Clients.Client(challenger.ConnectionId).abortChallenge(challenger, opponent);
         }
 
-        public void FireShot(int idGame, string shooterPlayerConnectionId, string targerPlayerConnectionId, int row, int column)
+        public void IsFirstToPlay(int idGame, string connectionId)
         {
             Game game = _gamelist.GetGame(idGame);
-            Player targetPlayer = game.getPlayer(targerPlayerConnectionId);
+            if (game != null)
+            {
+                 Clients.Caller.firstToPlay(game.Player1.ConnectionId == connectionId);
+            }
+            else
+            {
+                Clients.Caller.gameDoesNotExists();
+            }
+            
+        }
+
+        public void FireShot(int idGame, string shooterPlayerConnectionId, string targetPlayerConnectionId, int row, int column)
+        {
+            Game game = _gamelist.GetGame(idGame);
+            Player targetPlayer = game.getPlayer(targetPlayerConnectionId);
             Player shooterPlayer = game.getPlayer(shooterPlayerConnectionId);
             Coordinate coordinate = new Coordinate(row, column);
 
             if ( game == null || targetPlayer == null || shooterPlayer == null )
             {
                 Clients.Caller.errorGame();
-                Clients.Client(targerPlayerConnectionId).errorGame();
+                Clients.Client(targetPlayerConnectionId).errorGame();
             }
 
             ShotResult result = targetPlayer.ProcessShot(coordinate);
             if (result.Equals(ShotResult.Miss))
             {
                 shooterPlayer.ProcessShotResult(coordinate,ShotResult.Miss);
-                Clients.Caller.updateShotGrid(shooterPlayer.ShotGrid);
+                Clients.Caller.updateShotGridOnMissedShot(shooterPlayer.ShotGrid);
+                Clients.Client(targetPlayerConnectionId).setTurn(true);
             }
             else if (result.Equals(ShotResult.Hit))
             {
                 shooterPlayer.ProcessShotResult(coordinate, ShotResult.Hit);
-                Clients.Caller.updateShotGrid(shooterPlayer.ShotGrid);
+                Clients.Caller.updateShotGridOnSuccessfullShot(shooterPlayer.ShotGrid);
+                Clients.Client(targetPlayerConnectionId).notifyHit(true);
             }
             else
             {
                 shooterPlayer.ProcessShotResult(coordinate, ShotResult.Sunk);
                 if (!targetPlayer.HasLost)
                 {
-                    Clients.Caller.updateShotGrid(shooterPlayer.ShotGrid);
+                    Clients.Caller.updateShotGridOnSunkShip(shooterPlayer.ShotGrid);
+                    Clients.Client(targetPlayerConnectionId).notifyShipHasBeenSink();
                 }
                 else
                 {
                     Clients.Caller.notifyPlayerVictory(shooterPlayer.ShotGrid);
+                    Clients.Client(targetPlayerConnectionId).notifyPlayerDefeat();
                     _gamelist.Remove(game);
                 }
             }
