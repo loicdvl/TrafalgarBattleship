@@ -10,7 +10,7 @@ class ColContainer extends React.Component {
 
     render() {
         return (
-            <Col bsClass="col" sm={1} md={1} lg={1} className={this.props.className} onClick={this.fireShot} />
+            <Col bsClass="col" sm={1} md={1} lg={1} className={this.props.className}  onClick={(this.props.turn) ? this.fireShot : null} />
         )
     }
 }
