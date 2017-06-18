@@ -6,6 +6,7 @@
         {
             Name = "Cruiser";
             Width = 3;
+            State = Boards.State.Cruiser;
         }
     }
 }
