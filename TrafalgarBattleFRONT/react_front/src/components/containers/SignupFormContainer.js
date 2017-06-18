@@ -1,7 +1,9 @@
 import React from 'react';
 import {Button,Form,FormGroup,FormControl,ControlLabel,InputGroup,Glyphicon} from 'react-bootstrap';
 
-class SignupPage extends React.Component {
+import { userSignupRequest } from '../../api/user-api';
+
+class SignupFormContainer extends React.Component {
 
     state = {
         username: '',
@@ -19,14 +21,14 @@ class SignupPage extends React.Component {
         this.setState({ email: this.inputEmail.value });
     }
 
-    onChangeUsername = (e) =>{
+    onChangePassword = (e) =>{
         e.preventDefault();
-        this.setState({ password: this.inputUsername.value });
+        this.setState({ password: this.inputPassword.value });
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        this.props.userSignupRequest(this.state);
     }
 
     render() {
@@ -62,4 +64,8 @@ class SignupPage extends React.Component {
     }
 }
 
-export default SignupPage;
+SignupFormContainer.propTypes = {
+    userSignupRequest: React.PropTypes.func.isRequired
+}
+
+export default SignupFormContainer;

@@ -8,7 +8,7 @@ import {Jumbotron,Button,ButtonGroup,Modal,Form,FormGroup,FormControl,ControlLab
 
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
-import SignupPage from "./containers/SignupPage";
+import SignupFormContainer from "./containers/SignupFormContainer";
 
 class Index extends React.Component {
 
@@ -34,6 +34,7 @@ class Index extends React.Component {
     };
 
     render () {
+
         return (
             <div>
                 <Jumbotron className="jumbotron text-center">
@@ -66,7 +67,7 @@ class Index extends React.Component {
                             <Modal.Title>Inscription</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <SignupPage/>
+                            <SignupFormContainer />
                             <Alert bsStyle="success">Inscription réussie</Alert>
                         </Modal.Body>
                     </Modal>
