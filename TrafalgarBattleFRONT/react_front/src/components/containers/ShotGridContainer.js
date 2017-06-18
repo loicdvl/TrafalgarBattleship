@@ -1,18 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row } from 'react-bootstrap';
+
+import ColContainer from './ColContainer';
 
 class ShotGridContainer extends React.Component {
 
-    fire  = () => {
-        console.log("fire");
-    };
-
-
-    renderCols = (cols, row) => {
+   renderCols = (cols, row) => {
         let line = [];
         for(let j = row; j < row+10; j++) {
-            line[j] = <Col bsClass="col" sm={1} md={1} lg={1} x={j-row} y={row} className={cols[j].IsOccupied ? "occupied" : "water"} key={row+j} onClick={this.fire} />;
+            line[j] = <ColContainer Coordinate={cols[j].Coordinate} x={j-row} y={row} className={cols[j].IsOccupied ? "occupied" : "water"} key={row+j} />;
         }
         return line;
     };

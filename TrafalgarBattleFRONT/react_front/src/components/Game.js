@@ -4,9 +4,17 @@ import { connect } from 'react-redux';
 import PlayerGridContainer from './containers/PlayerGridContainer';
 import ShotGridContainer from './containers/ShotGridContainer';
 
+import { setShotGrid } from '../api/shotgrid-api';
+
 import '../css/game.css';
 
 class Game extends React.Component {
+
+    componentDidMount() {
+        this.props.socket.on('updateShotGrid', (ShotGrid) => {
+            setShotGrid(ShotGrid);
+        });
+    }
 
     render() {
         return (
@@ -34,10 +42,10 @@ class Game extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        user: store.userState.user,
         opponent: store.opponentState.opponent,
         game: store.gameState.game,
-        player: store.playerState.player
+        player: store.playerState.player,
+        socket: store.socketState.socket
     };
 };
 
