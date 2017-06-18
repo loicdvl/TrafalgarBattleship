@@ -6,6 +6,7 @@
         {
             Name = "Submarine";
             Width = 3;
+            State = Boards.State.Submarine;
         }
     }
 }

@@ -6,6 +6,7 @@
         {
             Name = "Destroyer";
             Width = 2;
+            State = Boards.State.Destroyer;
         }
     }
 }

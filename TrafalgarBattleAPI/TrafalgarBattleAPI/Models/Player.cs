@@ -45,7 +45,7 @@ namespace TrafalgarBattleAPI.Models
             {
                 return ShotResult.Miss;
             }
-            var ship = Ships.First(x => x.State == PlayerGrid.Search(coordinate.Row, coordinate.Column).State);
+            Ship ship = Ships.First(x => x.State == PlayerGrid.Search(coordinate.Row, coordinate.Column).State);
             ship.Hits++;
             return ship.IsSunk ? ShotResult.Sunk : ShotResult.Hit;
         }
@@ -72,26 +72,26 @@ namespace TrafalgarBattleAPI.Models
         public void PlaceShips()
         {
             var rand = new Random(Guid.NewGuid().GetHashCode());
-            foreach (var ship in Ships)
+            foreach (Ship ship in Ships)
             {
-                var isOpen = true;
+                bool isOpen = true;
                 while (isOpen)
                 {
-                    var startcolumn = rand.Next(0, 10);
-                    var startrow = rand.Next(0, 10);
+                    int startcolumn = rand.Next(0, 10);
+                    int startrow = rand.Next(0, 10);
                     int endrow = startrow, endcolumn = startcolumn;
-                    var orientation = rand.Next(1, 101) % 2;
+                    int orientation = rand.Next(1, 101) % 2;
 
                     if (orientation == 0)
                     {
-                        for (var i = 1; i < ship.Width; i++)
+                        for (int i = 1; i < ship.Width; i++)
                         {
                             endrow++;
                         }
                     }
                     else
                     {
-                        for (var i = 1; i < ship.Width; i++)
+                        for (int i = 1; i < ship.Width; i++)
                         {
                             endcolumn++;
                         }
@@ -102,15 +102,15 @@ namespace TrafalgarBattleAPI.Models
                         continue;
                     }
 
-                    var affectedPanels = PlayerGrid.Cases.Range(startrow, startcolumn, endrow, endcolumn);
-                    if (affectedPanels.Any(x => x.IsOccupied))
+                    List<Case> affectedCases = PlayerGrid.Cases.Range(startrow, startcolumn, endrow, endcolumn);
+                    if (affectedCases.Any(x => x.IsOccupied))
                     {
                         continue;
                     }
 
-                    foreach (var panel in affectedPanels)
+                    foreach (Case c in affectedCases)
                     {
-                        panel.State = ship.State;
+                        c.State = ship.State;
                     }
                     isOpen = false;
                 }

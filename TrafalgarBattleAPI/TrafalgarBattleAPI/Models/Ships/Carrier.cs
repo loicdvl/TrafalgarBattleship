@@ -6,6 +6,7 @@
         {
             Name = "Carrier";
             Width = 5;
+            State = Boards.State.Carrier;
         }
     }
 }

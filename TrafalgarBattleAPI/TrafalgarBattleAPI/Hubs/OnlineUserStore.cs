@@ -95,7 +95,7 @@ namespace TrafalgarBattleAPI.Hubs
                 Clients.Client(targerPlayerConnectionId).errorGame();
             }
 
-            var result = targetPlayer.ProcessShot(coordinate);
+            ShotResult result = targetPlayer.ProcessShot(coordinate);
             if (result.Equals(ShotResult.Miss))
             {
                 shooterPlayer.ProcessShotResult(coordinate,ShotResult.Miss);
@@ -109,7 +109,7 @@ namespace TrafalgarBattleAPI.Hubs
             else
             {
                 shooterPlayer.ProcessShotResult(coordinate, ShotResult.Sunk);
-                if (!shooterPlayer.HasLost)
+                if (!targetPlayer.HasLost)
                 {
                     Clients.Caller.updateShotGrid(shooterPlayer.ShotGrid);
                 }
