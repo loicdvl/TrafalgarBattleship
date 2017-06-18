@@ -15,6 +15,8 @@
                                   || State == State.Carrier
                                   || State == State.Cruiser
                                   || State == State.Destroyer
-                                  || State == State.Submarine;
+                                  || State == State.Submarine
+                                  || State == State.Hit
+                                  || State == State.Sunk;
     }
 }

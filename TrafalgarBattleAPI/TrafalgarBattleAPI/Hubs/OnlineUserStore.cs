@@ -82,11 +82,12 @@ namespace TrafalgarBattleAPI.Hubs
             Clients.Client(challenger.ConnectionId).abortChallenge(challenger, opponent);
         }
 
-        public void FireShot(int idGame, string shooterPlayerConnectionId, string targerPlayerConnectionId, Coordinate coordinate)
+        public void FireShot(int idGame, string shooterPlayerConnectionId, string targerPlayerConnectionId, int row, int column)
         {
             Game game = _gamelist.GetGame(idGame);
             Player targetPlayer = game.getPlayer(targerPlayerConnectionId);
             Player shooterPlayer = game.getPlayer(shooterPlayerConnectionId);
+            Coordinate coordinate = new Coordinate(row, column);
 
             if ( game == null || targetPlayer == null || shooterPlayer == null )
             {
@@ -98,23 +99,23 @@ namespace TrafalgarBattleAPI.Hubs
             if (result.Equals(ShotResult.Miss))
             {
                 shooterPlayer.ProcessShotResult(coordinate,ShotResult.Miss);
-                Clients.Caller.updateOpponentGridOnShotMissed(shooterPlayer.ShotGrid.Cases);
+                Clients.Caller.updateShotGrid(shooterPlayer.ShotGrid);
             }
             else if (result.Equals(ShotResult.Hit))
             {
                 shooterPlayer.ProcessShotResult(coordinate, ShotResult.Hit);
-                Clients.Caller.updateOpponentGridOnShotSuccess(shooterPlayer.ShotGrid.Cases);
+                Clients.Caller.updateShotGrid(shooterPlayer.ShotGrid);
             }
             else
             {
                 shooterPlayer.ProcessShotResult(coordinate, ShotResult.Sunk);
                 if (!shooterPlayer.HasLost)
                 {
-                    Clients.Caller.updateOpponentGridOnShotSuccess(shooterPlayer.ShotGrid.Cases);
+                    Clients.Caller.updateShotGrid(shooterPlayer.ShotGrid);
                 }
                 else
                 {
-                    Clients.Caller.notifyPlayerVictory(shooterPlayer.ShotGrid.Cases);
+                    Clients.Caller.notifyPlayerVictory(shooterPlayer.ShotGrid);
                     _gamelist.Remove(game);
                 }
             }
