@@ -28,7 +28,7 @@ class SignupFormContainer extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.userSignupRequest(this.state);
+        this.userSignupRequest(this.state);
     }
 
     render() {
@@ -62,10 +62,6 @@ class SignupFormContainer extends React.Component {
 
         );
     }
-}
-
-SignupFormContainer.propTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired
 }
 
 export default SignupFormContainer;

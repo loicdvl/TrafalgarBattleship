@@ -9,3 +9,7 @@ export function setUser(user) {
 export function userSignupRequest(userData){
       return axios.post('http://localhost:54409/api/User', userData);
 }
+
+export function userLoginRequest(userData){
+    return axios.post('http://localhost:54409/api/User', userData);
+}
