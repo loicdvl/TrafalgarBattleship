@@ -12,6 +12,8 @@ import { setUser } from '../api/user-api';
 import { setSocket } from '../api/socket-api';
 import { setGame } from '../api/game-api';
 import { setPlayer} from '../api/player-api';
+import { setPlayerGrid } from '../api/playergrid-api';
+import { setShotGrid } from '../api/shotgrid-api';
 import { setOpponent } from '../api/opponent-api';
 
 import '../css/bootstrap/css/bootstrap.min.css';
@@ -84,6 +86,8 @@ class ChallengePlayer extends React.Component {
         this.OnlineUserStoreProxy.on('startGame', (game,player,challenger) => {
             setGame(game);
             setPlayer(player);
+            setPlayerGrid(player.PlayerGrid);
+            setShotGrid(player.ShotGrid);
             setOpponent(challenger);
             browserHistory.push('/game/placing-ships');
         });

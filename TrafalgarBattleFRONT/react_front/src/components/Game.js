@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PlayerGridContainer from './containers/PlayerGridContainer';
-import OpponentGridContainer from './containers/OpponentGridContainer';
+import ShotGridContainer from './containers/ShotGridContainer';
 
 import '../css/game.css';
 
@@ -23,7 +23,7 @@ class Game extends React.Component {
                         </div>
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.opponent.Name}</h1>
-                            <OpponentGridContainer />
+                            <ShotGridContainer />
                         </div>
                     </div>
                 </div>

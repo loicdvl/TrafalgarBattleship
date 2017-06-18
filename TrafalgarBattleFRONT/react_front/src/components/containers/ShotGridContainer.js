@@ -1,14 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import * as gridApi from '../../api/grid-api';
-
 import { Grid, Row, Col } from 'react-bootstrap';
 
-class OpponentGridContainer extends React.Component {
-    componentDidMount() {
-        gridApi.getEmptyGrid();
-    };
+class ShotGridContainer extends React.Component {
 
     fire  = () => {
         console.log("fire");
@@ -25,7 +19,7 @@ class OpponentGridContainer extends React.Component {
 
     renderRow = (row) => {
         let cols=[];
-        this.props.opponentGrid.forEach((cases,index) => {
+        this.props.shotGrid.Cases.forEach((cases,index) => {
             if( index >= row && index < row+10 )
             {
                 cols[index] = cases;
@@ -41,7 +35,7 @@ class OpponentGridContainer extends React.Component {
     render() {
         return (
             <Grid bsClass="placingGrid">
-                {this.props.opponentGrid.map((cases, index) => {
+                {this.props.shotGrid.Cases.map((cases, index) => {
                     if( index%10 === 0 && index < 100 )
                     {
                         return (
@@ -60,8 +54,8 @@ class OpponentGridContainer extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        opponentGrid: store.opponentGridState.opponentGrid
+        shotGrid: store.shotGridState.shotGrid
     };
 };
 
-export default connect(mapStateToProps)(OpponentGridContainer);
+export default connect(mapStateToProps)(ShotGridContainer);
