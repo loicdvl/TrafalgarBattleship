@@ -45,7 +45,7 @@ namespace TrafalgarBattleAPI.Models
             {
                 return ShotResult.Miss;
             }
-            Ship ship = Ships.First(x => x.State == PlayerGrid.Search(coordinate.Row, coordinate.Column).State);
+            var ship = Ships.First(x => x.State == PlayerGrid.Search(coordinate.Row, coordinate.Column).State);
             ship.Hits++;
             return ship.IsSunk ? ShotResult.Sunk : ShotResult.Hit;
         }
@@ -72,7 +72,7 @@ namespace TrafalgarBattleAPI.Models
         public void PlaceShips()
         {
             var rand = new Random(Guid.NewGuid().GetHashCode());
-            foreach (Ship ship in Ships)
+            foreach (var ship in Ships)
             {
                 var isOpen = true;
                 while (isOpen)
