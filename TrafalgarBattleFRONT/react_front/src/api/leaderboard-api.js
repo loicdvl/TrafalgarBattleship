@@ -26,4 +26,3 @@ export function searchLeaderboard(query) {
             console.log(error);
         });
 }
-
