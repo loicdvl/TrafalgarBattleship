@@ -9,7 +9,12 @@ class ShotGridContainer extends React.Component {
    renderCols = (cols, row) => {
         let line = [];
         for(let j = row; j < row+10; j++) {
-            line[j] = <ColContainer Coordinate={cols[j].Coordinate} className={cols[j].IsOccupied ? "occupied" : "water"} key={row+j} turn={this.props.turn} />;
+            let caseClass = "water";
+            if ( cols[j].IsHit )
+                caseClass = "emptyHitCase";
+            if ( cols[j].IsOccupied )
+                caseClass = "occupied";
+            line[j] = <ColContainer Coordinate={cols[j].Coordinate} className={caseClass} key={row+j} turn={this.props.turn} />;
         }
         return line;
     };

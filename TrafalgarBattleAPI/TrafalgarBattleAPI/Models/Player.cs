@@ -53,6 +53,7 @@ namespace TrafalgarBattleAPI.Models
         public void ProcessShotResult(Coordinate coords, ShotResult result)
         {
             Case c = ShotGrid.Cases.At(coords.Row, coords.Column);
+            c.IsHit = true;
             switch (result)
             {
                 case ShotResult.Hit:

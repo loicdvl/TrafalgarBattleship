@@ -20,6 +20,11 @@ section>.placingGrid>.row>.col-sm-1 {
 .water {
 	background-color: #21219f;
 }
+
+.emptyHitCase {
+    background-color: purple;
+}
+
 section:first-of-type, .placingGrid {
 	padding: 15px;
 	background-color: #513C2D;
