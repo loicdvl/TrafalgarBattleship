@@ -18,4 +18,3 @@ export function searchOnlineUser(query) {
             console.log(error);
         });
 }
-

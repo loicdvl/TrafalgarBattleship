@@ -24,5 +24,4 @@ const mapStateToProps = function(store) {
     };
 };
 
-
 export default connect(mapStateToProps)(ColContainer);

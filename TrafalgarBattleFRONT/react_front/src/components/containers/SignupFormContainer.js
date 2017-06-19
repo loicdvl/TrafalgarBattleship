@@ -9,27 +9,27 @@ class SignupFormContainer extends React.Component {
         username: '',
         email: '',
         password: ''
-    }
+    };
 
     onChangeUsername = (e) =>{
         e.preventDefault();
         this.setState({ username: this.inputUsername.value });
-    }
+    };
 
     onChangeEmail = (e) =>{
         e.preventDefault();
         this.setState({ email: this.inputEmail.value });
-    }
+    };
 
     onChangePassword = (e) =>{
         e.preventDefault();
         this.setState({ password: this.inputPassword.value });
-    }
+    };
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.userSignupRequest(this.state);
-    }
+        userSignupRequest(this.state);
+    };
 
     render() {
         return (

@@ -8,22 +8,22 @@ class LoginFormContainer extends React.Component {
     state = {
         username: '',
         password: ''
-    }
+    };
 
     onChangeUsername = (e) => {
         e.preventDefault();
         this.setState({username: this.inputUsername.value});
-    }
+    };
 
     onChangePassword = (e) => {
         e.preventDefault();
         this.setState({password: this.inputPassword.value});
-    }
+    };
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.userLoginRequest(this.state);
-    }
+        userLoginRequest(this.state);
+    };
 
     render() {
         return (
