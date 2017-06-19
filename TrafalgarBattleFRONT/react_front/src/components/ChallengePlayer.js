@@ -56,7 +56,7 @@ class ChallengePlayer extends React.Component {
 
     escapeFromThisTrap = () => {
         this.closeModalModalOnWaitForDefiedResponse();
-        this.props.invoke('ChallengeUserAbort',this.props.opponent.ConnectionId);
+        this.props.invoke('ChallengeUserAbort', this.props.opponent.ConnectionId);
     };
 
     componentDidMount() {

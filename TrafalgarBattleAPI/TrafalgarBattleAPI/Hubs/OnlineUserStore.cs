@@ -7,7 +7,7 @@ namespace TrafalgarBattleAPI.Hubs
 {
     public class OnlineUserStore : Hub
     {
-        private readonly static ConnectionMapping<string> _connections =
+        private readonly static ConnectionMapping<string> _onlineUserMap =
             new ConnectionMapping<string>();
 
         private readonly static GameList _gamelist = new GameList();
@@ -17,30 +17,30 @@ namespace TrafalgarBattleAPI.Hubs
 
         public void UpdateOnlineUserList()
         {
-            var userlist = _connections.GetAllUsers();
+            var userlist = _onlineUserMap.GetAllUsers();
             Clients.All.updateOnlineUserList(userlist);
         }
 
         public void Disconnect(string connectionId)
         {
-            _connections.Remove(connectionId);
-            var userlist = _connections.GetAllUsers();
+            _onlineUserMap.Remove(connectionId);
+            var userlist = _onlineUserMap.GetAllUsers();
             Clients.All.updateOnlineUserList(userlist);
         }
 
         public void CreateUserFromName(string name)
         {
             User _user = new User(Context.ConnectionId, _iduser++, name);
-            _connections.Add(_user.ConnectionId, _user);
+            _onlineUserMap.Add(_user.ConnectionId, _user);
             Clients.Caller.setUser(_user);
-            var userlist = _connections.GetAllUsers();
+            var userlist = _onlineUserMap.GetAllUsers();
             Clients.All.updateOnlineUserList(userlist);
         }
 
         public void ChallengeUser(string targetConnectionId, string defiedUserName, string challengerConnectionId, string challengerName)
         {
-            User targetUser = _connections.GetConnections(targetConnectionId);
-            User challengerUser = _connections.GetConnections(challengerConnectionId);
+            User targetUser = _onlineUserMap.GetConnections(targetConnectionId);
+            User challengerUser = _onlineUserMap.GetConnections(challengerConnectionId);
 
             if ( targetUser != null && challengerUser != null )
             {
@@ -55,8 +55,8 @@ namespace TrafalgarBattleAPI.Hubs
 
         public void ChallengeAccepted(string callerConnectionId, string opponentConnectionId)
         {
-            User user1 = _connections.GetConnections(callerConnectionId);
-            User user2 = _connections.GetConnections(opponentConnectionId);
+            User user1 = _onlineUserMap.GetConnections(callerConnectionId);
+            User user2 = _onlineUserMap.GetConnections(opponentConnectionId);
 
             Player player1 = new Player(user1);
             player1.PlaceShips();
@@ -72,14 +72,18 @@ namespace TrafalgarBattleAPI.Hubs
 
         public void ChallengeDeclined(string callerConnectionId, string challengerConnectionId)
         {
-            User user = _connections.GetConnections(callerConnectionId);
+            User user = _onlineUserMap.GetConnections(callerConnectionId);
 
             Clients.Client(challengerConnectionId).displayDeniedChallenge(user);
         }
 
-        public void ChallengeUserAbort(User challenger, User opponent)
+        public void ChallengeUserAbort(string callerConnectionId, string targetConnectionId)
         {
-            Clients.Client(challenger.ConnectionId).abortChallenge(challenger, opponent);
+            User caller = _onlineUserMap.GetConnections(callerConnectionId);
+            if ( caller != null )
+            {
+                Clients.Client(targetConnectionId).abortChallengeDemand(caller.Name);
+            }
         }
 
         public void IsFirstToPlay(int idGame, string connectionId)
@@ -93,7 +97,6 @@ namespace TrafalgarBattleAPI.Hubs
             {
                 Clients.Caller.gameDoesNotExists();
             }
-            
         }
 
         public void FireShot(int idGame, string shooterPlayerConnectionId, string targetPlayerConnectionId, int row, int column)

@@ -24,8 +24,8 @@ class Game extends React.Component {
 
     componentDidMount() {
         this.props.socket.on('firstToPlay', (isFirstToPlay) => {
-            isFirstToPlay ? this.setState({turn: true, message: 'Tire en premier', messageType: 'default'}) : this.setState({turn: false, message: 'Tu vas te faire attaquer en premier', messageType: 'default'});
-            console.log(this.state.turn);
+            isFirstToPlay ? this.setState({turn: true, message: 'Tire en premier', messageType: 'default'})
+                : this.setState({turn: false, message: 'Tu vas te faire attaquer en premier', messageType: 'default'});
         });
 
         this.props.socket.on('updateShotGridOnMissedShot', (ShotGrid) => {
@@ -51,14 +51,12 @@ class Game extends React.Component {
 
         this.props.socket.on('notifyPlayerVictory', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
-            console.log("Bravo t'as gagné");
             this.openModal();
             this.setState({message: 'Gagné !'});
             this.setState({turn: false});
         });
 
         this.props.socket.on('notifyPlayerDefeat', () => {
-            console.log("T'as perdu looser");
             this.openModal();
             this.setState({message: 'Perdu !'});
             this.setState({turn: false});
@@ -83,7 +81,6 @@ class Game extends React.Component {
         });
 
         this.props.socket.invoke('IsFirstToPlay', this.props.game, this.props.player.ConnectionId);
-
     }
 
     openModal = () => {
