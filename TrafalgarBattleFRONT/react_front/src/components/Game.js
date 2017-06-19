@@ -31,18 +31,21 @@ class Game extends React.Component {
         this.props.socket.on('updateShotGridOnMissedShot', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
             this.setState({message: 'Raté..', messageType: 'danger'});
+            setTimeout( () => {this.setState({message: ''})}, 3000);
             this.setState({turn: false});
         });
 
         this.props.socket.on('updateShotGridOnSuccessfullShot', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
             setTimeout(() => this.setState({message: 'Touché', messageType: 'success'}), 1000);
+            setTimeout( () => {this.setState({message: ''})}, 3000);
             this.setState({turn: true});
         });
 
         this.props.socket.on('updateShotGridOnSunkShip', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
             this.setState({message: 'Coulé', messageType: 'success'});
+            setTimeout( () => {this.setState({message: ''})}, 3000);
             this.setState({turn: true});
         });
 
@@ -63,16 +66,19 @@ class Game extends React.Component {
 
         this.props.socket.on('setTurn', (turn) => {
             this.setState({message: 'A votre tour', messageType: 'default'});
+            setTimeout( () => {this.setState({message: ''})}, 3000);
             this.setState({turn: true});
         });
 
         this.props.socket.on('notifyHit', (hit) => {
             this.setState({message: 'Votre navire est touché', messageType: 'warning'});
+            setTimeout( () => {this.setState({message: ''})}, 3000);
             this.setState({turn: false});
         });
 
         this.props.socket.on('notifyShipHasBeenSink', () => {
             this.setState({message: 'Votre navire a coulé', messageType: 'danger'});
+            setTimeout( () => {this.setState({message: ''})}, 3000);
             this.setState({turn: false});
         });
 
