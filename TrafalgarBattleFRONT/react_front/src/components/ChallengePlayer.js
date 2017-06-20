@@ -94,7 +94,13 @@ class ChallengePlayer extends React.Component {
 
         this.connection.start().done( () => {
             setSocket(this.OnlineUserStoreProxy);
-            this.OnlineUserStoreProxy.invoke('CreateUserFromName',this.props.user.Name);
+            if(this.props.user.Name === '#Anon')
+            {
+                this.OnlineUserStoreProxy.invoke('CreateUserFromName',this.props.user.Name);
+            }
+            else
+            {
+            }
 		});
     }
 

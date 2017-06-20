@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.SignalR;
+using System.Collections.Generic;
 using TrafalgarBattleAPI.Models;
 using TrafalgarBattleAPI.Models.Boards;
 using TrafalgarBattleAPI.Models.Games;
@@ -17,8 +18,19 @@ namespace TrafalgarBattleAPI.Hubs
 
         public void UpdateOnlineUserList()
         {
-            var userlist = _onlineUserMap.GetAllUsers();
+            List<User> userlist = _onlineUserMap.GetAllUsers();
             Clients.All.updateOnlineUserList(userlist);
+        }
+
+        public void Connect(int iduser, string name, string avatar, int victory, int defeat)
+        {
+            User user = new User(Context.ConnectionId, iduser, name, avatar, victory, defeat);
+            if(user != null)
+            {
+                _onlineUserMap.Add(user.ConnectionId, user);
+                List<User> userlist = _onlineUserMap.GetAllUsers();
+                Clients.All.updateOnlineUserList(userlist);
+            }
         }
 
         public void Disconnect(string connectionId)
