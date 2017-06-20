@@ -100,6 +100,7 @@ class ChallengePlayer extends React.Component {
             }
             else
             {
+                this.OnlineUserStoreProxy.invoke('Connect', this.props.user.IdUser, this.props.user.Name, this.props.user.Avatar, this.props.user.Victory, this.props.user.Defeat);
             }
 		});
     }
