@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button,Form,FormGroup,FormControl,ControlLabel,InputGroup,Glyphicon} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Button, Form, FormGroup, FormControl, ControlLabel, InputGroup, Glyphicon, Alert} from 'react-bootstrap';
 
 import { userSignupRequest } from '../../api/user-api';
 
@@ -8,7 +9,9 @@ class SignupFormContainer extends React.Component {
     state = {
         username: '',
         email: '',
-        password: ''
+        password: '',
+        alertAttribute: '',
+        alertText: ''
     };
 
     onChangeUsername = (e) =>{
@@ -28,7 +31,18 @@ class SignupFormContainer extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        userSignupRequest(this.state);
+
+        if( this.state.username === '' || this.state.password.length < 8 || this.state.email === '' )
+        {
+            userSignupRequest(this.state);
+            this.setState({alertAttribute: 'success'});
+            this.setState({alertText: 'Inscription réussie !'});
+        }
+        else
+        {
+            this.setState({alertAttribute: 'danger'});
+            this.setState({alertText: 'Veuillez remplir les champs du formulaire !'});
+        }
     };
 
     render() {
@@ -58,10 +72,16 @@ class SignupFormContainer extends React.Component {
                 <FormGroup>
                     <Button type="submit" bsStyle="warning">S'inscrire</Button>
                 </FormGroup>
+                <Alert bsStyle={this.state.alertAttribute}>{this.state.alertText}</Alert>
             </Form>
-
         );
     }
 }
 
-export default SignupFormContainer;
+const mapStateToProps = function(store) {
+    return {
+        user: store.userState.user
+    };
+};
+
+export default connect(mapStateToProps)(SignupFormContainer);

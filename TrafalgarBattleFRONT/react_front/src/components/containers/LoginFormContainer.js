@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button,Form,FormGroup,FormControl,ControlLabel,InputGroup,Glyphicon} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Button, Form, FormGroup, FormControl, ControlLabel, InputGroup, Glyphicon, Alert} from 'react-bootstrap';
 
 import { userLoginRequest } from '../../api/user-api';
 
@@ -7,7 +8,9 @@ class LoginFormContainer extends React.Component {
 
     state = {
         username: '',
-        password: ''
+        password: '',
+        alertAttribute: '',
+        alertText: ''
     };
 
     onChangeUsername = (e) => {
@@ -22,7 +25,18 @@ class LoginFormContainer extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        userLoginRequest(this.state);
+
+        if( this.state.username !== '' && this.state.password !== '' )
+        {
+            userLoginRequest(this.state);
+            this.setState({alertAttribute: 'success'});
+            this.setState({alertText: 'Connexion réussie !'});
+        }
+        else
+        {
+            this.setState({alertAttribute: 'danger'});
+            this.setState({alertText: 'Veuillez remplir les champs du formulaire !'});
+        }
     };
 
     render() {
@@ -49,9 +63,16 @@ class LoginFormContainer extends React.Component {
                 <FormGroup>
                     <Button type="submit" bsStyle="warning">Se connecter</Button>
                 </FormGroup>
+                <Alert bsStyle={this.state.alertAttribute}>{this.state.alertText}</Alert>
             </Form>
         );
     }
 }
 
-export default LoginFormContainer;
+const mapStateToProps = function(store) {
+    return {
+        user: store.userState.user
+    };
+};
+
+export default connect(mapStateToProps)(LoginFormContainer);

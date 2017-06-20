@@ -11,12 +11,24 @@ export function userSignupRequest(userData){
           Username: userData.username,
           Password: userData.password,
           Email: userData.email
+      }).then(response => {
+          return response.data;
+      }).catch(error => {
+          console.log(error);
       });
 }
 
 export function userLoginRequest(userData){
-    return axios.post('http://localhost:54409/api/UserSignIn', {
+    return axios.post('http://localhost:54409/api/UserLogin', {
         Username: userData.username,
         Password: userData.password
+    }).then(response => {
+        if(response.data.Name === userData.username)
+        {
+            store.dispatch(getUserSuccess({user: response.data}));
+            return response.data;
+        }
+    }).catch(error => {
+        console.log(error);
     });
 }

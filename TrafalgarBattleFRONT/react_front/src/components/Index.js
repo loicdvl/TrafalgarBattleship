@@ -1,15 +1,15 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { Jumbotron, Button, ButtonGroup, Modal } from 'react-bootstrap';
+
+import SignupFormContainer from "./containers/SignupFormContainer";
+import LoginFormContainer from "./containers/LoginFormContainer";
 
 import Rules from './views/Rules';
-import {Jumbotron,Button,ButtonGroup,Modal,Alert} from 'react-bootstrap';
 
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
-import SignupFormContainer from "./containers/SignupFormContainer";
-import LoginFormContainer from "./containers/LoginFormContainer";
 
 class Index extends React.Component {
 
@@ -69,7 +69,6 @@ class Index extends React.Component {
                         </Modal.Header>
                         <Modal.Body>
                             <SignupFormContainer />
-                            <Alert bsStyle="success">Inscription réussie</Alert>
                         </Modal.Body>
                     </Modal>
 
@@ -79,12 +78,6 @@ class Index extends React.Component {
                         </Modal.Header>
                         <Modal.Body>
                             <LoginFormContainer />
-                            <Alert bsStyle="success">Connexion réussie</Alert>
-                            <br/><br/><br/>
-                            <ButtonGroup vertical>
-                                <Button type="submit" bsStyle="primary" block>Facebook</Button><br/>
-                                <Button type="submit" bsStyle="primary" block>Twitter</Button>
-                            </ButtonGroup>
                         </Modal.Body>
                     </Modal>
                 </div>
