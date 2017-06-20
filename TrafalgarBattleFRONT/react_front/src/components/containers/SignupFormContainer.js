@@ -33,7 +33,7 @@ class SignupFormContainer extends React.Component {
 
     render() {
         return (
-            <Form vertical onSubmit={this.onSubmit}>
+            <Form onSubmit={this.onSubmit}>
                 <FormGroup>
                     <ControlLabel className="col-md-2 control-label">Pseudo</ControlLabel>
                     <InputGroup className="col-md-10 inputGroupContainer">
