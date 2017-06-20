@@ -154,9 +154,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="ConnectionMapping.cs" />
-    <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
-    <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
     <Compile Include="Controllers\UserSignUpController.cs" />
     <Compile Include="Extensions\CaseExtensions.cs" />
