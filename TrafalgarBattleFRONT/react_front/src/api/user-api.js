@@ -12,7 +12,7 @@ export function userSignupRequest(userData){
           Password: userData.password,
           Email: userData.email
       }).then(response => {
-          return response.data;
+          
       }).catch(error => {
           console.log(error);
       });

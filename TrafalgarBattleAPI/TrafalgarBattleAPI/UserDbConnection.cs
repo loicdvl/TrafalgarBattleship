@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web;
 using TrafalgarBattleAPI.Models;
 
 namespace TrafalgarBattleAPI
@@ -43,10 +42,13 @@ namespace TrafalgarBattleAPI
             MyCnx.Open();
             MyCmd = new NpgsqlCommand(select, MyCnx);
 
+            MyCmd.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar)).Value = name;
+            MyCmd.Parameters.Add(new NpgsqlParameter("password", NpgsqlDbType.Varchar)).Value = password;
+
             da = new NpgsqlDataAdapter(MyCmd);
             da.Fill(MyData);
 
-            List<string> MyUserParameter = new List<string>(); 
+            List<string> MyUserParameter = new List<string>();
 
             foreach (DataRow row in MyData.Rows)
             {

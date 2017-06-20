@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using TrafalgarBattleAPI.Models;
@@ -12,6 +8,8 @@ namespace TrafalgarBattleAPI.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserLoginController : ApiController
     {
+        UserDbConnection udc = null;
+
         // GET: api/UserLogin
         public IEnumerable<string> Get()
         {
@@ -25,9 +23,13 @@ namespace TrafalgarBattleAPI.Controllers
         }
 
         // POST: api/UserLogin
-        public void Post([FromBody]UserLogin UserLogin)
+        public User Post([FromBody]UserLogin UserLogin)
         {
-            
+            udc = new UserDbConnection();
+
+            User user = udc.GetUser(UserLogin.Username, UserLogin.Password);
+
+            return user;
         }
 
         // PUT: api/UserLogin/5
