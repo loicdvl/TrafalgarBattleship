@@ -7,9 +7,16 @@ export function setUser(user) {
 }
 
 export function userSignupRequest(userData){
-      return axios.post('http://localhost:54409/api/User', userData);
+      return axios.post('http://localhost:54409/api/UserSignUp', {
+          Username: userData.username,
+          Password: userData.password,
+          Email: userData.email
+      });
 }
 
 export function userLoginRequest(userData){
-    return axios.post('http://localhost:54409/api/User', userData);
+    return axios.post('http://localhost:54409/api/UserSignIn', {
+        Username: userData.username,
+        Password: userData.password
+    });
 }
