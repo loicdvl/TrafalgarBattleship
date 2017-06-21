@@ -88,13 +88,11 @@ class Game extends React.Component {
         this.props.socket.invoke('IsFirstToPlay', this.props.game, this.props.player.ConnectionId);
     }
 
-    openModal = (event) => {
-        event.preventDefault();
+    openModal = () => {
         this.setState({ showModal : true });
     };
 
-    closeModal = (event) => {
-        event.preventDefault();
+    closeModal = () => {
         this.setState({ showModal : false });
     };
 
