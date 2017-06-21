@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import PlayerGridContainer from './containers/PlayerGridContainer';
 import ShotGridContainer from './containers/ShotGridContainer';
 
 import { setShotGrid } from '../api/shotgrid-api';
 
-import {Label, Modal} from 'react-bootstrap';
+import { Label, Modal, Button } from 'react-bootstrap';
 import '../css/game.css';
 
 class Game extends React.Component {
@@ -15,6 +16,7 @@ class Game extends React.Component {
         turn: false ,
         message: '',
         messageType: '',
+        modalMessage: '',
         showModal: false
     };
 
@@ -52,13 +54,13 @@ class Game extends React.Component {
         this.props.socket.on('notifyPlayerVictory', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
             this.openModal();
-            this.setState({message: 'Gagné !'});
+            this.setState({modalMessage: 'Vous avez Gagné !'});
             this.setState({turn: false});
         });
 
         this.props.socket.on('notifyPlayerDefeat', () => {
             this.openModal();
-            this.setState({message: 'Perdu !'});
+            this.setState({modalMessage: 'Vous avez perdu !'});
             this.setState({turn: false});
         });
 
@@ -91,6 +93,13 @@ class Game extends React.Component {
         this.setState({ showModal : false });
     };
 
+    redirectToChallengePlayerList = (e) => {
+        e.preventDefault();
+
+        this.closeModal();
+        browserHistory.push('/challenge-player');
+    };
+
     render() {
         return (
             <div className="test">
@@ -113,8 +122,11 @@ class Game extends React.Component {
                 </div>
                 <Modal show={this.state.showModal} onHide={this.closeModal}>
                     <Modal.Header closeButton>
-                        <Modal.Title>{this.state.message}</Modal.Title>
+                        <Modal.Title>{this.state.modalMessage}</Modal.Title>
                     </Modal.Header>
+                    <Modal.Body>
+                        <Button onClick={this.redirectToChallengePlayerList} >Faire une autre partie</Button>
+                    </Modal.Body>
                 </Modal>
             </div>
         )
