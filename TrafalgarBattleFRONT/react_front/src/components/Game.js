@@ -18,10 +18,10 @@ class Game extends React.Component {
         messageType: '',
         modalMessage: '',
         showModal: false,
-        opponentGrid: 'invisible',
-        playerGrid: '',
+        opponentGrid: '',
         playerSuccessfullHit: 0,
-        opponentSuccessfullHit: 0
+        opponentSuccessfullHit: 0,
+        shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 gameSection'
     };
 
     updateShotGrid = (ShotGrid) => {
@@ -31,14 +31,14 @@ class Game extends React.Component {
     componentDidMount() {
         this.props.socket.on('firstToPlay', (isFirstToPlay) => {
             isFirstToPlay ? this.setState({turn: true, message: 'Tire en premier', messageType: 'default'})
-                : this.setState({turn: false, message: 'Tu vas te faire attaquer en premier', messageType: 'default'});
+                : this.setState({turn: false, message: 'Tu vas te faire attaquer en premier', messageType: 'default', shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 opacgameSection'});
         });
 
         this.props.socket.on('updateShotGridOnMissedShot', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
             this.setState({message: 'Raté..', messageType: 'danger'});
             setTimeout( () => {this.setState({message: ''})}, 3000);
-            this.setState({turn: false});
+            this.setState({turn: false, shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 opacgameSection'});
         });
 
         this.props.socket.on('updateShotGridOnSuccessfullShot', (ShotGrid) => {
@@ -58,19 +58,19 @@ class Game extends React.Component {
         this.props.socket.on('notifyPlayerVictory', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
             this.openModal();
-            this.setState({modalMessage: 'Vous avez Gagné !', turn: false, playerSuccessfullHit: this.state.playerSuccessfullHit+1});
+            this.setState({modalMessage: 'Vous avez Gagné !', turn: false, playerSuccessfullHit: this.state.playerSuccessfullHit+1, shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 opacgameSection'});
         });
 
         this.props.socket.on('notifyPlayerDefeat', () => {
             this.openModal();
             this.setState({modalMessage: 'Vous avez perdu !'});
-            this.setState({turn: false, opponentSuccessfullHit: this.state.opponentSuccessfullHit+1});
+            this.setState({turn: false, opponentSuccessfullHit: this.state.opponentSuccessfullHit+1, shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 opacgameSection'});
         });
 
         this.props.socket.on('setTurn', (turn) => {
-            this.setState({message: 'A votre tour', messageType: 'default', playerGrid: 'invisible', opponentGrid: ''});
+            this.setState({message: 'A votre tour', messageType: 'default', opponentGrid: ''});
             setTimeout( () => {this.setState({message: ''})}, 3000);
-            this.setState({turn: true});
+            this.setState({turn: true, shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 gameSection'});
         });
 
         this.props.socket.on('notifyHit', (hit) => {
@@ -116,15 +116,11 @@ class Game extends React.Component {
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.player.Name}</h1>
                             <ProgressBar active now={100-this.state.opponentSuccessfullHit*(100/17)} />
-                            <div className={this.state.playerGrid}>
-                            </div>
                             <PlayerGridContainer />
                         </div>
-                        <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
+                        <div className={this.state.shotGridClassName}>
                             <h1>{this.props.opponent.Name}</h1>
                             <ProgressBar active now={100-this.state.playerSuccessfullHit*(100/17)} />
-                            <div className={this.state.opponentGrid}>
-                            </div>
                             <ShotGridContainer turn={this.state.turn} />
                         </div>
                     </div>
