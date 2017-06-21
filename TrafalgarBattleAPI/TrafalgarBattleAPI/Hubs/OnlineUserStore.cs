@@ -28,6 +28,7 @@ namespace TrafalgarBattleAPI.Hubs
             if(user != null)
             {
                 _onlineUserMap.Add(user.ConnectionId, user);
+                Clients.Caller.setUser(user);
                 List<User> userlist = _onlineUserMap.GetAllUsers();
                 Clients.All.updateOnlineUserList(userlist);
             }
@@ -36,7 +37,7 @@ namespace TrafalgarBattleAPI.Hubs
         public void Disconnect(string connectionId)
         {
             _onlineUserMap.Remove(connectionId);
-            var userlist = _onlineUserMap.GetAllUsers();
+            List<User> userlist = _onlineUserMap.GetAllUsers();
             Clients.All.updateOnlineUserList(userlist);
         }
 
@@ -45,7 +46,7 @@ namespace TrafalgarBattleAPI.Hubs
             User _user = new User(Context.ConnectionId, _iduser++, name);
             _onlineUserMap.Add(_user.ConnectionId, _user);
             Clients.Caller.setUser(_user);
-            var userlist = _onlineUserMap.GetAllUsers();
+            List<User> userlist = _onlineUserMap.GetAllUsers();
             Clients.All.updateOnlineUserList(userlist);
         }
 
@@ -111,17 +112,17 @@ namespace TrafalgarBattleAPI.Hubs
             }
         }
 
-        public void FireShot(int idGame, string shooterPlayerConnectionId, string targetPlayerConnectionId, int row, int column)
+        public void FireShot(int idGame, string shooterPlayerConnectionId, int row, int column)
         {
             Game game = _gamelist.GetGame(idGame);
-            Player targetPlayer = game.getPlayer(targetPlayerConnectionId);
+            Player targetPlayer = game.getOpponentPlayer(shooterPlayerConnectionId);
             Player shooterPlayer = game.getPlayer(shooterPlayerConnectionId);
             Coordinate coordinate = new Coordinate(row, column);
 
             if ( game == null || targetPlayer == null || shooterPlayer == null )
             {
                 Clients.Caller.errorGame();
-                Clients.Client(targetPlayerConnectionId).errorGame();
+                Clients.Client(targetPlayer.ConnectionId).errorGame();
             }
 
             ShotResult result = targetPlayer.ProcessShot(coordinate);
@@ -129,13 +130,13 @@ namespace TrafalgarBattleAPI.Hubs
             {
                 shooterPlayer.ProcessShotResult(coordinate,ShotResult.Miss);
                 Clients.Caller.updateShotGridOnMissedShot(shooterPlayer.ShotGrid);
-                Clients.Client(targetPlayerConnectionId).setTurn(true);
+                Clients.Client(targetPlayer.ConnectionId).setTurn(true);
             }
             else if (result.Equals(ShotResult.Hit))
             {
                 shooterPlayer.ProcessShotResult(coordinate, ShotResult.Hit);
                 Clients.Caller.updateShotGridOnSuccessfullShot(shooterPlayer.ShotGrid);
-                Clients.Client(targetPlayerConnectionId).notifyHit(true);
+                Clients.Client(targetPlayer.ConnectionId).notifyHit(true);
             }
             else
             {
@@ -143,12 +144,12 @@ namespace TrafalgarBattleAPI.Hubs
                 if (!targetPlayer.HasLost)
                 {
                     Clients.Caller.updateShotGridOnSunkShip(shooterPlayer.ShotGrid);
-                    Clients.Client(targetPlayerConnectionId).notifyShipHasBeenSink();
+                    Clients.Client(targetPlayer.ConnectionId).notifyShipHasBeenSink();
                 }
                 else
                 {
                     Clients.Caller.notifyPlayerVictory(shooterPlayer.ShotGrid);
-                    Clients.Client(targetPlayerConnectionId).notifyPlayerDefeat();
+                    Clients.Client(targetPlayer.ConnectionId).notifyPlayerDefeat();
                     _gamelist.Remove(game);
                 }
             }
