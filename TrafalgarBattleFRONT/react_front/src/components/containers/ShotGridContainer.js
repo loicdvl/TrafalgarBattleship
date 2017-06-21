@@ -6,7 +6,7 @@ import ColContainer from './ColContainer';
 
 class ShotGridContainer extends React.Component {
 
-   renderCols = (cols, row) => {
+    renderCols = (cols, row) => {
         let line = [];
         for(let j = row; j < row+10; j++) {
             let caseClass = "water";

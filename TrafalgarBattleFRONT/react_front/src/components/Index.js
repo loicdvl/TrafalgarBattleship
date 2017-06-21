@@ -58,7 +58,6 @@ class Index extends React.Component {
                 </Jumbotron>
 
                 <div className="test">
-                    <div id="elevator_item"><a id="elevator" title="Back To Top" /></div>
 
                     <div className="divider" />
 

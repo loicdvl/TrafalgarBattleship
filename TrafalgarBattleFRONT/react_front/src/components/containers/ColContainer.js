@@ -5,7 +5,7 @@ import { Col } from 'react-bootstrap';
 class ColContainer extends React.Component {
 
     fireShot = () => {
-        this.props.socket.invoke('FireShot', this.props.game, this.props.player.ConnectionId, this.props.opponent.ConnectionId, this.props.Coordinate.Row, this.props.Coordinate.Column);
+        this.props.socket.invoke('FireShot', this.props.game, this.props.player.ConnectionId, this.props.Coordinate.Row, this.props.Coordinate.Column);
     };
 
     render() {
@@ -19,7 +19,6 @@ const mapStateToProps = function(store) {
     return {
         socket: store.socketState.socket,
         player: store.playerState.player,
-        opponent: store.opponentState.opponent,
         game: store.gameState.game
     };
 };
