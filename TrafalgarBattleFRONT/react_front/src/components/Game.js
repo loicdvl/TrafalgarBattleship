@@ -17,7 +17,10 @@ class Game extends React.Component {
         message: '',
         messageType: '',
         modalMessage: '',
-        showModal: false
+        showModal: false,
+        opponentGrid: 'invisible',
+        playerGrid: '',
+
     };
 
     updateShotGrid = (ShotGrid) => {
@@ -65,7 +68,7 @@ class Game extends React.Component {
         });
 
         this.props.socket.on('setTurn', (turn) => {
-            this.setState({message: 'A votre tour', messageType: 'default'});
+            this.setState({message: 'A votre tour', messageType: 'default', playerGrid: 'invisible', opponentGrid: ''});
             setTimeout( () => {this.setState({message: ''})}, 3000);
             this.setState({turn: true});
         });
@@ -113,11 +116,15 @@ class Game extends React.Component {
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.player.Name}</h1>
                             <ProgressBar active now="50" />
+                            <div className={this.state.playerGrid}>
+                            </div>
                             <PlayerGridContainer />
                         </div>
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.opponent.Name}</h1>
                             <ProgressBar active now="50" />
+                            <div className={this.state.opponentGrid}>
+                            </div>
                             <ShotGridContainer turn={this.state.turn} />
                         </div>
                     </div>
