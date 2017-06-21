@@ -20,7 +20,8 @@ class Game extends React.Component {
         showModal: false,
         opponentGrid: 'invisible',
         playerGrid: '',
-
+        playerSuccessfullHit: 0,
+        opponentSuccessfullHit: 0
     };
 
     updateShotGrid = (ShotGrid) => {
@@ -42,29 +43,28 @@ class Game extends React.Component {
 
         this.props.socket.on('updateShotGridOnSuccessfullShot', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
-            setTimeout(() => this.setState({message: 'Touché', messageType: 'success'}), 1000);
+            this.setState({message: 'Touché', messageType: 'success'});
             setTimeout( () => {this.setState({message: ''})}, 3000);
-            this.setState({turn: true});
+            this.setState({turn: true, playerSuccessfullHit: this.state.playerSuccessfullHit+1});
         });
 
         this.props.socket.on('updateShotGridOnSunkShip', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
             this.setState({message: 'Coulé', messageType: 'success'});
-            setTimeout( () => {this.setState({message: ''})}, 3000);
-            this.setState({turn: true});
+            setTimeout( () => {this.setState({message: ''})}, 2000);
+            this.setState({turn: true, playerSuccessfullHit: this.state.playerSuccessfullHit+1});
         });
 
         this.props.socket.on('notifyPlayerVictory', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
             this.openModal();
-            this.setState({modalMessage: 'Vous avez Gagné !'});
-            this.setState({turn: false});
+            this.setState({modalMessage: 'Vous avez Gagné !', turn: false, playerSuccessfullHit: this.state.playerSuccessfullHit+1});
         });
 
         this.props.socket.on('notifyPlayerDefeat', () => {
             this.openModal();
             this.setState({modalMessage: 'Vous avez perdu !'});
-            this.setState({turn: false});
+            this.setState({turn: false, opponentSuccessfullHit: this.state.opponentSuccessfullHit+1});
         });
 
         this.props.socket.on('setTurn', (turn) => {
@@ -76,28 +76,30 @@ class Game extends React.Component {
         this.props.socket.on('notifyHit', (hit) => {
             this.setState({message: 'Votre navire est touché', messageType: 'warning'});
             setTimeout( () => {this.setState({message: ''})}, 3000);
-            this.setState({turn: false});
+            this.setState({turn: false, opponentSuccessfullHit: this.state.opponentSuccessfullHit+1});
         });
 
         this.props.socket.on('notifyShipHasBeenSink', () => {
             this.setState({message: 'Votre navire a coulé', messageType: 'danger'});
             setTimeout( () => {this.setState({message: ''})}, 3000);
-            this.setState({turn: false});
+            this.setState({turn: false, opponentSuccessfullHit: this.state.opponentSuccessfullHit+1});
         });
 
         this.props.socket.invoke('IsFirstToPlay', this.props.game, this.props.player.ConnectionId);
     }
 
-    openModal = () => {
+    openModal = (event) => {
+        event.preventDefault();
         this.setState({ showModal : true });
     };
 
-    closeModal = () => {
+    closeModal = (event) => {
+        event.preventDefault();
         this.setState({ showModal : false });
     };
 
-    redirectToChallengePlayerList = (e) => {
-        e.preventDefault();
+    redirectToChallengePlayerList = (event) => {
+        event.preventDefault();
 
         this.closeModal();
         browserHistory.push('/challenge-player');
@@ -115,14 +117,14 @@ class Game extends React.Component {
                     <div className="row">
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.player.Name}</h1>
-                            <ProgressBar active now="50" />
+                            <ProgressBar active now={100-this.state.opponentSuccessfullHit*(100/17)} />
                             <div className={this.state.playerGrid}>
                             </div>
                             <PlayerGridContainer />
                         </div>
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.opponent.Name}</h1>
-                            <ProgressBar active now="50" />
+                            <ProgressBar active now={100-this.state.playerSuccessfullHit*(100/17)} />
                             <div className={this.state.opponentGrid}>
                             </div>
                             <ShotGridContainer turn={this.state.turn} />
