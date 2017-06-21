@@ -23,10 +23,5 @@ namespace TrafalgarBattleAPI.Models.Boards
         {
             return Cases.First(x => x.Coordinate.Row == row && x.Coordinate.Column == column);
         }
-
-        public void SetCaseState(bool isOccupied, Coordinate coordinate)
-        {
-            Cases[coordinate.Row * 10 + coordinate.Column].State = isOccupied ? State.Occupied : State.Empty;
-        }
     }
 }
