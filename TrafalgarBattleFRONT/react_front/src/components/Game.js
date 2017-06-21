@@ -7,7 +7,7 @@ import ShotGridContainer from './containers/ShotGridContainer';
 
 import { setShotGrid } from '../api/shotgrid-api';
 
-import { Label, Modal, Button } from 'react-bootstrap';
+import { Label, Modal, Button, ProgressBar } from 'react-bootstrap';
 import '../css/game.css';
 
 class Game extends React.Component {
@@ -112,10 +112,12 @@ class Game extends React.Component {
                     <div className="row">
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.player.Name}</h1>
+                            <ProgressBar active now="50" />
                             <PlayerGridContainer />
                         </div>
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.opponent.Name}</h1>
+                            <ProgressBar active now="50" />
                             <ShotGridContainer turn={this.state.turn} />
                         </div>
                     </div>
