@@ -19,7 +19,6 @@ const mapStateToProps = function(store) {
     return {
         socket: store.socketState.socket,
         player: store.playerState.player,
-        opponent: store.opponentState.opponent,
         game: store.gameState.game
     };
 };
