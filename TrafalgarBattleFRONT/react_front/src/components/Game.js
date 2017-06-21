@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import PlayerGridContainer from './containers/PlayerGridContainer';
 import ShotGridContainer from './containers/ShotGridContainer';
 
 import { setShotGrid } from '../api/shotgrid-api';
 
-import {Label, Modal} from 'react-bootstrap';
+import { Label, Modal, Button, ProgressBar } from 'react-bootstrap';
 import '../css/game.css';
 
 class Game extends React.Component {
@@ -15,7 +16,11 @@ class Game extends React.Component {
         turn: false ,
         message: '',
         messageType: '',
-        showModal: false
+        modalMessage: '',
+        showModal: false,
+        opponentGrid: 'invisible',
+        playerGrid: '',
+
     };
 
     updateShotGrid = (ShotGrid) => {
@@ -52,18 +57,18 @@ class Game extends React.Component {
         this.props.socket.on('notifyPlayerVictory', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
             this.openModal();
-            this.setState({message: 'Gagné !'});
+            this.setState({modalMessage: 'Vous avez Gagné !'});
             this.setState({turn: false});
         });
 
         this.props.socket.on('notifyPlayerDefeat', () => {
             this.openModal();
-            this.setState({message: 'Perdu !'});
+            this.setState({modalMessage: 'Vous avez perdu !'});
             this.setState({turn: false});
         });
 
         this.props.socket.on('setTurn', (turn) => {
-            this.setState({message: 'A votre tour', messageType: 'default'});
+            this.setState({message: 'A votre tour', messageType: 'default', playerGrid: 'invisible', opponentGrid: ''});
             setTimeout( () => {this.setState({message: ''})}, 3000);
             this.setState({turn: true});
         });
@@ -91,6 +96,13 @@ class Game extends React.Component {
         this.setState({ showModal : false });
     };
 
+    redirectToChallengePlayerList = (e) => {
+        e.preventDefault();
+
+        this.closeModal();
+        browserHistory.push('/challenge-player');
+    };
+
     render() {
         return (
             <div className="test">
@@ -103,18 +115,27 @@ class Game extends React.Component {
                     <div className="row">
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.player.Name}</h1>
+                            <ProgressBar active now="50" />
+                            <div className={this.state.playerGrid}>
+                            </div>
                             <PlayerGridContainer />
                         </div>
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.opponent.Name}</h1>
+                            <ProgressBar active now="50" />
+                            <div className={this.state.opponentGrid}>
+                            </div>
                             <ShotGridContainer turn={this.state.turn} />
                         </div>
                     </div>
                 </div>
                 <Modal show={this.state.showModal} onHide={this.closeModal}>
                     <Modal.Header closeButton>
-                        <Modal.Title>{this.state.message}</Modal.Title>
+                        <Modal.Title>{this.state.modalMessage}</Modal.Title>
                     </Modal.Header>
+                    <Modal.Body>
+                        <Button onClick={this.redirectToChallengePlayerList} >Faire une autre partie</Button>
+                    </Modal.Body>
                 </Modal>
             </div>
         )

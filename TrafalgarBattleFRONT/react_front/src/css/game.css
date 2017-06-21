@@ -23,7 +23,15 @@
 .label {
     font-size: 15px;
 }
+.emptyHitCase {
+    background-color: purple;
+}
 #placing {
     text-align: center;
     height: 80px;
+}
+.invisible{
+    background-color: grey;
+    height: 500px;
+    position: absolute;
 }
