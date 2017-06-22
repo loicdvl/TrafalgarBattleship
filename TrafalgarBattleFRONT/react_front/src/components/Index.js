@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import { Jumbotron, Button, ButtonGroup, Modal } from 'react-bootstrap';
 
 import SignupFormContainer from "./containers/SignupFormContainer";
@@ -34,6 +34,16 @@ class Index extends React.Component {
         this.setState({ showModalSignIn : false });
     };
 
+
+    redirectToChallengePlayerList = (event) => {
+        event.preventDefault();
+        browserHistory.push('/challenge-player');
+    };
+    redirectToLeaderboard = (event) => {
+        event.preventDefault();
+        browserHistory.push('/leaderboard');
+    };
+
     render () {
 
         return (
@@ -44,9 +54,9 @@ class Index extends React.Component {
                         <h2>Bienvenue</h2>
                     </div>
                     <ButtonGroup vertical>
-                        <Link to="/challenge-player"><Button bsStyle="primary" bsSize="large" block>Commencer une partie</Button></Link>
+                        <Button bsStyle="primary" bsSize="large" block onClick={this.redirectToChallengePlayerList}>Commencer une partie</Button>
                         <br/>
-                        <Link to="/leaderboard"><Button bsStyle="primary" bsSize="large" block>Leaderboard</Button></Link>
+                        <Button bsStyle="primary" bsSize="large" block onClick={this.redirectToLeaderboard}>Leaderboard</Button>
                         <br/>
                         <Button bsStyle="primary" bsSize="large" onClick={this.openModalSignIn} block>Se connecter</Button>
                         <br/>
