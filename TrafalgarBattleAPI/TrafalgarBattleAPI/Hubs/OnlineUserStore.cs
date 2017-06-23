@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TrafalgarBattleAPI.Models;
 using TrafalgarBattleAPI.Models.Boards;
 using TrafalgarBattleAPI.Models.Games;
@@ -16,10 +17,13 @@ namespace TrafalgarBattleAPI.Hubs
         private static int _iduser = 0;
         private static int _idGame = 0;
 
-        public void UpdateOnlineUserList()
+        
+        public override Task OnDisconnected(bool stopCalled)
         {
+            _onlineUserMap.Remove(Context.ConnectionId);
             List<User> userlist = _onlineUserMap.GetAllUsers();
             Clients.All.updateOnlineUserList(userlist);
+            return base.OnDisconnected(stopCalled);
         }
 
         public void Connect(int iduser, string name, string avatar, int victory, int defeat)
