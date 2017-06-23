@@ -9,7 +9,7 @@ class LoginFormContainer extends React.Component {
     state = {
         username: '',
         password: '',
-        alertAttribute: '',
+        alertAttribute: 'notAlerted',
         alertText: ''
     };
 
@@ -29,12 +29,12 @@ class LoginFormContainer extends React.Component {
         if( this.state.username !== '' && this.state.password !== '' )
         {
             userLoginRequest(this.state);
-            this.setState({alertAttribute: 'success'});
+            this.setState({alertAttribute: 'alerted success'});
             this.setState({alertText: 'Connexion réussie !'});
         }
         else
         {
-            this.setState({alertAttribute: 'danger'});
+            this.setState({alertAttribute: 'alerted danger'});
             this.setState({alertText: 'Veuillez remplir les champs du formulaire !'});
         }
     };
@@ -63,7 +63,7 @@ class LoginFormContainer extends React.Component {
                 <FormGroup>
                     <Button type="submit" bsStyle="warning">Se connecter</Button>
                 </FormGroup>
-                <Alert bsStyle={this.state.alertAttribute}>{this.state.alertText}</Alert>
+                <Alert className={this.state.alertAttribute}>{this.state.alertText}</Alert>
             </Form>
         );
     }

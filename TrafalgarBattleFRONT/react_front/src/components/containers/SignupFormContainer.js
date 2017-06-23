@@ -10,8 +10,8 @@ class SignupFormContainer extends React.Component {
         username: '',
         email: '',
         password: '',
-        alertAttribute: '',
-        alertText: ''
+        alertAttribute: 'notAlerted',
+        alertText: '',
     };
 
     onChangeUsername = (e) =>{
@@ -31,16 +31,15 @@ class SignupFormContainer extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-
         if( this.state.username === '' || this.state.password.length < 8 || this.state.email === '' )
         {
             userSignupRequest(this.state);
-            this.setState({alertAttribute: 'success'});
+            this.setState({alertAttribute: 'alerted success'});
             this.setState({alertText: 'Inscription réussie !'});
         }
         else
         {
-            this.setState({alertAttribute: 'danger'});
+            this.setState({alertAttribute: 'alerted danger'});
             this.setState({alertText: 'Veuillez remplir les champs du formulaire !'});
         }
     };
@@ -70,9 +69,9 @@ class SignupFormContainer extends React.Component {
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
-                    <Button type="submit" bsStyle="warning">S'inscrire</Button>
+                    <Button type="submit" bsStyle="warning" onClick="">S'inscrire</Button>
                 </FormGroup>
-                <Alert bsStyle={this.state.alertAttribute}>{this.state.alertText}</Alert>
+                <Alert className={this.state.alertAttribute}>{this.state.alertText}</Alert>
             </Form>
         );
     }

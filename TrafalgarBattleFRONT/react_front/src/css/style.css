@@ -92,7 +92,12 @@ h1, h2 {
 #blockBtn {
     margin : 30px 0px 30px 0px;
 }
-
+.notAlerted {
+    display: none;
+}
+.alerted {
+    display: block;
+}
 
 /*_______________________________MODAL(CONNEXION)_____________________________*/
 .modal-content {
