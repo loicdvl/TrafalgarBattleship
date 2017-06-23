@@ -23,6 +23,16 @@ namespace TrafalgarBattleAPI.Hubs
             _onlineUserMap.Remove(Context.ConnectionId);
             List<User> userlist = _onlineUserMap.GetAllUsers();
             Clients.All.updateOnlineUserList(userlist);
+
+            List<Game> games = _gamelist.GetAllGames();
+            foreach(Game g in games)
+            {
+                if(g.GetPlayer(Context.ConnectionId) != null)
+                {
+                    Player player = g.GetOpponentPlayer(Context.ConnectionId);
+                    Clients.Client(player.ConnectionId).notifyOpponentDisconnected();
+                }
+            }
             return base.OnDisconnected(stopCalled);
         }
 
@@ -119,8 +129,8 @@ namespace TrafalgarBattleAPI.Hubs
         public void FireShot(int idGame, string shooterPlayerConnectionId, int row, int column)
         {
             Game game = _gamelist.GetGame(idGame);
-            Player targetPlayer = game.getOpponentPlayer(shooterPlayerConnectionId);
-            Player shooterPlayer = game.getPlayer(shooterPlayerConnectionId);
+            Player targetPlayer = game.GetOpponentPlayer(shooterPlayerConnectionId);
+            Player shooterPlayer = game.GetPlayer(shooterPlayerConnectionId);
             Coordinate coordinate = new Coordinate(row, column);
 
             if ( game == null || targetPlayer == null || shooterPlayer == null )

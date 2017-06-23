@@ -21,7 +21,8 @@ class Game extends React.Component {
         opponentGrid: '',
         playerSuccessfullHit: 0,
         opponentSuccessfullHit: 0,
-        shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 gameSection'
+        shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 gameSection',
+        opponentDisconnected: false
     };
 
     updateShotGrid = (ShotGrid) => {
@@ -85,6 +86,10 @@ class Game extends React.Component {
             this.setState({turn: false, opponentSuccessfullHit: this.state.opponentSuccessfullHit+1});
         });
 
+        this.props.socket.on('notifyOpponentDisconnected', () => {
+            this.setState({opponentDisconnected: true});
+        });
+
         this.props.socket.invoke('IsFirstToPlay', this.props.game, this.props.player.ConnectionId);
     }
 
@@ -94,6 +99,10 @@ class Game extends React.Component {
 
     closeModal = () => {
         this.setState({ showModal : false });
+    };
+
+    closeModalOpponentDisconnected = () => {
+        this.setState({opponentDisconnected: false});
     };
 
     redirectToChallengePlayerList = (event) => {
@@ -131,6 +140,15 @@ class Game extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Button onClick={this.redirectToChallengePlayerList} >Faire une autre partie</Button>
+                    </Modal.Body>
+                </Modal>
+
+                <Modal show={this.state.opponentDisconnected} onHide={this.closeModalOpponentDisconnected} >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Adversaire deconnecté !</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Button onClick={this.redirectToChallengePlayerList} >Retourner à la liste des joueurs</Button>
                     </Modal.Body>
                 </Modal>
             </div>

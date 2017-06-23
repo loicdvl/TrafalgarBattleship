@@ -42,5 +42,10 @@ namespace TrafalgarBattleAPI.Hubs
             }
             return null;
         }
+
+        public List<Game> GetAllGames()
+        {
+            return _gamelist;
+        }
     }
 }

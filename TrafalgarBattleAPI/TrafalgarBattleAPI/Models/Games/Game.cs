@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace TrafalgarBattleAPI.Models.Games
+﻿namespace TrafalgarBattleAPI.Models.Games
 {
     public class Game
     {
@@ -21,7 +16,7 @@ namespace TrafalgarBattleAPI.Models.Games
             Player1.isTurn = true;
         }
 
-        public Player getPlayer(string connectionId)
+        public Player GetPlayer(string connectionId)
         {
             if (Player1.ConnectionId == connectionId)
             {
@@ -37,7 +32,7 @@ namespace TrafalgarBattleAPI.Models.Games
             }
         }
 
-        public Player getOpponentPlayer(string connectionId)
+        public Player GetOpponentPlayer(string connectionId)
         {
             if(Player1.ConnectionId == connectionId)
             {

@@ -31,15 +31,5 @@ namespace TrafalgarBattleAPI.Controllers
 
             return user;
         }
-
-        // PUT: api/UserLogin/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/UserLogin/5
-        public void Delete(int id)
-        {
-        }
     }
 }
