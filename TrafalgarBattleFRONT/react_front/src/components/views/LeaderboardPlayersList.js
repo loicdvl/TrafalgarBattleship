@@ -5,33 +5,19 @@ import { Image } from 'react-bootstrap';
 class LeaderboardPlayersList extends React.Component {
 
     renderLeaderboardList () {
-        if(this.props.leaderboard !== null) {
-            if (this.props.leaderboard.length > 1) {
-                return this.props.leaderboard.map(player => {
-                    return (
-                        <tr key={player.ConnectionId}>
-                            <td><Image src="oldship.png"/></td>
-                            <td>{player.Rank}</td>
-                            <td>{player.Name}</td>
-                            <td>{player.Victory}</td>
-                            <td>{player.Defeat}</td>
-                            <td>{player.Victory - player.Defeat}</td>
-                        </tr>
-                    );
-                })
-            }
-            else {
+        if (this.props.leaderboard.length >= 1) {
+            return this.props.leaderboard.map(player => {
                 return (
-                    <tr key={this.props.leaderboard.ConnectionId}>
+                    <tr key={player.ConnectionId}>
                         <td><Image src="oldship.png"/></td>
-                        <td>{this.props.leaderboard.Rank}</td>
-                        <td>{this.props.leaderboard.Name}</td>
-                        <td>{this.props.leaderboard.Victory}</td>
-                        <td>{this.props.leaderboard.Defeat}</td>
-                        <td>{this.props.leaderboard.Victory - this.props.leaderboard.Defeat}</td>
+                        <td>{player.Rank}</td>
+                        <td>{player.Name}</td>
+                        <td>{player.Victory}</td>
+                        <td>{player.Defeat}</td>
+                        <td>{player.Victory - player.Defeat}</td>
                     </tr>
-                )
-            }
+                );
+            })
         }
         else {
             return null;

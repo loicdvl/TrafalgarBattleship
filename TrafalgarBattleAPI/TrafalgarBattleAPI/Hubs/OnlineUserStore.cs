@@ -31,6 +31,8 @@ namespace TrafalgarBattleAPI.Hubs
                 {
                     Player player = g.GetOpponentPlayer(Context.ConnectionId);
                     Clients.Client(player.ConnectionId).notifyOpponentDisconnected();
+                    _gamelist.Remove(g);
+                    break;
                 }
             }
             return base.OnDisconnected(stopCalled);
