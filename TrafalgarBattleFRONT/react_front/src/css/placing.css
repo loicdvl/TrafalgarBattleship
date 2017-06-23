@@ -6,7 +6,6 @@
 section>.placingGrid>.row>.col-lg-1,
 section>.placingGrid>.row>.col-md-1,
 section>.placingGrid>.row>.col-sm-1 {
-	border: 1px solid black;
 	width: 10%;
 	height: 50px;
 }
@@ -15,10 +14,31 @@ section>.placingGrid>.row>.col-sm-1 {
     margin-left: 0px;
 }
 .occupied {
-	background-color: red
+	background-color: #a7471b;
+	box-shadow: 0px 0px 5px 0px #000000;
 }
 .water {
-	background-color: #21219f;
+	/*background-color: #030356;*/
+	background: linear-gradient(132deg, #a5d0dd, #267e92);
+	background-size: 400% 400%;
+	-webkit-animation: AnimationName 4s ease infinite;
+	-moz-animation: AnimationName 4s ease infinite;
+	animation: AnimationName 4s ease infinite;
+}
+@-webkit-keyframes AnimationName {
+	0%{background-position:0% 33%}
+	50%{background-position:100% 68%}
+	100%{background-position:0% 33%}
+}
+@-moz-keyframes AnimationName {
+	0%{background-position:0% 33%}
+	50%{background-position:100% 68%}
+	100%{background-position:0% 33%}
+}
+@keyframes AnimationName {
+	0%{background-position:0% 33%}
+	50%{background-position:100% 68%}
+	100%{background-position:0% 33%}
 }
 section:first-of-type, .placingGrid {
 	padding: 15px;
