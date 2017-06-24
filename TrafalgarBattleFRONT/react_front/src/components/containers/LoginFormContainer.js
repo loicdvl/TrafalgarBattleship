@@ -29,13 +29,17 @@ class LoginFormContainer extends React.Component {
         if( this.state.username !== '' && this.state.password !== '' )
         {
             userLoginRequest(this.state);
-            this.setState({alertAttribute: 'alerted success'});
-            this.setState({alertText: 'Connexion réussie !'});
+            this.setState({
+                alertAttribute: 'alerted success',
+                alertText: 'Connexion réussie !'
+            });
         }
         else
         {
-            this.setState({alertAttribute: 'alerted danger'});
-            this.setState({alertText: 'Veuillez remplir les champs du formulaire !'});
+            this.setState({
+                alertAttribute: 'alerted danger',
+                alertText: 'Veuillez remplir les champs du formulaire !'
+            });
         }
     };
 

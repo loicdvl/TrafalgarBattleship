@@ -146,13 +146,13 @@ namespace TrafalgarBattleAPI.Hubs
             {
                 shooterPlayer.ProcessShotResult(coordinate,ShotResult.Miss);
                 Clients.Caller.updateShotGridOnMissedShot(shooterPlayer.ShotGrid);
-                Clients.Client(targetPlayer.ConnectionId).setTurn(true);
+                Clients.Client(targetPlayer.ConnectionId).setTurn();
             }
             else if (result.Equals(ShotResult.Hit))
             {
                 shooterPlayer.ProcessShotResult(coordinate, ShotResult.Hit);
                 Clients.Caller.updateShotGridOnSuccessfullShot(shooterPlayer.ShotGrid);
-                Clients.Client(targetPlayer.ConnectionId).notifyHit(true);
+                Clients.Client(targetPlayer.ConnectionId).notifyHit();
             }
             else
             {

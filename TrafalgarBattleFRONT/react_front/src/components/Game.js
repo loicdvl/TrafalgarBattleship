@@ -13,12 +13,11 @@ import '../css/game.css';
 class Game extends React.Component {
 
     state = {
-        turn: false ,
+        turn: false,
         message: '',
         messageType: '',
         modalMessage: '',
         showModal: false,
-        opponentGrid: '',
         playerSuccessfullHit: 0,
         opponentSuccessfullHit: 0,
         shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 gameSection',
@@ -37,53 +36,104 @@ class Game extends React.Component {
 
         this.props.socket.on('updateShotGridOnMissedShot', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
-            this.setState({message: 'Raté..', messageType: 'danger'});
-            setTimeout( () => {this.setState({message: ''})}, 3000);
-            this.setState({turn: false, shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 opacgameSection'});
+            this.setState({
+                message: 'Raté !',
+                messageType: 'danger',
+                turn: false,
+                shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 opacgameSection'
+            });
+            setTimeout( () => {
+                this.setState({
+                    message: "Tour de l'adversaire",
+                    messageType: 'default'
+                })
+            }, 2000);
         });
 
         this.props.socket.on('updateShotGridOnSuccessfullShot', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
-            this.setState({message: 'Touché', messageType: 'success'});
-            setTimeout( () => {this.setState({message: ''})}, 3000);
-            this.setState({turn: true, playerSuccessfullHit: this.state.playerSuccessfullHit+1});
+            this.setState({
+                message: 'Touché',
+                messageType: 'success',
+                playerSuccessfullHit: this.state.playerSuccessfullHit+1
+            });
+            setTimeout( () => {
+                this.setState({
+                    message: 'Vous pouvez rejouer !',
+                    messageType: 'default'
+                })
+            }, 2000);
         });
 
         this.props.socket.on('updateShotGridOnSunkShip', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
-            this.setState({message: 'Coulé', messageType: 'success'});
-            setTimeout( () => {this.setState({message: ''})}, 2000);
-            this.setState({turn: true, playerSuccessfullHit: this.state.playerSuccessfullHit+1});
+            this.setState({
+                message: 'Coulé',
+                messageType: 'success',
+                playerSuccessfullHit: this.state.playerSuccessfullHit+1
+            });
+            setTimeout( () => {
+                this.setState({
+                    message: 'Vous pouvez rejouer !',
+                    messageType: 'default'
+                })
+            }, 2000);
         });
 
         this.props.socket.on('notifyPlayerVictory', (ShotGrid) => {
             this.updateShotGrid(ShotGrid);
+            this.setState({
+                modalMessage: 'Vous avez Gagné !',
+                turn: false,
+                playerSuccessfullHit: this.state.playerSuccessfullHit+1,
+                shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 opacgameSection'
+            });
             this.openModal();
-            this.setState({modalMessage: 'Vous avez Gagné !', turn: false, playerSuccessfullHit: this.state.playerSuccessfullHit+1, shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 opacgameSection'});
         });
 
         this.props.socket.on('notifyPlayerDefeat', () => {
             this.openModal();
-            this.setState({modalMessage: 'Vous avez perdu !'});
-            this.setState({turn: false, opponentSuccessfullHit: this.state.opponentSuccessfullHit+1, shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 opacgameSection'});
+            this.setState({
+                modalMessage: 'Vous avez perdu !',
+                opponentSuccessfullHit: this.state.opponentSuccessfullHit + 1
+            });
         });
 
-        this.props.socket.on('setTurn', (turn) => {
-            this.setState({message: 'A votre tour', messageType: 'default', opponentGrid: ''});
-            setTimeout( () => {this.setState({message: ''})}, 3000);
-            this.setState({turn: true, shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 gameSection'});
+        this.props.socket.on('setTurn', () => {
+            this.setState({
+                message: 'A votre tour',
+                messageType: 'default',
+                turn: true,
+                shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 gameSection'
+            });
         });
 
-        this.props.socket.on('notifyHit', (hit) => {
-            this.setState({message: 'Votre navire est touché', messageType: 'warning'});
-            setTimeout( () => {this.setState({message: ''})}, 3000);
-            this.setState({turn: false, opponentSuccessfullHit: this.state.opponentSuccessfullHit+1});
+        this.props.socket.on('notifyHit', () => {
+            this.setState({
+                message: 'Votre navire est touché',
+                messageType: 'warning',
+                opponentSuccessfullHit: this.state.opponentSuccessfullHit+1
+            });
+            setTimeout( () => {
+                this.setState({
+                    message: 'Votre adversaire rejoue !',
+                    messageType: 'default'
+                })
+            }, 2000);
         });
 
         this.props.socket.on('notifyShipHasBeenSink', () => {
-            this.setState({message: 'Votre navire a coulé', messageType: 'danger'});
-            setTimeout( () => {this.setState({message: ''})}, 3000);
-            this.setState({turn: false, opponentSuccessfullHit: this.state.opponentSuccessfullHit+1});
+            this.setState({
+                message: 'Votre navire a coulé',
+                messageType: 'danger',
+                opponentSuccessfullHit: this.state.opponentSuccessfullHit+1
+            });
+            setTimeout( () => {
+                this.setState({
+                    message: 'Votre adversaire rejoue !',
+                    messageType: 'default'
+                })
+            }, 2000);
         });
 
         this.props.socket.on('notifyOpponentDisconnected', () => {
@@ -124,12 +174,12 @@ class Game extends React.Component {
                     <div className="row">
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.player.Name}</h1>
-                            <ProgressBar active now={100-this.state.opponentSuccessfullHit*(100/17)} />
+                            <ProgressBar active now={100-this.state.opponentSuccessfullHit*(100/23)} />
                             <PlayerGridContainer />
                         </div>
                         <div className={this.state.shotGridClassName}>
                             <h1>{this.props.opponent.Name}</h1>
-                            <ProgressBar active now={100-this.state.playerSuccessfullHit*(100/17)} />
+                            <ProgressBar active now={100-this.state.playerSuccessfullHit*(100/23)} />
                             <ShotGridContainer turn={this.state.turn} />
                         </div>
                     </div>

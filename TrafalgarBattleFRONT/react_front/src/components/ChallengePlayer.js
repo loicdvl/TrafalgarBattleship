@@ -27,13 +27,17 @@ class ChallengePlayer extends React.Component {
     };
 
     openModalOnBeingDefied = (opponent) => {
-        this.setState({opponent});
-        this.setState({ showModalOnBeingDefied : true });
+        this.setState({
+            opponent: opponent,
+            showModalOnBeingDefied : true
+        });
     };
 
     openModalOnWaitForDefiedResponse = (opponent) => {
-        this.setState({opponent});
-        this.setState({ showModalOnWaitForDefiedResponse : true });
+        this.setState({
+            opponent: opponent,
+            showModalOnWaitForDefiedResponse : true
+        });
     };
 
     closeModalModalOnWaitForDefiedResponse = () => {

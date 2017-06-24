@@ -34,13 +34,17 @@ class SignupFormContainer extends React.Component {
         if( this.state.username === '' || this.state.password.length < 8 || this.state.email === '' )
         {
             userSignupRequest(this.state);
-            this.setState({alertAttribute: 'alerted success'});
-            this.setState({alertText: 'Inscription réussie !'});
+            this.setState({
+                alertAttribute: 'alerted success',
+                alertText: 'Inscription réussie !'
+            });
         }
         else
         {
-            this.setState({alertAttribute: 'alerted danger'});
-            this.setState({alertText: 'Veuillez remplir les champs du formulaire !'});
+            this.setState({
+                alertAttribute: 'alerted danger',
+                alertText: 'Veuillez remplir les champs du formulaire !'
+            });
         }
     };
 
