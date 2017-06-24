@@ -31,9 +31,11 @@ namespace TrafalgarBattleAPI.Models
             Ships = new List<Ship>
             {
                 new Destroyer(),
+                new Destroyer(),
                 new Submarine(),
                 new Cruiser(),
                 new Carrier(),
+                new Battleship(),
                 new Battleship()
             };
             PlayerGrid = new PlayerGrid();
