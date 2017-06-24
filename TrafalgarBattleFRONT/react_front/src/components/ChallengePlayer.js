@@ -23,7 +23,8 @@ class ChallengePlayer extends React.Component {
     state = {
         showModalOnWaitForDefiedResponse: false,
         showModalOnBeingDefied: false,
-        opponent: this.props.opponent
+        opponent: this.props.opponent,
+        modalTextOnWaitForDefiedResponse: ''
     };
 
     openModalOnBeingDefied = (opponent) => {
@@ -50,17 +51,17 @@ class ChallengePlayer extends React.Component {
 
     challengeAccepted = () => {
         this.closeModalOnBeingDefied();
-        this.props.socket.invoke('ChallengeAccepted', this.props.user.ConnectionId, this.state.opponent.ConnectionId);
+        this.props.socket.invoke('ChallengeAccepted', this.state.opponent.ConnectionId);
     };
 
     challengeDeclined = () => {
         this.closeModalOnBeingDefied();
-        this.props.socket.invoke('ChallengeDeclined', this.props.user.ConnectionId, this.state.opponent.ConnectionId);
+        this.props.socket.invoke('ChallengeDeclined', this.state.opponent.ConnectionId);
     };
 
     escapeFromThisTrap = () => {
+        this.props.socket.invoke('ChallengeUserAbort', this.state.opponent.ConnectionId);
         this.closeModalModalOnWaitForDefiedResponse();
-        this.props.invoke('ChallengeUserAbort', this.props.opponent.ConnectionId);
     };
 
     componentDidMount() {
@@ -75,16 +76,24 @@ class ChallengePlayer extends React.Component {
             setUser(_user);
         });
 
-        this.OnlineUserStoreProxy.on('defied', (_user) => {
-            this.openModalOnBeingDefied(_user);
+        this.OnlineUserStoreProxy.on('defied', (opponent) => {
+            this.openModalOnBeingDefied(opponent);
         });
 
         this.OnlineUserStoreProxy.on('waitingForResponse', (opponent) => {
+            this.setState({modalTextOnWaitForDefiedResponse: "En attente de réponse de l'adversaire !"});
             this.openModalOnWaitForDefiedResponse(opponent);
         });
 
+        this.OnlineUserStoreProxy.on('abortChallenge', () => {
+            this.closeModalOnBeingDefied();
+        });
+
         this.OnlineUserStoreProxy.on('displayDeniedChallenge', () => {
-            this.closeModalModalOnWaitForDefiedResponse();
+            this.setState({modalTextOnWaitForDefiedResponse: "Challenge refusé !"});
+            setTimeout(() => {
+                this.closeModalModalOnWaitForDefiedResponse()
+            }, 2000);
         });
 
         this.OnlineUserStoreProxy.on('startGame', (game,player,challenger) => {
@@ -110,7 +119,7 @@ class ChallengePlayer extends React.Component {
     }
 
     componentWillUnmount() {
-        this.OnlineUserStoreProxy.invoke('Disconnect',this.props.user.ConnectionId);
+        this.OnlineUserStoreProxy.invoke('Disconnect');
     }
 
     render() {
@@ -144,7 +153,7 @@ class ChallengePlayer extends React.Component {
                             <Modal.Title>Défi</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            En attente de réponse de l'adversaire !
+                            {this.state.modalTextOnWaitForDefiedResponse}
                         </Modal.Body>
                         <Modal.Footer>
                             <Button bsStyle="danger" onClick={this.escapeFromThisTrap}>Abandonner</Button>

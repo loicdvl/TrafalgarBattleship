@@ -50,9 +50,9 @@ namespace TrafalgarBattleAPI.Hubs
             }
         }
 
-        public void Disconnect(string connectionId)
+        public void Disconnect()
         {
-            _onlineUserMap.Remove(connectionId);
+            _onlineUserMap.Remove(Context.ConnectionId);
             List<User> userlist = _onlineUserMap.GetAllUsers();
             Clients.All.updateOnlineUserList(userlist);
         }
@@ -82,9 +82,9 @@ namespace TrafalgarBattleAPI.Hubs
             }   
         }
 
-        public void ChallengeAccepted(string callerConnectionId, string opponentConnectionId)
+        public void ChallengeAccepted(string opponentConnectionId)
         {
-            User user1 = _onlineUserMap.GetConnections(callerConnectionId);
+            User user1 = _onlineUserMap.GetConnections(Context.ConnectionId);
             User user2 = _onlineUserMap.GetConnections(opponentConnectionId);
 
             Player player1 = new Player(user1);
@@ -99,19 +99,19 @@ namespace TrafalgarBattleAPI.Hubs
             Clients.Client(opponentConnectionId).startGame(game.IdGame, game.Player2, game.Player1);
         }
 
-        public void ChallengeDeclined(string callerConnectionId, string challengerConnectionId)
+        public void ChallengeDeclined(string challengerConnectionId)
         {
-            User user = _onlineUserMap.GetConnections(callerConnectionId);
+            User user = _onlineUserMap.GetConnections(Context.ConnectionId);
 
             Clients.Client(challengerConnectionId).displayDeniedChallenge(user);
         }
 
-        public void ChallengeUserAbort(string callerConnectionId, string targetConnectionId)
+        public void ChallengeUserAbort(string targetConnectionId)
         {
-            User caller = _onlineUserMap.GetConnections(callerConnectionId);
+            User caller = _onlineUserMap.GetConnections(Context.ConnectionId);
             if ( caller != null )
             {
-                Clients.Client(targetConnectionId).abortChallengeDemand(caller.Name);
+                Clients.Client(targetConnectionId).abortChallenge();
             }
         }
 
