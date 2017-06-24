@@ -14,7 +14,7 @@ class ShotGridContainer extends React.Component {
                 caseClass = "emptyHitCase";
             if ( cols[j].IsOccupied )
                 caseClass = "occupied";
-            line[j] = <ColContainer Coordinate={cols[j].Coordinate} className={caseClass} key={row+j} turn={this.props.turn} />;
+            line[j] = <ColContainer Coordinate={cols[j].Coordinate} isHit={cols[j].IsHit} className={caseClass} key={row+j} turn={this.props.turn} />;
         }
         return line;
     };
