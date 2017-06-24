@@ -8,6 +8,8 @@ import LoginFormContainer from "./containers/LoginFormContainer";
 
 import Rules from './views/Rules';
 
+import { resetUserToDefault } from '../api/user-api';
+
 import '../css/bootstrap/css/bootstrap.min.css';
 import '../css/style.css';
 
@@ -44,6 +46,59 @@ class Index extends React.Component {
         browserHistory.push('/leaderboard');
     };
 
+    disconnectUser = (event) => {
+        event.preventDefault();
+        resetUserToDefault();
+    };
+
+    renderName = () => {
+        if(this.props.user.Name !== '#Anon')
+        {
+            return (
+                this.props.user.Name
+            )
+        }
+    };
+
+    renderSignUpButton = () => {
+        if(this.props.user.Name === '#Anon')
+        {
+            return (
+                <Button bsStyle="primary" bsSize="large" onClick={this.openModalSignUp} block>S'inscrire</Button>
+            )
+        }
+        else
+        {
+            return null;
+        }
+    };
+
+    renderSignInButton = () => {
+        if(this.props.user.Name === '#Anon')
+        {
+            return (
+                <Button bsStyle="primary" bsSize="large" onClick={this.openModalSignIn} block>Se connecter</Button>
+            )
+        }
+        else
+        {
+            return null;
+        }
+    };
+
+    renderDisconnectButton = () => {
+        if(this.props.user.Name !== '#Anon')
+        {
+            return (
+                <Button bsStyle="primary" bsSize="large" onClick={this.disconnectUser} block>Deconnexion</Button>
+            )
+        }
+        else
+        {
+            return null;
+        }
+    };
+
     render () {
 
         return (
@@ -51,16 +106,17 @@ class Index extends React.Component {
                 <Jumbotron className="jumbotron text-center">
                     <div id="header">
                         <h1>Trafalgar Battleship</h1>
-                        <h2>Bienvenue</h2>
+                        <h2>Bienvenue {this.renderName()}</h2>
                     </div>
                     <ButtonGroup vertical>
                         <Button bsStyle="primary" bsSize="large" block onClick={this.redirectToChallengePlayerList}>Commencer une partie</Button>
                         <br/>
                         <Button bsStyle="primary" bsSize="large" block onClick={this.redirectToLeaderboard}>Leaderboard</Button>
                         <br/>
-                        <Button bsStyle="primary" bsSize="large" onClick={this.openModalSignIn} block>Se connecter</Button>
+                        {this.renderSignInButton()}
+                        {this.renderDisconnectButton()}
                         <br/>
-                        <Button bsStyle="primary" bsSize="large" onClick={this.openModalSignUp} block>S'inscrire</Button>
+                        {this.renderSignUpButton()}
                         <br/>
                     </ButtonGroup>
                     <br/>

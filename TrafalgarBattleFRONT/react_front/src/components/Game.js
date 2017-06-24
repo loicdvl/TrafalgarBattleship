@@ -174,12 +174,12 @@ class Game extends React.Component {
                     <div className="row">
                         <div className="col col-6 col-sm-6 col-md-6 col-lg-6 gameSection">
                             <h1>{this.props.player.Name}</h1>
-                            <ProgressBar active now={100-this.state.opponentSuccessfullHit*(100/23)} />
+                            <ProgressBar active now={100-this.state.opponentSuccessfullHit*(100/17)} />
                             <PlayerGridContainer />
                         </div>
                         <div className={this.state.shotGridClassName}>
                             <h1>{this.props.opponent.Name}</h1>
-                            <ProgressBar active now={100-this.state.playerSuccessfullHit*(100/23)} />
+                            <ProgressBar active now={100-this.state.playerSuccessfullHit*(100/17)} />
                             <ShotGridContainer turn={this.state.turn} />
                         </div>
                     </div>

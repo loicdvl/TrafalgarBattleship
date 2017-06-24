@@ -19,7 +19,6 @@ export function searchLeaderboard(query) {
         .then(response => {
             if (response.status === 200 ) {
                 store.dispatch(getLeaderboardSuccess({leaderboard: response.data}));
-                console.log(response);
                 return response;
             }
         }).catch(error => {

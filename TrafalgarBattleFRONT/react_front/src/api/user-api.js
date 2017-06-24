@@ -32,3 +32,11 @@ export function userLoginRequest(userData){
         console.log(error);
     });
 }
+
+export function resetUserToDefault(){
+    return store.dispatch(getUserSuccess({
+        user: {
+            Name: "#Anon"
+        }
+    }));
+}
