@@ -1,37 +1,29 @@
-## Welcome to GitHub Pages
+## Trafalgar Battleship
 
-You can use the [editor on GitHub](https://github.com/loicdvl/TrafalgarBattleship/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This repository contains both the API and the front to consume it.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Under TrafalgarBattleAPI folder there is all the files and configuration to import the project into Visual Studio.
+The server is using .Net C# technology and a Postgresql database.
 
-### Markdown
+Under TrafalgarBattleFront folder there is all the files and configuration to install and launch the game.
+The front is using Reactjs Technology.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+## Run the server
 
-# Header 1
-## Header 2
-### Header 3
+First open the file TrafalgarBattleAPI/TrafalgarBattleAPI.sln with Visual Studio.
+Then, run the project.
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+## Run the website
 
-**Bold** and _Italic_ and `Code` text
+You first need to install Nodejs on your computer.
+Once it is done follow these instructions :
+- Open your command line into the folder TrafalgarBattleFront/
+- npm install
+- npm start
+- the website will be opened in your default browser
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/loicdvl/TrafalgarBattleship/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Enjoy the game
