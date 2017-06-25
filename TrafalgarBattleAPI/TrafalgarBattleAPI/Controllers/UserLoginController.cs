@@ -11,18 +11,6 @@ namespace TrafalgarBattleAPI.Controllers
     {
         UserDbConnection udc = null;
 
-        // GET: api/UserLogin
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/UserLogin/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/UserLogin
         public User Post([FromBody]UserLogin UserLogin)
         {

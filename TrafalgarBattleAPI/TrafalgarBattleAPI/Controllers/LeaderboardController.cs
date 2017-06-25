@@ -11,14 +11,6 @@ namespace TrafalgarBattleAPI.Controllers
     {
         UserDbConnection udc = null;
 
-        private readonly User[] _leaderboard =
-        {
-            new User("1","Loic"),
-            new User("2","Lucie"),
-            new User("3","Choustof"),
-            new User("4","Glodie")
-        };
-       
         // GET api/<controller>
         public IEnumerable<User> Get()
         {
@@ -32,13 +24,12 @@ namespace TrafalgarBattleAPI.Controllers
         // GET api/<controller>/5
         public User Get(string id)
         {
-            var user = _leaderboard.FirstOrDefault((u) => u.Name == id);
-            return user;
-        }
+            udc = new UserDbConnection();
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
+            List<User> leaderboard = udc.GetLeaderboard();
+            User user = leaderboard.FirstOrDefault((u) => u.Name == id);
+
+            return user;
         }
     }
 }
