@@ -119,5 +119,19 @@ namespace TrafalgarBattleAPI.Models
                 }
             }
         }
+        
+        public void UpdateScoreOnVictory()
+        {
+            UserDbConnection udc = new UserDbConnection();
+
+            udc.UpdateUserOnVictory(IdUser);
+        }
+
+        public void UpdateScoreOnDefeat()
+        {
+            UserDbConnection udc = new UserDbConnection();
+
+            udc.UpdateUserOnDefeat(IdUser);
+        }
     }
 }

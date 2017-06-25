@@ -164,6 +164,8 @@ namespace TrafalgarBattleAPI.Hubs
                 }
                 else
                 {
+                    shooterPlayer.UpdateScoreOnVictory();
+                    targetPlayer.UpdateScoreOnDefeat();
                     Clients.Caller.notifyPlayerVictory(shooterPlayer.ShotGrid);
                     Clients.Client(targetPlayer.ConnectionId).notifyPlayerDefeat();
                     _gamelist.Remove(game);

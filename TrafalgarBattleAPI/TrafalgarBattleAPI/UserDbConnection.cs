@@ -150,5 +150,35 @@ namespace TrafalgarBattleAPI
 
             return leaderboard;
         }
+
+        public void UpdateUserOnVictory(int iduser)
+        {
+            MyCnx = new NpgsqlConnection(Conx);
+            string update = "UPDATE  \"user\"  SET victory=victory+1 WHERE iduser=:iduser;";
+            MyCnx.Open();
+
+            MyCmd = new NpgsqlCommand(update, MyCnx);
+
+            MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
+
+            MyCmd.ExecuteNonQuery();
+
+            MyCnx.Close();
+        }
+
+        public void UpdateUserOnDefeat(int iduser)
+        {
+            MyCnx = new NpgsqlConnection(Conx);
+            string update = "UPDATE  \"user\"  SET defeat=defeat+1 WHERE iduser=:iduser;";
+            MyCnx.Open();
+
+            MyCmd = new NpgsqlCommand(update, MyCnx);
+
+            MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
+
+            MyCmd.ExecuteNonQuery();
+
+            MyCnx.Close();
+        }
     }
 }
