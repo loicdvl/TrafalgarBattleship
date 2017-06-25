@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using TrafalgarBattleAPI.Controllers.Cryptography;
 using TrafalgarBattleAPI.Models;
 
 namespace TrafalgarBattleAPI.Controllers
@@ -29,7 +30,7 @@ namespace TrafalgarBattleAPI.Controllers
 
             if( userSignUp.Username != null && userSignUp.Password != null )
             {
-                udc.InsertUser(userSignUp.Username, userSignUp.Password);
+                udc.InsertUser(userSignUp.Username, SHA.GenerateSHA256String(userSignUp.Password));
             }
         }
 

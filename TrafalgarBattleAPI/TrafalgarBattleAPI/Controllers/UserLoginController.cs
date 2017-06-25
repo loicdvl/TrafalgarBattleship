@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using TrafalgarBattleAPI.Controllers.Cryptography;
 using TrafalgarBattleAPI.Models;
 
 namespace TrafalgarBattleAPI.Controllers
@@ -27,7 +28,7 @@ namespace TrafalgarBattleAPI.Controllers
         {
             udc = new UserDbConnection();
 
-            User user = udc.GetUser(UserLogin.Username, UserLogin.Password);
+            User user = udc.GetUser(UserLogin.Username, SHA.GenerateSHA256String(UserLogin.Password));
 
             return user;
         }
