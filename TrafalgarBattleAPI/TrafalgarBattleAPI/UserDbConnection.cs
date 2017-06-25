@@ -13,171 +13,227 @@ namespace TrafalgarBattleAPI
         NpgsqlCommand MyCmd = null;
         NpgsqlConnection MyCnx = null;
 
-        public void InsertUser(string name, string password)
+        // Insert a new user to the database. Invoke on SignUpForm submit.
+        public int InsertUser(string name, string password)
         {
+            int result = 0;
+
             MyCnx = new NpgsqlConnection(Conx);
-            string insert = "INSERT INTO \"user\"(iduser,name,password,avatar,victory,defeat) values(DEFAULT,:name,:password,:avatar,:victory,:defeat)";
-
             MyCnx.Open();
-            MyCmd = new NpgsqlCommand(insert, MyCnx);
-            
-            MyCmd.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar)).Value = name;
-            MyCmd.Parameters.Add(new NpgsqlParameter("password", NpgsqlDbType.Varchar)).Value = password;
-            MyCmd.Parameters.Add(new NpgsqlParameter("avatar", NpgsqlDbType.Varchar)).Value = "oldship.png";
-            MyCmd.Parameters.Add(new NpgsqlParameter("victory", NpgsqlDbType.Integer)).Value = 0;
-            MyCmd.Parameters.Add(new NpgsqlParameter("defeat", NpgsqlDbType.Integer)).Value = 0;
 
-            MyCmd.ExecuteNonQuery();
-            MyCnx.Close();
-        }
-
-        public User GetUser(string name, string password)
-        {
-            DataTable MyData = new DataTable();
-            NpgsqlDataAdapter da;
-            MyCnx = new NpgsqlConnection(Conx);
-            string select = "SELECT iduser,name,avatar,victory,defeat from \"user\" WHERE (name=:name AND password=:password);";
-
-            MyCnx.Open();
-            MyCmd = new NpgsqlCommand(select, MyCnx);
-
-            MyCmd.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar)).Value = name;
-            MyCmd.Parameters.Add(new NpgsqlParameter("password", NpgsqlDbType.Varchar)).Value = password;
-
-            da = new NpgsqlDataAdapter(MyCmd);
-            da.Fill(MyData);
-
-            List<string> MyUserParameter = new List<string>();
-
-            foreach (DataRow row in MyData.Rows)
+            if(MyCnx != null)
             {
-                for (int i = 0; i < MyData.Columns.Count; i++)
+                string insert = "INSERT INTO \"user\"(iduser,name,password,avatar,victory,defeat) values(DEFAULT,:name,:password,:avatar,:victory,:defeat)";
+
+                MyCmd = new NpgsqlCommand(insert, MyCnx);
+
+                if (MyCmd != null)
                 {
-                    MyUserParameter.Add(row[i].ToString());
+                    MyCmd.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar)).Value = name;
+                    MyCmd.Parameters.Add(new NpgsqlParameter("password", NpgsqlDbType.Varchar)).Value = password;
+                    MyCmd.Parameters.Add(new NpgsqlParameter("avatar", NpgsqlDbType.Varchar)).Value = "oldship.png";
+                    MyCmd.Parameters.Add(new NpgsqlParameter("victory", NpgsqlDbType.Integer)).Value = 0;
+                    MyCmd.Parameters.Add(new NpgsqlParameter("defeat", NpgsqlDbType.Integer)).Value = 0;
+
+                    result = MyCmd.ExecuteNonQuery();
                 }
             }
             MyCnx.Close();
 
-            int.TryParse(MyUserParameter.ElementAt(0), out int iduser);
-            int.TryParse(MyUserParameter.ElementAt(3), out int victory);
-            int.TryParse(MyUserParameter.ElementAt(4), out int defeat);
+            return result;
+        }
 
-            User user = new User(iduser, MyUserParameter.ElementAt(1),MyUserParameter.ElementAt(2),victory,defeat);
+        // Search a user in the database based on his name and his password. Invoke on LoginForm submit.
+        public User GetUser(string name, string password)
+        {
+            User user = null;
+
+            MyCnx = new NpgsqlConnection(Conx);
+            MyCnx.Open();
+
+            if(MyCnx != null)
+            {
+                string select = "SELECT iduser,name,avatar,victory,defeat from \"user\" WHERE (name=:name AND password=:password);";
+
+                MyCmd = new NpgsqlCommand(select, MyCnx);
+                if(MyCmd != null)
+                {
+                    DataTable MyData = new DataTable();
+                    NpgsqlDataAdapter da;
+
+                    MyCmd.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar)).Value = name;
+                    MyCmd.Parameters.Add(new NpgsqlParameter("password", NpgsqlDbType.Varchar)).Value = password;
+
+                    da = new NpgsqlDataAdapter(MyCmd);
+                    da.Fill(MyData);
+
+                    List<string> MyUserParameter = new List<string>();
+
+                    if (MyData.Rows.Count == 1)
+                    {
+                        foreach (DataRow row in MyData.Rows)
+                        {
+                            for (int i = 0; i < MyData.Columns.Count; i++)
+                            {
+                                MyUserParameter.Add(row[i].ToString());
+                            }
+                        }
+                        int.TryParse(MyUserParameter.ElementAt(0), out int iduser);
+                        int.TryParse(MyUserParameter.ElementAt(3), out int victory);
+                        int.TryParse(MyUserParameter.ElementAt(4), out int defeat);
+
+                        user = new User(iduser, MyUserParameter.ElementAt(1), MyUserParameter.ElementAt(2), victory, defeat);
+                    }
+                }
+            }
+            MyCnx.Close();
 
             return user;
         }
 
-        public void UpdateUser(int iduser, string name, string password, string avatar, int victory, int defeat)
+        // Update all values of an user based on his iduser. Not used for now as we do not have developped any profile page.
+        public int UpdateUser(int iduser, string name, string password, string avatar, int victory, int defeat)
         {
-            MyCnx = new NpgsqlConnection(Conx);
-            string update = "UPDATE  \"user\"  SET name =:name ,password=:password,avatar=:avatar,victory=:victory WHERE(iduser=:iduser);";
-            MyCnx.Open();
+            int result = 0;
 
-            MyCmd = new NpgsqlCommand(update, MyCnx);
-
-            MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
-            MyCmd.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar)).Value = name;
-            MyCmd.Parameters.Add(new NpgsqlParameter("password", NpgsqlDbType.Varchar)).Value = password;
-            MyCmd.Parameters.Add(new NpgsqlParameter("avatar", NpgsqlDbType.Varchar)).Value = avatar;
-            MyCmd.Parameters.Add(new NpgsqlParameter("victory", NpgsqlDbType.Integer)).Value = victory;
-            MyCmd.Parameters.Add(new NpgsqlParameter("defeat", NpgsqlDbType.Integer)).Value = defeat;
-
-            MyCmd.ExecuteNonQuery();
-            MyCnx.Close();
-        }
-
-        public DataTable SelectAllUser()
-        {
-            DataTable MyData = new DataTable();
-            NpgsqlDataAdapter da;
             MyCnx = new NpgsqlConnection(Conx);
             MyCnx.Open();
-            string select = "SELECT * FROM \"user\"";
-            MyCmd = new NpgsqlCommand(select, MyCnx);
-            da = new NpgsqlDataAdapter(MyCmd);
-            da.Fill(MyData);
+
+            if(MyCnx != null)
+            {
+                string update = "UPDATE  \"user\"  SET name =:name ,password=:password,avatar=:avatar,victory=:victory WHERE(iduser=:iduser);";
+
+                MyCmd = new NpgsqlCommand(update, MyCnx);
+
+                if(MyCmd != null)
+                {
+                    MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
+                    MyCmd.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar)).Value = name;
+                    MyCmd.Parameters.Add(new NpgsqlParameter("password", NpgsqlDbType.Varchar)).Value = password;
+                    MyCmd.Parameters.Add(new NpgsqlParameter("avatar", NpgsqlDbType.Varchar)).Value = avatar;
+                    MyCmd.Parameters.Add(new NpgsqlParameter("victory", NpgsqlDbType.Integer)).Value = victory;
+                    MyCmd.Parameters.Add(new NpgsqlParameter("defeat", NpgsqlDbType.Integer)).Value = defeat;
+
+                    result = MyCmd.ExecuteNonQuery();
+                }
+            }
             MyCnx.Close();
-            return MyData;
+
+            return result;
         }
 
-        public void DeleteUserbyId(int iduser)
+        // Delete an user from the database based on his iduser. Not used for now as we do not managed any user profile page.
+        public int DeleteUserbyId(int iduser)
         {
-            MyCnx = new NpgsqlConnection(Conx);
-            string delete = "DELETE FROM \"user\" WHERE(iduser=:iduser)";
+            int result = 0;
 
+            MyCnx = new NpgsqlConnection(Conx);
             MyCnx.Open();
-            MyCmd = new NpgsqlCommand(delete, MyCnx);
-            MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
-            MyCmd.ExecuteNonQuery();
+
+            if(MyCnx != null)
+            {
+                string delete = "DELETE FROM \"user\" WHERE(iduser=:iduser)";
+
+                MyCmd = new NpgsqlCommand(delete, MyCnx);
+                if(MyCmd != null)
+                {
+                    MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
+
+                    result = MyCmd.ExecuteNonQuery();
+                }
+                
+            }
             MyCnx.Close();
+
+            return result;
         }
 
+        // Return the user ordered by their number of victory desc. Used to display the leaderboard screen.
         public List<User> GetLeaderboard()
         {
-            DataTable MyData = new DataTable();
-            NpgsqlDataAdapter da;
-            MyCnx = new NpgsqlConnection(Conx);
-            string select = "SELECT iduser,name,avatar,victory,defeat from \"user\" ORDER BY victory desc;";
-
-            MyCnx.Open();
-            MyCmd = new NpgsqlCommand(select, MyCnx);
-
-            da = new NpgsqlDataAdapter(MyCmd);
-            da.Fill(MyData);
-
-            
             List<User> leaderboard = new List<User>();
-            foreach (DataRow row in MyData.Rows)
-            {
-                List<string> MyUserParameter = new List<string>();
-                for (int i = 0; i < MyData.Columns.Count; i++)
-                {
-                    MyUserParameter.Add(row[i].ToString());
-                }
-                int.TryParse(MyUserParameter.ElementAt(0), out int iduser);
-                string name = MyUserParameter.ElementAt(1);
-                string avatar = MyUserParameter.ElementAt(2);
-                int.TryParse(MyUserParameter.ElementAt(3), out int victory);
-                int.TryParse(MyUserParameter.ElementAt(4), out int defeat);
 
-                User user = new User(iduser, name, avatar, victory, defeat);
-                if ( user != null )
+            MyCnx = new NpgsqlConnection(Conx);
+            MyCnx.Open();
+            if(MyCnx != null)
+            {
+                string select = "SELECT iduser,name,avatar,victory,defeat from \"user\" ORDER BY victory desc;";
+
+                MyCmd = new NpgsqlCommand(select, MyCnx);
+
+                if(MyCmd != null)
                 {
-                    leaderboard.Add(user);
-                }
+                    DataTable MyData = new DataTable();
+
+                    NpgsqlDataAdapter da = new NpgsqlDataAdapter(MyCmd);
+                    da.Fill(MyData);
+
+                    foreach (DataRow row in MyData.Rows)
+                    {
+                        List<string> MyUserParameter = new List<string>();
+                        for (int i = 0; i < MyData.Columns.Count; i++)
+                        {
+                            MyUserParameter.Add(row[i].ToString());
+                        }
+                        int.TryParse(MyUserParameter.ElementAt(0), out int iduser);
+                        string name = MyUserParameter.ElementAt(1);
+                        string avatar = MyUserParameter.ElementAt(2);
+                        int.TryParse(MyUserParameter.ElementAt(3), out int victory);
+                        int.TryParse(MyUserParameter.ElementAt(4), out int defeat);
+
+                        User user = new User(iduser, name, avatar, victory, defeat);
+                        if (user != null)
+                        {
+                            leaderboard.Add(user);
+                        }
+                    }
+                } 
             }
             MyCnx.Close();
 
             return leaderboard;
         }
 
+        // Add one victory to the specified user.
         public void UpdateUserOnVictory(int iduser)
         {
             MyCnx = new NpgsqlConnection(Conx);
-            string update = "UPDATE  \"user\"  SET victory=victory+1 WHERE iduser=:iduser;";
             MyCnx.Open();
 
-            MyCmd = new NpgsqlCommand(update, MyCnx);
+            if(MyCnx != null)
+            {
+                string update = "UPDATE  \"user\"  SET victory=victory+1 WHERE iduser=:iduser;";
 
-            MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
+                MyCmd = new NpgsqlCommand(update, MyCnx);
+                if(MyCmd != null)
+                {
+                    MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
 
-            MyCmd.ExecuteNonQuery();
-
+                    MyCmd.ExecuteNonQuery();
+                }
+            }
             MyCnx.Close();
         }
 
+        // Add one defeat to the specified user
         public void UpdateUserOnDefeat(int iduser)
         {
             MyCnx = new NpgsqlConnection(Conx);
-            string update = "UPDATE  \"user\"  SET defeat=defeat+1 WHERE iduser=:iduser;";
             MyCnx.Open();
 
-            MyCmd = new NpgsqlCommand(update, MyCnx);
+            if(MyCnx != null)
+            {
+                string update = "UPDATE  \"user\"  SET defeat=defeat+1 WHERE iduser=:iduser;";
 
-            MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
+                MyCmd = new NpgsqlCommand(update, MyCnx);
 
-            MyCmd.ExecuteNonQuery();
+                if(MyCmd != null)
+                {
+                    MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
 
+                    MyCmd.ExecuteNonQuery();
+                }
+            }
             MyCnx.Close();
         }
     }

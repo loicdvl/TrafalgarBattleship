@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.Cors;
 using TrafalgarBattleAPI.Controllers.Cryptography;
 using TrafalgarBattleAPI.Models;
