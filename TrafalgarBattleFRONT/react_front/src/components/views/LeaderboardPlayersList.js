@@ -5,7 +5,7 @@ import { Image } from 'react-bootstrap';
 class LeaderboardPlayersList extends React.Component {
 
     renderLeaderboardList () {
-        if (this.props.leaderboard.length >= 1) {
+        if (Array.isArray(this.props.leaderboard.length)) {
             return this.props.leaderboard.map((user, index) => {
                 return (
                     <tr key={index}>
@@ -20,7 +20,16 @@ class LeaderboardPlayersList extends React.Component {
             })
         }
         else {
-            return null;
+            return (
+                <tr>
+                    <td><Image src={this.props.leaderboard.Avatar} /></td>
+                    <td>0</td>
+                    <td>{this.props.leaderboard.Name}</td>
+                    <td>{this.props.leaderboard.Victory}</td>
+                    <td>{this.props.leaderboard.Defeat}</td>
+                    <td>{this.props.leaderboard.Victory - this.props.leaderboard.Defeat}</td>
+                </tr>
+            )
         }
     }
 
