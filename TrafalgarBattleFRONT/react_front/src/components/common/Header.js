@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Link } from 'react-router';
 import { Nav, Image, Jumbotron } from 'react-bootstrap';
 
@@ -12,7 +11,7 @@ class Header extends React.Component {
                     <Nav className="navbar navbar-default navbar-static-top" role="banner">
                         <div className="container-fluid">
                             <div className="navbar-header">
-                                <Link to="#" className="navbar-brand">
+                                <Link to="/" className="navbar-brand">
                                     <Image src="oldship.png" id="brand"/>
                                 </Link>
                             </div>
