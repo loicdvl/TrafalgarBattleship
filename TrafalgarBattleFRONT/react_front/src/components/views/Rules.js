@@ -3,7 +3,7 @@ import React from 'react';
 class Rules extends React.Component {
     render() {
         return (
-            <div id="regles">
+            <div id="rules">
                 <p>
                     Dans le cadre de la formation Master 1 Miage apprentissage, nous avons pour projet de réaliser une
                     application. Le sujet choisi est une application web proposé par M. Julien Hairapian. Il s’agit d’une

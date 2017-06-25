@@ -11,8 +11,8 @@ class Leaderboard extends React.Component {
 
     render() {
         return (
-			<div className="test">
-				<div id="DefierJoueur">
+			<div className="content">
+				<div id="board">
 					<h1>Leaderboard : Classement des meilleurs joueurs !</h1>
 
 					<SearchFormContainer typeSearch="LEADERBOARD"/>

@@ -123,7 +123,7 @@ class Index extends React.Component {
                     <a className="glyphicon glyphicon-menu-down" href="#regles" />
                 </Jumbotron>
 
-                <div className="test">
+                <div className="content">
 
                     <div className="divider" />
 

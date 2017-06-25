@@ -36,7 +36,7 @@ class ShotGridContainer extends React.Component {
 
     render() {
         return (
-            <Grid bsClass="placingGrid">
+            <Grid bsClass="grid">
                 {this.props.shotGrid.Cases.map((cases, index) => {
                     if( index%10 === 0 && index < 100 )
                     {

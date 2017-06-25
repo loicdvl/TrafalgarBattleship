@@ -29,7 +29,7 @@ class PlayerGridContainer extends React.Component {
 
     render() {
         return (
-            <Grid bsClass="placingGrid">
+            <Grid bsClass="grid">
                 {this.props.player.PlayerGrid.Cases.map((cases, index) => {
                     if( index%10 === 0 && index < 100 )
                     {

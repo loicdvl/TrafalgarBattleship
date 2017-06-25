@@ -13,7 +13,7 @@ class PlacingShips extends React.Component {
 
     render() {
         return (
-            <div className="test">
+            <div className="content">
                 <div id="placing">
                     <h1>Place tes navires</h1>
                 </div>

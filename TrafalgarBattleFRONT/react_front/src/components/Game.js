@@ -164,7 +164,7 @@ class Game extends React.Component {
 
     render() {
         return (
-            <div className="test">
+            <div className="content">
                 <div id="placing">
                     <h1>A l'attaque !</h1>
                     <Label bsStyle={this.state.messageType}>{this.state.message}</Label>

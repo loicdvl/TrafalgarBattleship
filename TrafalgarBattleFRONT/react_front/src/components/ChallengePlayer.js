@@ -124,8 +124,8 @@ class ChallengePlayer extends React.Component {
 
     render() {
         return (
-            <div className="test">
-                <div id="DefierJoueur">
+            <div className="content">
+                <div id="board">
                     <h1>C'est parti {(this.props.user.Name !== '#Anon') ? this.props.user.Name : null}, défie un adversaire !</h1>
 
                     <SearchFormContainer typeSearch="PLAYER"/>
