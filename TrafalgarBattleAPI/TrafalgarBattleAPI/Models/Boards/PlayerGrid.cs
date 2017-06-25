@@ -10,9 +10,9 @@ namespace TrafalgarBattleAPI.Models.Boards
         public PlayerGrid()
         {
             Cases = new List<Case>();
-            for(var i=0;i<10;i++)
+            for(int i=0;i<10;i++)
             {
-                for(var j=0;j<10;j++)
+                for(int j=0;j<10;j++)
                 {
                     Cases.Add(new Case(i,j));
                 }

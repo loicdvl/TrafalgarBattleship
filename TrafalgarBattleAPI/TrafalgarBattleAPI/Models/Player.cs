@@ -12,7 +12,7 @@ namespace TrafalgarBattleAPI.Models
         public PlayerGrid PlayerGrid { get; set; }
         public PlayerGrid ShotGrid { get; set; }
         public List<Ship> Ships { get; set; }
-        public bool isTurn { get; set; }
+        public bool IsTurn { get; set; }
         public bool HasLost
         {
             get
@@ -38,7 +38,7 @@ namespace TrafalgarBattleAPI.Models
             };
             PlayerGrid = new PlayerGrid();
             ShotGrid = new PlayerGrid();
-            isTurn = false;
+            IsTurn = false;
         }
 
         public ShotResult ProcessShot(Coordinate coordinate)
@@ -72,7 +72,7 @@ namespace TrafalgarBattleAPI.Models
             }
         }
 
-        public void PlaceShips()
+        public void PlaceRandomShips()
         {
             var rand = new Random(Guid.NewGuid().GetHashCode());
             foreach (Ship ship in Ships)

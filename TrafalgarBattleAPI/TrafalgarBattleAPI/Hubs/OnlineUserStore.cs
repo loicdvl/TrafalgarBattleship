@@ -9,8 +9,8 @@ namespace TrafalgarBattleAPI.Hubs
 {
     public class OnlineUserStore : Hub
     {
-        private readonly static ConnectionMapping<string> _onlineUserMap =
-            new ConnectionMapping<string>();
+        private readonly static OnlineUserMapping<string> _onlineUserMap =
+            new OnlineUserMapping<string>();
 
         private readonly static GameList _gamelist = new GameList();
 
@@ -68,8 +68,8 @@ namespace TrafalgarBattleAPI.Hubs
 
         public void ChallengeUser(string targetConnectionId, string defiedUserName, string challengerConnectionId, string challengerName)
         {
-            User targetUser = _onlineUserMap.GetConnections(targetConnectionId);
-            User challengerUser = _onlineUserMap.GetConnections(challengerConnectionId);
+            User targetUser = _onlineUserMap.GetOnlineUser(targetConnectionId);
+            User challengerUser = _onlineUserMap.GetOnlineUser(challengerConnectionId);
 
             if ( targetUser != null && challengerUser != null )
             {
@@ -84,13 +84,13 @@ namespace TrafalgarBattleAPI.Hubs
 
         public void ChallengeAccepted(string opponentConnectionId)
         {
-            User user1 = _onlineUserMap.GetConnections(Context.ConnectionId);
-            User user2 = _onlineUserMap.GetConnections(opponentConnectionId);
+            User user1 = _onlineUserMap.GetOnlineUser(Context.ConnectionId);
+            User user2 = _onlineUserMap.GetOnlineUser(opponentConnectionId);
 
             Player player1 = new Player(user1);
-            player1.PlaceShips();
+            player1.PlaceRandomShips();
             Player player2 = new Player(user2);
-            player2.PlaceShips();
+            player2.PlaceRandomShips();
 
             Game game = new Game(_idGame++, player1, player2);
             _gamelist.Add(game);
@@ -101,14 +101,14 @@ namespace TrafalgarBattleAPI.Hubs
 
         public void ChallengeDeclined(string challengerConnectionId)
         {
-            User user = _onlineUserMap.GetConnections(Context.ConnectionId);
+            User user = _onlineUserMap.GetOnlineUser(Context.ConnectionId);
 
             Clients.Client(challengerConnectionId).displayDeniedChallenge(user);
         }
 
         public void ChallengeUserAbort(string targetConnectionId)
         {
-            User caller = _onlineUserMap.GetConnections(Context.ConnectionId);
+            User caller = _onlineUserMap.GetOnlineUser(Context.ConnectionId);
             if ( caller != null )
             {
                 Clients.Client(targetConnectionId).abortChallenge();

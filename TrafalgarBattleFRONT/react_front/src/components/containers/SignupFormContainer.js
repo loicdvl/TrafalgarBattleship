@@ -31,7 +31,7 @@ class SignupFormContainer extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        if( this.state.username === '' || this.state.password.length < 8 || this.state.email === '' )
+        if( this.state.username !== '' && this.state.password.length >= 8 && this.state.email !== '' )
         {
             userSignupRequest(this.state);
             this.setState({
@@ -73,7 +73,7 @@ class SignupFormContainer extends React.Component {
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
-                    <Button type="submit" bsStyle="warning" onClick="">S'inscrire</Button>
+                    <Button type="submit" bsStyle="warning">S'inscrire</Button>
                 </FormGroup>
                 <Alert className={this.state.alertAttribute}>{this.state.alertText}</Alert>
             </Form>

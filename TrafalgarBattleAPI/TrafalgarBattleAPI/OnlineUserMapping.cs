@@ -3,25 +3,25 @@ using TrafalgarBattleAPI.Models;
 
 namespace TrafalgarBattleAPI
 {
-    public class ConnectionMapping<T>
+    public class OnlineUserMapping<T>
     {
-        private readonly Dictionary<T, User> _connections =
+        private readonly Dictionary<T, User> _onlineUsers =
             new Dictionary<T, User>();
 
         public void Add(T key, User user)
         {
-            lock (_connections)
+            lock (_onlineUsers)
             {
-                if (!_connections.TryGetValue(key, out User u))
+                if (!_onlineUsers.TryGetValue(key, out User u))
                 {
-                    _connections.Add(key, user);
+                    _onlineUsers.Add(key, user);
                 }
             }
         }
 
-        public User GetConnections(T key)
+        public User GetOnlineUser(T key)
         {
-            if (_connections.TryGetValue(key, out User user))
+            if (_onlineUsers.TryGetValue(key, out User user))
             {
                 return user;
             }
@@ -30,11 +30,11 @@ namespace TrafalgarBattleAPI
 
         public void Remove(T key)
         {
-            lock (_connections)
+            lock (_onlineUsers)
             {
-                if (_connections.TryGetValue(key, out User u))
+                if (_onlineUsers.TryGetValue(key, out User u))
                 {
-                    _connections.Remove(key);
+                    _onlineUsers.Remove(key);
                 }
             }
         }
@@ -42,9 +42,9 @@ namespace TrafalgarBattleAPI
         public List<User> GetAllUsers()
         {
             List<User> users = new List<User>();
-            foreach(var connection in _connections)
+            foreach(var onlineUser in _onlineUsers)
             {
-                users.Add(connection.Value);
+                users.Add(onlineUser.Value);
             }
             return users;
         }

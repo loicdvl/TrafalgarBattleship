@@ -13,39 +13,17 @@
             Player1 = player1;
             Player2 = player2;
             FirstToPlay = Player1.ConnectionId;
-            Player1.isTurn = true;
+            Player1.IsTurn = true;
         }
 
         public Player GetPlayer(string connectionId)
         {
-            if (Player1.ConnectionId == connectionId)
-            {
-                return Player1;
-            }
-            else if (Player2.ConnectionId == connectionId)
-            {
-                return Player2;
-            }
-            else
-            {
-                return null;
-            }
+            return (Player1.ConnectionId == connectionId ? Player1 : (Player2.ConnectionId == connectionId) ? Player2 : null);
         }
 
         public Player GetOpponentPlayer(string connectionId)
         {
-            if(Player1.ConnectionId == connectionId)
-            {
-                return Player2;
-            }
-            else if(Player2.ConnectionId == connectionId)
-            {
-                return Player1;
-            }
-            else
-            {
-                return null;
-            }
+            return (Player1.ConnectionId == connectionId ? Player2 : (Player2.ConnectionId == connectionId) ? Player1 : null);
         }
     }
 }
