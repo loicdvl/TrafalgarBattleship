@@ -10,13 +10,14 @@ import { Table } from 'react-bootstrap';
 class OnlineUserListContainer extends React.Component {
 
     renderOnlineUserList() {
-        if (this.props.onlineUsers.length >= 1 ) {
+        if (Array.isArray(this.props.onlineUsers)) {
             return this.props.onlineUsers.map((onlineUser) => {
                 return (
                     <tr key={onlineUser.ConnectionId}>
                         <td><Image src={onlineUser.Avatar} id="brand" /></td>
                         <td>{onlineUser.Name}</td>
-                        <td>{(this.props.user.ConnectionId !== onlineUser.ConnectionId) ?
+                        <td>
+                            {(this.props.user.ConnectionId !== onlineUser.ConnectionId) ?
                             <ButtonWithUser onlineUser={onlineUser}>Défier</ButtonWithUser>
                             : null }
                         </td>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import LeaderboardPlayersList from '../views/LeaderboardPlayersList';
 import * as leaderboardAPI from '../../api/leaderboard-api';
 
@@ -13,30 +12,21 @@ class LeaderboardPlayersListContainer extends React.Component {
 
     render() {
          return (
-            <div>
-                <Table striped condensed hover>
-                    <thead>
-                    <tr>
-                        <th/>
-                        <th>Position</th>
-                        <th>Joueur</th>
-                        <th>Victoire</th>
-                        <th>Défaite</th>
-                        <th>Total</th>
-                    </tr>
-                    </thead>
-                    <LeaderboardPlayersList />
-                </Table>
-            </div>
+            <Table striped condensed hover>
+                <thead>
+                <tr>
+                    <th/>
+                    <th>Position</th>
+                    <th>Joueur</th>
+                    <th>Victoire</th>
+                    <th>Défaite</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <LeaderboardPlayersList />
+            </Table>
         )
     }
 }
 
-const mapStateToProps = function(store) {
-    return {
-        leaderboard: store.leaderboardState.leaderboard,
-        user: store.userState.user
-    };
-};
-
-export default connect(mapStateToProps)(LeaderboardPlayersListContainer);
+export default LeaderboardPlayersListContainer;

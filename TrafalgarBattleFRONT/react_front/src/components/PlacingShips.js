@@ -15,7 +15,7 @@ class PlacingShips extends React.Component {
         return (
             <div className="content">
                 <div id="placing">
-                    <h1>Place tes navires</h1>
+                    <h1>Place tes navires {this.props.user.Name !== '#Anon' ? this.props.user.Name : null}</h1>
                 </div>
                 <div className="container">
                     <div className="row">

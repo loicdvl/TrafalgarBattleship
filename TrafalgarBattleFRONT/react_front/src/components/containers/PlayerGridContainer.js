@@ -47,8 +47,7 @@ class PlayerGridContainer extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        player: store.playerState.player,
-        playerGrid: store.playerGridState.playerGrid
+        player: store.playerState.player
     };
 };
 
