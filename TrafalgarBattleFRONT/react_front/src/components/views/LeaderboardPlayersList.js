@@ -5,7 +5,7 @@ import { Image } from 'react-bootstrap';
 class LeaderboardPlayersList extends React.Component {
 
     renderLeaderboardList () {
-        if (Array.isArray(this.props.leaderboard.length)) {
+        if (Array.isArray(this.props.leaderboard)) {
             return this.props.leaderboard.map((user, index) => {
                 return (
                     <tr key={index}>
@@ -19,7 +19,7 @@ class LeaderboardPlayersList extends React.Component {
                 );
             })
         }
-        else {
+        else if (!Array.isArray(this.props.leaderboard) && typeof this.props.leaderboard === 'object' && this.props.leaderboard !== null){
             return (
                 <tr>
                     <td><Image src={this.props.leaderboard.Avatar} /></td>
@@ -30,6 +30,10 @@ class LeaderboardPlayersList extends React.Component {
                     <td>{this.props.leaderboard.Victory - this.props.leaderboard.Defeat}</td>
                 </tr>
             )
+        }
+        else
+        {
+            return null;
         }
     }
 
