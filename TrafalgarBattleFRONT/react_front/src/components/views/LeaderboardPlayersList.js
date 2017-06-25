@@ -1,20 +1,20 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import { Image } from 'react-bootstrap';
 
 class LeaderboardPlayersList extends React.Component {
 
     renderLeaderboardList () {
         if (this.props.leaderboard.length >= 1) {
-            return this.props.leaderboard.map(player => {
+            return this.props.leaderboard.map((user, index) => {
                 return (
-                    <tr key={player.ConnectionId}>
+                    <tr key={index}>
                         <td><Image src="oldship.png"/></td>
-                        <td>{player.Rank}</td>
-                        <td>{player.Name}</td>
-                        <td>{player.Victory}</td>
-                        <td>{player.Defeat}</td>
-                        <td>{player.Victory - player.Defeat}</td>
+                        <td>{index+1}</td>
+                        <td>{user.Name}</td>
+                        <td>{user.Victory}</td>
+                        <td>{user.Defeat}</td>
+                        <td>{user.Victory - user.Defeat}</td>
                     </tr>
                 );
             })
@@ -33,5 +33,11 @@ class LeaderboardPlayersList extends React.Component {
     }
 }
 
-export default LeaderboardPlayersList;
+const mapStateToProps = function(store) {
+    return {
+        leaderboard: store.leaderboardState.leaderboard
+    };
+};
+
+export default connect(mapStateToProps)(LeaderboardPlayersList);
 

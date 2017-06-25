@@ -1,6 +1,5 @@
 ﻿using Npgsql;
 using NpgsqlTypes;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -55,7 +54,6 @@ namespace TrafalgarBattleAPI
                 for (int i = 0; i < MyData.Columns.Count; i++)
                 {
                     MyUserParameter.Add(row[i].ToString());
-                    Console.Write("{0} \t \n", row[i].ToString());
                 }
             }
             MyCnx.Close();
@@ -112,6 +110,45 @@ namespace TrafalgarBattleAPI
             MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
             MyCmd.ExecuteNonQuery();
             MyCnx.Close();
+        }
+
+        public List<User> GetLeaderboard()
+        {
+            DataTable MyData = new DataTable();
+            NpgsqlDataAdapter da;
+            MyCnx = new NpgsqlConnection(Conx);
+            string select = "SELECT iduser,name,avatar,victory,defeat from \"user\" ORDER BY victory desc;";
+
+            MyCnx.Open();
+            MyCmd = new NpgsqlCommand(select, MyCnx);
+
+            da = new NpgsqlDataAdapter(MyCmd);
+            da.Fill(MyData);
+
+            
+            List<User> leaderboard = new List<User>();
+            foreach (DataRow row in MyData.Rows)
+            {
+                List<string> MyUserParameter = new List<string>();
+                for (int i = 0; i < MyData.Columns.Count; i++)
+                {
+                    MyUserParameter.Add(row[i].ToString());
+                }
+                int.TryParse(MyUserParameter.ElementAt(0), out int iduser);
+                string name = MyUserParameter.ElementAt(1);
+                string avatar = MyUserParameter.ElementAt(2);
+                int.TryParse(MyUserParameter.ElementAt(3), out int victory);
+                int.TryParse(MyUserParameter.ElementAt(4), out int defeat);
+
+                User user = new User(iduser, name, avatar, victory, defeat);
+                if ( user != null )
+                {
+                    leaderboard.Add(user);
+                }
+            }
+            MyCnx.Close();
+
+            return leaderboard;
         }
     }
 }

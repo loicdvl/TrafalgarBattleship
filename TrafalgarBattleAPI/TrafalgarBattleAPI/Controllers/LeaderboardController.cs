@@ -9,6 +9,8 @@ namespace TrafalgarBattleAPI.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LeaderboardController : ApiController
     {
+        UserDbConnection udc = null;
+
         private readonly User[] _leaderboard =
         {
             new User("1","Loic"),
@@ -20,7 +22,11 @@ namespace TrafalgarBattleAPI.Controllers
         // GET api/<controller>
         public IEnumerable<User> Get()
         {
-            return _leaderboard;
+            udc = new UserDbConnection();
+
+            List<User> leaderboard = udc.GetLeaderboard();
+
+            return leaderboard;
         }
 
         // GET api/<controller>/5

@@ -25,7 +25,7 @@ class LeaderboardPlayersListContainer extends React.Component {
                         <th>Total</th>
                     </tr>
                     </thead>
-                    <LeaderboardPlayersList leaderboard={this.props.leaderboard} />
+                    <LeaderboardPlayersList />
                 </Table>
             </div>
         )

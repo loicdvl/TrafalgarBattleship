@@ -33,15 +33,5 @@ namespace TrafalgarBattleAPI.Controllers
                 udc.InsertUser(userSignUp.Username, SHA.GenerateSHA256String(userSignUp.Password));
             }
         }
-
-        // PUT: api/UserSignUp/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/UserSignUp/5
-        public void Delete(int id)
-        {
-        }
     }
 }
