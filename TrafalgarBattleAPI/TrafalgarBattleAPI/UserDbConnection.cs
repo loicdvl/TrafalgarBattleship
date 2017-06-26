@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using NpgsqlTypes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace TrafalgarBattleAPI
         string Conx = "Server=localhost;Port=5432;Database=TrafalgarBattleship;User Id=postgres;Password=admin;";
         NpgsqlCommand MyCmd = null;
         NpgsqlConnection MyCnx = null;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger
+                (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         // Insert a new user to the database. Invoke on SignUpForm submit.
         public int InsertUser(string name, string password)
@@ -35,7 +39,14 @@ namespace TrafalgarBattleAPI
                     MyCmd.Parameters.Add(new NpgsqlParameter("victory", NpgsqlDbType.Integer)).Value = 0;
                     MyCmd.Parameters.Add(new NpgsqlParameter("defeat", NpgsqlDbType.Integer)).Value = 0;
 
-                    result = MyCmd.ExecuteNonQuery();
+                    try
+                    {
+                        result = MyCmd.ExecuteNonQuery();
+                    }
+                    catch(Exception e)
+                    {
+                        log.Error("InsertUser", e);
+                    }
                 }
             }
             MyCnx.Close();
@@ -64,8 +75,17 @@ namespace TrafalgarBattleAPI
                     MyCmd.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar)).Value = name;
                     MyCmd.Parameters.Add(new NpgsqlParameter("password", NpgsqlDbType.Varchar)).Value = password;
 
-                    da = new NpgsqlDataAdapter(MyCmd);
-                    da.Fill(MyData);
+                    try
+                    {
+                        da = new NpgsqlDataAdapter(MyCmd);
+                        da.Fill(MyData);
+                    }
+                    catch(Exception e)
+                    {
+                        log.Error("GetUser", e);
+                    }
+                    
+                    
 
                     List<string> MyUserParameter = new List<string>();
 
@@ -114,7 +134,14 @@ namespace TrafalgarBattleAPI
                     MyCmd.Parameters.Add(new NpgsqlParameter("victory", NpgsqlDbType.Integer)).Value = victory;
                     MyCmd.Parameters.Add(new NpgsqlParameter("defeat", NpgsqlDbType.Integer)).Value = defeat;
 
-                    result = MyCmd.ExecuteNonQuery();
+                    try
+                    {
+                        result = MyCmd.ExecuteNonQuery();
+                    }
+                    catch(Exception e)
+                    {
+                        log.Error("UpdateUser", e);
+                    }
                 }
             }
             MyCnx.Close();
@@ -139,7 +166,14 @@ namespace TrafalgarBattleAPI
                 {
                     MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
 
-                    result = MyCmd.ExecuteNonQuery();
+                    try
+                    {
+                        result = MyCmd.ExecuteNonQuery();
+                    }
+                    catch(Exception e)
+                    {
+                        log.Error("DeleteUserById", e);
+                    }
                 }
                 
             }
@@ -165,8 +199,16 @@ namespace TrafalgarBattleAPI
                 {
                     DataTable MyData = new DataTable();
 
-                    NpgsqlDataAdapter da = new NpgsqlDataAdapter(MyCmd);
-                    da.Fill(MyData);
+                    try
+                    {
+                        NpgsqlDataAdapter da = new NpgsqlDataAdapter(MyCmd);
+                        da.Fill(MyData);
+                    }
+                    catch(Exception e)
+                    {
+                        log.Error("GetLeaderboard", e);
+                    }
+                    
 
                     foreach (DataRow row in MyData.Rows)
                     {
@@ -209,7 +251,14 @@ namespace TrafalgarBattleAPI
                 {
                     MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
 
-                    MyCmd.ExecuteNonQuery();
+                    try
+                    {
+                        MyCmd.ExecuteNonQuery();
+                    }
+                    catch(Exception e)
+                    {
+                        log.Error("UpdateUserOnVictory", e);
+                    }
                 }
             }
             MyCnx.Close();
@@ -231,7 +280,14 @@ namespace TrafalgarBattleAPI
                 {
                     MyCmd.Parameters.Add(new NpgsqlParameter("iduser", NpgsqlDbType.Integer)).Value = iduser;
 
-                    MyCmd.ExecuteNonQuery();
+                    try
+                    {
+                        MyCmd.ExecuteNonQuery();
+                    }
+                    catch(Exception e)
+                    {
+                        log.Error("UpdateUserOnDefeat", e);
+                    }
                 }
             }
             MyCnx.Close();
