@@ -21,7 +21,8 @@ class Game extends React.Component {
         playerSuccessfullHit: 0,
         opponentSuccessfullHit: 0,
         shotGridClassName: 'col col-6 col-sm-6 col-md-6 col-lg-6 gameSection',
-        opponentDisconnected: false
+        opponentDisconnected: false,
+        errorGame: false
     };
 
     updateShotGrid = (ShotGrid) => {
@@ -140,6 +141,10 @@ class Game extends React.Component {
             this.setState({opponentDisconnected: true});
         });
 
+        this.props.socket.on('errorGame', () => {
+            this.setState({errorGame: true});
+        });
+
         this.props.socket.invoke('IsFirstToPlay', this.props.game, this.props.player.ConnectionId);
     }
 
@@ -151,13 +156,7 @@ class Game extends React.Component {
         this.setState({ showModal : false });
     };
 
-    closeModalOpponentDisconnected = () => {
-        this.setState({opponentDisconnected: false});
-    };
-
-    redirectToChallengePlayerList = (event) => {
-        event.preventDefault();
-
+    redirectToChallengePlayerList = () => {
         this.closeModal();
         browserHistory.push('/challenge-player');
     };
@@ -184,7 +183,8 @@ class Game extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Modal show={this.state.showModal} onHide={this.closeModal}>
+
+                <Modal show={this.state.showModal} onHide={this.redirectToChallengePlayerList}>
                     <Modal.Header closeButton>
                         <Modal.Title>{this.state.modalMessage}</Modal.Title>
                     </Modal.Header>
@@ -193,13 +193,29 @@ class Game extends React.Component {
                     </Modal.Body>
                 </Modal>
 
-                <Modal show={this.state.opponentDisconnected} onHide={this.closeModalOpponentDisconnected} >
+                <Modal show={this.state.opponentDisconnected} onHide={this.redirectToChallengePlayerList} >
                     <Modal.Header closeButton>
                         <Modal.Title>Adversaire deconnecté !</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Button onClick={this.redirectToChallengePlayerList} >Retourner à la liste des joueurs</Button>
+                        Nous sommes désolé mais il semblerait que votre adversaire soit parti !
                     </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.redirectToChallengePlayerList} >Retourner à la liste des joueurs</Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={this.state.errorGame} onHide={this.redirectToChallengePlayerList} >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Erreur !</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Désolé, une erreur est survenue !
+                        Veuillez retourner sur la liste des joueurs en ligne pour défier un autre joueur.
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.redirectToChallengePlayerList} >Retourner à la liste des joueurs</Button>
+                    </Modal.Footer>
                 </Modal>
             </div>
         )

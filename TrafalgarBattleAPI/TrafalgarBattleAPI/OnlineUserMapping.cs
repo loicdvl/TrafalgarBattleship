@@ -5,44 +5,47 @@ namespace TrafalgarBattleAPI
 {
     public class OnlineUserMapping<T>
     {
-        private readonly Dictionary<T, User> _onlineUsers =
+        private readonly Dictionary<T, User> OnlineUsers =
             new Dictionary<T, User>();
 
-        public void Add(T key, User user)
+        public bool Add(T key, User user)
         {
-            lock (_onlineUsers)
+            lock (OnlineUsers)
             {
-                if (!_onlineUsers.TryGetValue(key, out User u))
+                if (!OnlineUsers.TryGetValue(key, out User u))
                 {
-                    _onlineUsers.Add(key, user);
+                    OnlineUsers.Add(key, user);
+                    return true;
                 }
+                return false;
             }
         }
 
         public User GetOnlineUser(T key)
         {
-            if (_onlineUsers.TryGetValue(key, out User user))
+            if (OnlineUsers.TryGetValue(key, out User user))
             {
                 return user;
             }
             return null;
         }
 
-        public void Remove(T key)
+        public bool Remove(T key)
         {
-            lock (_onlineUsers)
+            lock (OnlineUsers)
             {
-                if (_onlineUsers.TryGetValue(key, out User u))
+                if (OnlineUsers.TryGetValue(key, out User u))
                 {
-                    _onlineUsers.Remove(key);
+                    return OnlineUsers.Remove(key);
                 }
+                return false;
             }
         }
 
         public List<User> GetAllUsers()
         {
             List<User> users = new List<User>();
-            foreach(var onlineUser in _onlineUsers)
+            foreach(var onlineUser in OnlineUsers)
             {
                 users.Add(onlineUser.Value);
             }
