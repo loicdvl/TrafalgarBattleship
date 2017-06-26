@@ -54,5 +54,16 @@
             Victory = victory;
             Defeat = defeat;
         }
+
+        public User(int iduser, string name, string avatar, int victory, int defeat, int rank)
+        {
+            ConnectionId = "";
+            IdUser = iduser;
+            Rank = rank;
+            Avatar = avatar;
+            Name = name;
+            Victory = victory;
+            Defeat = defeat;
+        }
     }
 }

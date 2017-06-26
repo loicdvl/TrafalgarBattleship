@@ -191,7 +191,7 @@ namespace TrafalgarBattleAPI
             MyCnx.Open();
             if(MyCnx != null)
             {
-                string select = "SELECT iduser,name,avatar,victory,defeat from \"user\" ORDER BY victory desc;";
+                string select = "SELECT iduser,name,avatar,victory,defeat from \"user\" ORDER BY victory-defeat desc, name;";
 
                 MyCmd = new NpgsqlCommand(select, MyCnx);
 
@@ -208,8 +208,8 @@ namespace TrafalgarBattleAPI
                     {
                         log.Error("GetLeaderboard", e);
                     }
-                    
 
+                    int rank = 1;
                     foreach (DataRow row in MyData.Rows)
                     {
                         List<string> MyUserParameter = new List<string>();
@@ -223,10 +223,11 @@ namespace TrafalgarBattleAPI
                         int.TryParse(MyUserParameter.ElementAt(3), out int victory);
                         int.TryParse(MyUserParameter.ElementAt(4), out int defeat);
 
-                        User user = new User(iduser, name, avatar, victory, defeat);
+                        User user = new User(iduser, name, avatar, victory, defeat, rank);
                         if (user != null)
                         {
                             leaderboard.Add(user);
+                            rank++;
                         }
                     }
                 } 

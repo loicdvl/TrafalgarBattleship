@@ -10,7 +10,7 @@ class LeaderboardPlayersList extends React.Component {
                 return (
                     <tr key={index}>
                         <td><Image src="oldship.png"/></td>
-                        <td>{index+1}</td>
+                        <td>{user.Rank}</td>
                         <td>{user.Name}</td>
                         <td>{user.Victory}</td>
                         <td>{user.Defeat}</td>
@@ -23,7 +23,7 @@ class LeaderboardPlayersList extends React.Component {
             return (
                 <tr>
                     <td><Image src={this.props.leaderboard.Avatar} /></td>
-                    <td>0</td>
+                    <td>{this.props.leaderboard.Rank}</td>
                     <td>{this.props.leaderboard.Name}</td>
                     <td>{this.props.leaderboard.Victory}</td>
                     <td>{this.props.leaderboard.Defeat}</td>
