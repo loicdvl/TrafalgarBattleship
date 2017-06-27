@@ -96,6 +96,10 @@ class ChallengePlayer extends React.Component {
             }, 2000);
         });
 
+        this.OnlineUserStoreProxy.on('renderSearchOnlineUser', (user) => {
+            updateOnlineUserList(user);
+        });
+
         this.OnlineUserStoreProxy.on('startGame', (game,player,challenger) => {
             setGame(game);
             setPlayer(player);

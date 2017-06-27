@@ -2,7 +2,11 @@ import * as types from '../actions/action-types';
 
 const initialState = {
     user: {
-        Name: '#Anon'
+        IdUser: 0,
+        Name: '#Anon',
+        Avatar: 'oldship.png',
+        Victory: 0,
+        Defeat: 0
     }
 };
 

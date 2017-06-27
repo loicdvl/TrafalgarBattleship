@@ -8,8 +8,8 @@ class SignupFormContainer extends React.Component {
 
     state = {
         username: '',
-        email: '',
         password: '',
+        passwordConfirmation: '',
         alertAttribute: 'notAlerted',
         alertText: '',
     };
@@ -19,9 +19,9 @@ class SignupFormContainer extends React.Component {
         this.setState({ username: this.inputUsername.value });
     };
 
-    onChangeEmail = (e) =>{
+    onChangePasswordConfirmation = (e) =>{
         e.preventDefault();
-        this.setState({ email: this.inputEmail.value });
+        this.setState({ passwordConfirmation: this.inputPasswordConfirmation.value });
     };
 
     onChangePassword = (e) =>{
@@ -31,13 +31,17 @@ class SignupFormContainer extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        if( this.state.username !== '' && this.state.password.length >= 8 && this.state.email !== '' )
+        if( this.state.username !== '' && this.state.password.length >= 8 && this.state.passwordConfirmation === this.state.password )
         {
             userSignupRequest(this.state);
-            this.setState({
-                alertAttribute: 'alerted success',
-                alertText: 'Inscription réussie !'
-            });
+
+            if(this.props.user !== '#Anon') {
+                this.setState({
+                    alertAttribute: 'alerted success',
+                    alertText: 'Inscription réussie !'
+                });
+                this.props.closeModalSignup();
+            }
         }
         else
         {
@@ -59,17 +63,17 @@ class SignupFormContainer extends React.Component {
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>
-                    <ControlLabel className="col-md-2 control-label">E-mail</ControlLabel>
-                    <InputGroup className="col-md-10 inputGroupContainer">
-                        <InputGroup.Addon><Glyphicon glyph="envelope"/></InputGroup.Addon>
-                        <FormControl type="text" inputRef={(ref) => {this.inputEmail = ref;}} onChange={this.onChangeEmail}/>
-                    </InputGroup>
-                </FormGroup>
-                <FormGroup>
                     <ControlLabel className="col-md-2 control-label">Mot de passe</ControlLabel>
                     <InputGroup className="col-md-10 inputGroupContainer">
                         <InputGroup.Addon><Glyphicon glyph="eye-close"/></InputGroup.Addon>
                         <FormControl type="password" inputRef={(ref) => {this.inputPassword = ref;}} onChange={this.onChangePassword}/>
+                    </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                    <ControlLabel className="col-md-2 control-label">Confirmation</ControlLabel>
+                    <InputGroup className="col-md-10 inputGroupContainer">
+                        <InputGroup.Addon><Glyphicon glyph="eye-close"/></InputGroup.Addon>
+                        <FormControl type="password" inputRef={(ref) => {this.inputPasswordConfirmation = ref;}} onChange={this.onChangePasswordConfirmation}/>
                     </InputGroup>
                 </FormGroup>
                 <FormGroup>

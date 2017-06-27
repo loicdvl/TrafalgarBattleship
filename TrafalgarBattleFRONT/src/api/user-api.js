@@ -7,15 +7,17 @@ export function setUser(user) {
 }
 
 export function userSignupRequest(userData){
-      return axios.post('http://localhost:54409/api/UserSignUp', {
-          Username: userData.username,
-          Password: userData.password,
-          Email: userData.email
-      }).then(response => {
-          
-      }).catch(error => {
-          console.log(error);
-      });
+
+    return axios.post('http://localhost:54409/api/UserSignUp', {
+        Username: userData.username,
+        Password: userData.password,
+        PasswordConfirmation: userData.passwordConfirmation
+    }).then(response => {
+        store.dispatch(getUserSuccess({user: response.data}));
+        return response.data;
+    }).catch(error => {
+        console.log(error);
+    });
 }
 
 export function userLoginRequest(userData){
@@ -36,7 +38,11 @@ export function userLoginRequest(userData){
 export function resetUserToDefault(){
     return store.dispatch(getUserSuccess({
         user: {
-            Name: "#Anon"
+            IdUser: 0,
+            Name: '#Anon',
+            Avatar: 'oldship.png',
+            Victory: 0,
+            Defeat: 0,
         }
     }));
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TrafalgarBattleAPI.Models;
 using TrafalgarBattleAPI.Models.Boards;
@@ -76,6 +77,17 @@ namespace TrafalgarBattleAPI.Hubs
                 List<User> userlist = OnlineUserMap.GetAllUsers();
                 Clients.All.updateOnlineUserList(userlist);
             }          
+        }
+
+        public void SearchOnlineUser(string name)
+        {
+            List<User> userlist = OnlineUserMap.GetAllUsers();
+            User user = userlist.FirstOrDefault((u) => u.Name == name);
+
+            if(user != null)
+            {
+                Clients.Caller.renderSearchOnlineUser(user);
+            }
         }
 
         // Create a default user for client without register account and return it to the client.

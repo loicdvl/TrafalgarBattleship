@@ -25,6 +25,19 @@ class OnlineUserListContainer extends React.Component {
                 );
             });
         }
+        else if (!Array.isArray(this.props.onlineUsers) && typeof this.props.onlineUsers === 'object' && this.props.onlineUsers !== null){
+            return (
+                <tr>
+                    <td><Image src={this.props.onlineUsers.Avatar} id="brand" /></td>
+                    <td>{this.props.onlineUsers.Name}</td>
+                    <td>
+                        {(this.props.user.ConnectionId !== this.props.onlineUsers.ConnectionId) ?
+                            <ButtonWithUser onlineUser={this.props.onlineUsers}>Défier</ButtonWithUser>
+                            : null }
+                    </td>
+                </tr>
+            )
+        }
         else {
             return null;
         }

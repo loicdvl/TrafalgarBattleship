@@ -11,14 +11,17 @@ namespace TrafalgarBattleAPI.Controllers
         UserDbConnection udc = null;
 
         // POST: api/UserSignUp
-        public void Post([FromBody]UserSignUp userSignUp)
+        public User Post([FromBody]UserSignUp userSignUp)
         {
             udc = new UserDbConnection();
 
-            if( userSignUp.Username != null && userSignUp.Password != null )
+            if( userSignUp.Username != null && userSignUp.Password != null && userSignUp.PasswordConfirmation == userSignUp.Password )
             {
                 udc.InsertUser(userSignUp.Username, SHA.GenerateSHA256String(userSignUp.Password));
             }
+
+            User user = udc.GetUser(userSignUp.Username, SHA.GenerateSHA256String(userSignUp.Password));
+            return user;
         }
     }
 }

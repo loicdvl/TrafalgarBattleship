@@ -133,7 +133,7 @@ class Index extends React.Component {
                             <Modal.Title>Inscription</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <SignupFormContainer />
+                            <SignupFormContainer closeModalSignup={this.closeModalSignUp} />
                         </Modal.Body>
                     </Modal>
 
@@ -142,7 +142,7 @@ class Index extends React.Component {
                             <Modal.Title>Connexion</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <LoginFormContainer />
+                            <LoginFormContainer closeModalSignin={this.closeModalSignIn} />
                         </Modal.Body>
                     </Modal>
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchForm from '../views/SearchForm';
-import { searchOnlineUser} from '../../api/online-users-api';
+import { connect } from 'react-redux';
 import * as leaderboardApi from '../../api/leaderboard-api';
 
 
@@ -13,9 +13,13 @@ class SearchFormContainer extends React.Component {
             let query = this.refs.child.getQuery();
 
             if ( this.props.typeSearch === "PLAYER" )
-                searchOnlineUser(query);
+            {
+                this.props.socket.invoke('SearchOnlineUser', query);
+            }
             else if (this.props.typeSearch === "LEADERBOARD" )
+            {
                 leaderboardApi.searchLeaderboard(query);
+            }
         };
 
         return (
@@ -24,4 +28,10 @@ class SearchFormContainer extends React.Component {
     }
 }
 
-export default SearchFormContainer;
+const mapStateToProps = function(store) {
+    return {
+        socket: store.socketState.socket
+    };
+};
+
+export default connect (mapStateToProps)(SearchFormContainer);

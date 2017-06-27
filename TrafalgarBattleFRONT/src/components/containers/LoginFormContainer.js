@@ -29,10 +29,15 @@ class LoginFormContainer extends React.Component {
         if( this.state.username !== '' && this.state.password !== '' )
         {
             userLoginRequest(this.state);
-            this.setState({
-                alertAttribute: 'alerted success',
-                alertText: 'Connexion réussie !'
-            });
+
+            if(this.props.user.Name !== '#Anon')
+            {
+                this.setState({
+                    alertAttribute: 'alerted success',
+                    alertText: 'Connexion réussie !'
+                });
+                this.props.closeModalSignin();
+            }
         }
         else
         {
