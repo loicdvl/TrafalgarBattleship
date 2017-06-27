@@ -5,6 +5,8 @@ This project is a battleship web application.
 Online players can play against each other in real time.
 
 
+## Content
+
 This repository contains both the API and the front to consume it.
 
 Under TrafalgarBattleAPI folder there is all the files and configuration to import the project into Visual Studio.
