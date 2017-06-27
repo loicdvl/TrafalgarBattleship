@@ -191,23 +191,19 @@ namespace TrafalgarBattleAPI.Hubs
                 Coordinate coordinate = new Coordinate(row, column);
 
                 ShotResult result = targetPlayer.ProcessShot(coordinate);
+                shooterPlayer.ProcessShotResult(coordinate, result);
                 if (result.Equals(ShotResult.Miss))
                 {
-                    shooterPlayer.ProcessShotResult(coordinate, ShotResult.Miss);
-
                     Clients.Caller.updateShotGridOnMissedShot(shooterPlayer.ShotGrid);
                     Clients.Client(targetPlayer.ConnectionId).setTurn();
                 }
                 else if (result.Equals(ShotResult.Hit))
                 {
-                    shooterPlayer.ProcessShotResult(coordinate, ShotResult.Hit);
-
                     Clients.Caller.updateShotGridOnSuccessfullShot(shooterPlayer.ShotGrid);
                     Clients.Client(targetPlayer.ConnectionId).notifyHit();
                 }
                 else
                 {
-                    shooterPlayer.ProcessShotResult(coordinate, ShotResult.Sunk);
                     if (!targetPlayer.HasLost)
                     {
                         Clients.Caller.updateShotGridOnSunkShip(shooterPlayer.ShotGrid);
