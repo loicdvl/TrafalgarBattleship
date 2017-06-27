@@ -1,6 +1,7 @@
 ## Trafalgar Battleship
 
 This project is a battleship web application.
+
 Online players can play against each other in real time.
 
 
